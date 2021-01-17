@@ -273,6 +273,7 @@
 	exports.$XMLHttpRequest = null;
 	exports.$OffscreenCanvas = null;
 	exports.$HTMLCanvasElement = null;
+	exports.$createImageBitmap = null;
 	exports.$requestAnimationFrame = null;
 
 	var Platform = /*#__PURE__*/function () {
@@ -291,6 +292,7 @@
 			exports.$XMLHttpRequest = globals.XMLHttpRequest;
 			exports.$OffscreenCanvas = globals.OffscreenCanvas;
 			exports.$HTMLCanvasElement = globals.HTMLCanvasElement;
+			exports.$createImageBitmap = globals.createImageBitmap;
 			exports.$requestAnimationFrame = globals.requestAnimationFrame;
 			exports.$URL = globals.window.URL;
 		};
@@ -305,6 +307,7 @@
 			exports.$XMLHttpRequest = null;
 			exports.$OffscreenCanvas = null;
 			exports.$HTMLCanvasElement = null;
+			exports.$createImageBitmap = null;
 			exports.$requestAnimationFrame = null;
 		};
 
@@ -31110,7 +31113,7 @@
 	};
 
 	function ImageBitmapLoader(manager) {
-		if (typeof createImageBitmap === 'undefined') {
+		if (typeof exports.$createImageBitmap === 'undefined') {
 			console.warn('THREE.ImageBitmapLoader: createImageBitmap() not supported.');
 		}
 
@@ -31152,7 +31155,7 @@
 			fetch(url, fetchOptions).then(function (res) {
 				return res.blob();
 			}).then(function (blob) {
-				return createImageBitmap(blob, scope.options);
+				return exports.$createImageBitmap(blob, scope.options);
 			}).then(function (imageBitmap) {
 				Cache.add(url, imageBitmap);
 				if (onLoad) onLoad(imageBitmap);

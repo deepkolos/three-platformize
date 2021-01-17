@@ -24,7 +24,7 @@ function _isRelativePath(url) {
     return !(/^(http|https|ftp|wxfile):\/\/.*/i.test(url));
 }
 
-export default class XMLHttpRequest extends EventTarget {
+export default class $XMLHttpRequest extends EventTarget {
 
     constructor() {
         super();
@@ -81,13 +81,13 @@ export default class XMLHttpRequest extends EventTarget {
     open(method, url /* async, user, password 这几个参数在小程序内不支持*/ ) {
         this._method = method
         this._url = url
-        _changeReadyState.call(this, XMLHttpRequest.OPENED)
+        _changeReadyState.call(this, $XMLHttpRequest.OPENED)
     }
 
     overrideMimeType() {}
 
     send(data = '') {
-        if (this.readyState !== XMLHttpRequest.OPENED) {
+        if (this.readyState !== $XMLHttpRequest.OPENED) {
             throw new Error("Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED.")
         } else {
             const url = this._url
@@ -120,8 +120,8 @@ export default class XMLHttpRequest extends EventTarget {
                     _responseHeader.set(this, header)
                 }
                 _triggerEvent.call(this, 'loadstart')
-                _changeReadyState.call(this, XMLHttpRequest.HEADERS_RECEIVED)
-                _changeReadyState.call(this, XMLHttpRequest.LOADING)
+                _changeReadyState.call(this, $XMLHttpRequest.HEADERS_RECEIVED)
+                _changeReadyState.call(this, $XMLHttpRequest.LOADING)
 
                 this.response = data
 
@@ -136,7 +136,7 @@ export default class XMLHttpRequest extends EventTarget {
                 } else {
                     this.responseText = data
                 }
-                _changeReadyState.call(this, XMLHttpRequest.DONE)
+                _changeReadyState.call(this, $XMLHttpRequest.DONE)
                 _triggerEvent.call(this, 'load')
                 _triggerEvent.call(this, 'loadend')
             }
@@ -181,6 +181,7 @@ export default class XMLHttpRequest extends EventTarget {
                 header: header,
                 dataType: dataType,
                 responseType: responseType,
+                enableCache: true,
                 success: onSuccess,
                 fail: onFail
             })
@@ -213,8 +214,8 @@ export default class XMLHttpRequest extends EventTarget {
 }
 
 // TODO 没法模拟 HEADERS_RECEIVED 和 LOADING 两个状态
-XMLHttpRequest.UNSEND = 0
-XMLHttpRequest.OPENED = 1
-XMLHttpRequest.HEADERS_RECEIVED = 2
-XMLHttpRequest.LOADING = 3
-XMLHttpRequest.DONE = 4
+$XMLHttpRequest.UNSEND = 0
+$XMLHttpRequest.OPENED = 1
+$XMLHttpRequest.HEADERS_RECEIVED = 2
+$XMLHttpRequest.LOADING = 3
+$XMLHttpRequest.DONE = 4

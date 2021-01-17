@@ -1,7 +1,7 @@
 import Blob from "./Blob";
 import ArrayBufferToBase64 from "./ArrayBufferToBase64";
 
-export default class URL {
+export default class $URL {
 
 	createObjectURL(obj) {
 
@@ -15,6 +15,8 @@ export default class URL {
 		}
 
 		return "";
-  }
+	}
+	
+	revokeObjectURL() {}
 
 }

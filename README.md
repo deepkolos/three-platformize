@@ -3,35 +3,40 @@
 一个让 THREE 平台化的项目
 
 0. 目前已适配微信小程序，淘宝小程序
-1. 支持 tree shaking（sideEffects: false）
+1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
-3. 适配 examples/jsm，types 正常（未完全测试，仅仅测试了 GLTFLoader）
+3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试，仅仅测试了 GLTFLoader）
 
 # 使用
 
 ```js
 import { PLATFORM } from 'three-platformize';
-import WechatPlatform from 'three-platformize/build/WechatPlatform';
+import WechatPlatform from 'three-platformize/src/WechatPlatform';
 
 PLATFORM.set(new WechatPlatform(canvas)); // webgl canvas
 
-// 使用使用完毕后释放资源
+// 使用完毕后释放资源
 PLATFORM.dispose();
 ```
 
 # DEMO
 
-[微信小程序DEMO]()
+<div>
+  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
+  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
+</div>
 
-[淘宝小程序DEMO]()
+[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)
+
+[淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
 
 # 实现
 
-构建时替换平台相关的 api 调用，转发到 PLATFORM 的引用，通过PLATFORM.set更新
+构建时替换平台相关的 api 调用，转发到 PLATFORM 的引用，通过 PLATFORM.set 更新
 
 # 维护
 
-### 如何更新Three的版本？
+### 如何更新 Three 的版本？
 
 ```shell
 # 更新依赖three的版本
@@ -44,13 +49,13 @@ PLATFORM.dispose();
 > npm run build
 ```
 
-### 如何平台化自定义的Three？
+### 如何平台化自定义的 Three？
 
 ```shell
 # 把自定义Three link 到./three
 > npx symlink-dir yourthree ./three
 
-# 不适用软链接直接复制也行
+# 不使用软链接直接复制或者git submodule也可以
 > cp yourthree ./three
 
 # 构建
@@ -60,9 +65,7 @@ PLATFORM.dispose();
 # TODO
 
 0. 适配头条小程序
-1. 编写微信小程序DEMO
-2. 编写淘宝小程序DEMO
 
 # Bug
 
-Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 由于 API 没抄全，加载 glb 有问题)
+Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 小程序 由于 API 没抄全，加载 glb 有问题)

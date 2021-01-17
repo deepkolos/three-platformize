@@ -1,4 +1,4 @@
-import { $Blob, $URL } from '../../../build/three.module.js';
+import { $createImageBitmap, $Blob, $URL } from '../../../build/three.module.js';
 import { Loader, LoaderUtils, FileLoader, MeshBasicMaterial, Color, MeshStandardMaterial, TangentSpaceNormalMap, Interpolant, ImageBitmapLoader, TextureLoader, InterleavedBuffer, InterleavedBufferAttribute, BufferAttribute, RGBFormat, LinearFilter, LinearMipmapLinearFilter, RepeatWrapping, PointsMaterial, Material, LineBasicMaterial, DoubleSide, Vector2, sRGBEncoding, PropertyBinding, BufferGeometry, SkinnedMesh, Mesh, LineSegments, Line, LineLoop, Points, Group, PerspectiveCamera, MathUtils, OrthographicCamera, InterpolateLinear, AnimationClip, Bone, Object3D, Matrix4, Skeleton, SpotLight, PointLight, DirectionalLight, MeshPhysicalMaterial, NearestFilter, NearestMipmapNearestFilter, LinearMipmapNearestFilter, NearestMipmapLinearFilter, ClampToEdgeWrapping, MirroredRepeatWrapping, InterpolateDiscrete, FrontSide, CanvasTexture, TriangleFanDrawMode, TriangleStripDrawMode, VectorKeyframeTrack, QuaternionKeyframeTrack, NumberKeyframeTrack, Box3, Vector3, Sphere } from '../../../build/three.module.js';
 
 var GLTFLoader = ( function () {
@@ -1848,7 +1848,7 @@ var GLTFLoader = ( function () {
 
 		// Use an ImageBitmapLoader if imageBitmaps are supported. Moves much of the
 		// expensive work of uploading a texture to the GPU off the main thread.
-		if ( typeof createImageBitmap !== 'undefined' && /Firefox/.test( navigator.userAgent ) === false ) {
+		if ( typeof $createImageBitmap !== 'undefined' && /Firefox/.test( navigator.userAgent ) === false ) {
 
 			this.textureLoader = new ImageBitmapLoader( this.options.manager );
 

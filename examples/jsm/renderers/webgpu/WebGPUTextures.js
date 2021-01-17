@@ -1,4 +1,4 @@
-import { $HTMLCanvasElement } from '../../../../build/three.module.js';
+import { $HTMLCanvasElement, $createImageBitmap } from '../../../../build/three.module.js';
 import { GPUTextureFormat, GPUAddressMode, GPUFilterMode, GPUTextureDimension } from './constants.js';
 import { Texture, NearestFilter, CubeTexture, RepeatWrapping, MirroredRepeatWrapping, NearestMipmapNearestFilter, NearestMipmapLinearFilter, RGFormat, FloatType, HalfFloatType, UnsignedByteType, RedFormat, RGBAFormat, sRGBEncoding, RGBFormat, RGBA_S3TC_DXT5_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT1_Format, LinearFilter } from '../../../../build/three.module.js';
 import WebGPUTextureUtils from './WebGPUTextureUtils.js';
@@ -648,7 +648,7 @@ class WebGPUTextures {
 			options.imageOrientation = ( texture.flipY === true ) ? 'flipY' : 'none';
 			options.premultiplyAlpha = ( texture.premultiplyAlpha === true ) ? 'premultiply' : 'default';
 
-			return createImageBitmap( image, 0, 0, width, height, options );
+			return $createImageBitmap( image, 0, 0, width, height, options );
 
 		} else {
 

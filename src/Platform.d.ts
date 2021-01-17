@@ -1,27 +1,15 @@
-class Platform {
+export class Platform {
+  set(platform: any): void;
 
-	set(platform: any);
-
-	dispose();
-
+  dispose(): void;
 }
 
-const PLATFORM: Platform;
-let $atob: any
-let $window: any
-let $document: any
-let $XMLHttpRequest: any
-let $OffscreenCanvas: any
-let $HTMLCanvasElement: any
-let $requestAnimationFrame: any
-
-export {
-	PLATFORM,
-	$window,
-	$document,
-	$XMLHttpRequest,
-	$atob,
-	$OffscreenCanvas,
-	$HTMLCanvasElement,
-	$requestAnimationFrame,
-};
+export const PLATFORM: Platform;
+export let $atob: any;
+export let $window: any;
+export let $document: any;
+export let $XMLHttpRequest: any;
+export let $OffscreenCanvas: any;
+export let $HTMLCanvasElement: any;
+export let $createImageBitmap: any;
+export let $requestAnimationFrame: any;

@@ -1,15 +1,16 @@
 {
   "name": "three-platformize",
   "version": "1.0.0",
-  "description": "platformized three that support wechat and taobao miniprogram",
-  "main": "lib/index.js",
+  "description": "platformized three that support wechat and taobao miniprogram and tree shaking",
+  "main": "build/three.js",
+  "module": "build/three.module.js",
   "sideEffects": false,
   "types": "src/Three.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "link": "symlink-dir ./node_modules/three ./three",
-    "build": "npm run build-three && npm run build-jsm && npm run build-platform",
-    "build-three": "rollup -c config/rollup.config.js",
+    "build": "npm run build-three && npm run build-jsm",
+    "build-three": "rollup -c config/rollup.config.three.js",
     "build-jsm": "rollup -c config/rollup.config.jsm.js",
     "build-platform": "rollup -c config/rollup.config.platform.js"
   },

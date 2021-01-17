@@ -10,6 +10,7 @@ export const platformVariables = [
   'XMLHttpRequest',
   'OffscreenCanvas',
   'HTMLCanvasElement',
+  'createImageBitmap',
   'requestAnimationFrame',
 ];
 

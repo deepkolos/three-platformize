@@ -13,6 +13,8 @@ export class TaobaoPlatform {
 
   constructor( canvas ) {
 
+    const systemInfo = my.getSystemInfoSync()
+
     this.canvas = canvas;
 
     this.document = {
@@ -29,6 +31,9 @@ export class TaobaoPlatform {
 
     this.window = {
 
+      innerWidth: systemInfo.windowWidth,
+      innerHeight: systemInfo.windowHeight,
+      devicePixelRatio: systemInfo.pixelRatio,
       AudioContext: function() {},
       URL: new URL(),
       requestAnimationFrame: this.canvas.requestAnimationFrame,
@@ -40,6 +45,8 @@ export class TaobaoPlatform {
       copyProperties(i.constructor.prototype, EventTarget.prototype)
 
     });
+
+    this.patchCanvas();
 
   }
 
@@ -83,7 +90,8 @@ export class TaobaoPlatform {
       HTMLCanvasElement: undefined,
       XMLHttpRequest: XMLHttpRequest,
       requestAnimationFrame: this.canvas.requestAnimationFrame,
-      OffscreenCanvas: OffscreenCanvas
+      OffscreenCanvas: OffscreenCanvas,
+      createImageBitmap: undefined,
 
     }
 

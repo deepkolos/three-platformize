@@ -6,6 +6,7 @@ let $document = null;
 let $XMLHttpRequest = null;
 let $OffscreenCanvas = null;
 let $HTMLCanvasElement = null;
+let $createImageBitmap = null;
 let $requestAnimationFrame = null;
 
 class Platform {
@@ -25,6 +26,7 @@ class Platform {
 		$XMLHttpRequest = globals.XMLHttpRequest;
 		$OffscreenCanvas = globals.OffscreenCanvas;
 		$HTMLCanvasElement = globals.HTMLCanvasElement;
+		$createImageBitmap = globals.createImageBitmap;
 		$requestAnimationFrame = globals.requestAnimationFrame;
 
 		$URL = globals.window.URL;
@@ -43,6 +45,7 @@ class Platform {
 		$XMLHttpRequest = null;
 		$OffscreenCanvas = null;
 		$HTMLCanvasElement = null;
+		$createImageBitmap = null;
 		$requestAnimationFrame = null;
 
 	}
@@ -51,4 +54,4 @@ class Platform {
 
 const PLATFORM = new Platform();
 
-export { PLATFORM, $window, $document, $XMLHttpRequest, $atob, $OffscreenCanvas, $HTMLCanvasElement, $requestAnimationFrame, $Blob, $URL };
+export { PLATFORM, $window, $document, $XMLHttpRequest, $atob, $OffscreenCanvas, $HTMLCanvasElement, $requestAnimationFrame, $Blob, $URL, $createImageBitmap };

@@ -45,6 +45,8 @@ export class WechatPlatform {
 
     });
 
+    this.patchCanvas();
+
   }
 
   patchCanvas() {
@@ -88,6 +90,7 @@ export class WechatPlatform {
       XMLHttpRequest: XMLHttpRequest,
       requestAnimationFrame: this.canvas.requestAnimationFrame,
       OffscreenCanvas: OffscreenCanvas,
+      createImageBitmap: undefined,
 
     }
 
