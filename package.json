@@ -1,0 +1,39 @@
+{
+  "name": "three-platformize",
+  "version": "1.0.0",
+  "description": "platformized three that support wechat and taobao miniprogram",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "types": "src/Three.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "link": "symlink-dir ./node_modules/three ./three",
+    "build": "npm run build-three && npm run build-jsm && npm run build-platform",
+    "build-three": "rollup -c config/rollup.config.js",
+    "build-jsm": "rollup -c config/rollup.config.jsm.js",
+    "build-platform": "rollup -c config/rollup.config.platform.js"
+  },
+  "keywords": [
+    "three",
+    "wechat",
+    "taobao",
+    "mini",
+    "program"
+  ],
+  "author": "DeepKolos <deepkolos@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-inject": "^4.0.2",
+    "rollup": "^2.36.2",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-multi-input": "^1.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "symlink-dir": "^4.1.0"
+  },
+  "dependencies": {
+    "three": "^0.124.0"
+  }
+}
