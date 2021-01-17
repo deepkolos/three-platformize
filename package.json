@@ -5,7 +5,7 @@
   "main": "build/three.js",
   "module": "build/three.module.js",
   "sideEffects": false,
-  "types": "src/Three.d.ts",
+  "types": "src/ThreePlatformize.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "link": "symlink-dir ./node_modules/three ./three",
