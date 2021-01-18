@@ -1,4 +1,5 @@
 import EventTarget from "../libs/EventTarget.js";
+import { decode as base64ToArrayBuffer } from '../libs/base64-arraybuffer';
 
 const _requestHeader = new WeakMap();
 const _responseHeader = new WeakMap();
@@ -111,12 +112,11 @@ export default class $XMLHttpRequest extends EventTarget {
       this.response = null;
 
       const onSuccess = ({ data, statusCode, header }) => {
-        // console.log('onSuccess', data)
-        if (responseType === 'arraybuffer') {
-          const enc = new TextEncoder()
-          data = enc.encode(data).buffer
+
+        if (responseType === "arraybuffer") {
+          data = base64ToArrayBuffer(data)
         }
-        // data = Uint8Array.from(data, function(c){return c.codePointAt(0);}).buffer
+
         statusCode = statusCode === undefined ? 200 : statusCode;
         if (typeof data !== "string" && !(data instanceof ArrayBuffer)) {
           try {
@@ -199,7 +199,7 @@ export default class $XMLHttpRequest extends EventTarget {
           const fs = my.getFileSystemManager();
           fs.readFile({
             filePath: apFilePath,
-            // encoding: 'binary',
+            encoding: responseType === "arraybuffer" ? 'base64' : undefined,
             // encoding: 'arraybuffer', // 不写encoding默认ArrayBuffer
             success: onSuccess,
           });

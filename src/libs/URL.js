@@ -1,5 +1,5 @@
 import Blob from "./Blob";
-import ArrayBufferToBase64 from "./ArrayBufferToBase64";
+import { decode as ArrayBufferToBase64 } from './base64-arraybuffer';
 
 export default class $URL {
 
