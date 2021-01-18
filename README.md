@@ -68,4 +68,4 @@ PLATFORM.dispose();
 
 # Bug
 
-Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 小程序 由于 API 没抄全，加载 glb 有问题)
+~~Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 小程序 由于 API 没抄全，加载 glb 有问题)~~ 已修复，淘宝小程序也可以加载GLB (v1.0.1)
