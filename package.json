@@ -1,6 +1,6 @@
 {
   "name": "three-platformize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "platformized three that support wechat and taobao miniprogram and tree shaking",
   "main": "build/three.js",
   "module": "build/three.module.js",
