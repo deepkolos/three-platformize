@@ -1,4 +1,4 @@
-import EventTarget from "../libs/EventTarget.js";
+import EventTarget from '../libs/EventTarget.js';
 import { decode as base64ToArrayBuffer } from '../libs/base64-arraybuffer';
 
 const _requestHeader = new WeakMap();
@@ -8,7 +8,7 @@ const _requestTask = new WeakMap();
 function _triggerEvent(type, event = {}) {
   event.target = event.target || this;
 
-  if (typeof this[`on${type}`] === "function") {
+  if (typeof this[`on${type}`] === 'function') {
     this[`on${type}`].call(this, event);
   }
 }
@@ -18,7 +18,7 @@ function _changeReadyState(readyState, event = {}) {
 
   event.readyState = readyState;
 
-  _triggerEvent.call(this, "readystatechange", event);
+  _triggerEvent.call(this, 'readystatechange', event);
 }
 
 function _isRelativePath(url) {
@@ -44,16 +44,16 @@ export default class $XMLHttpRequest extends EventTarget {
     this.readyState = 0;
     this.response = null;
     this.responseText = null;
-    this.responseType = "text";
-    this.dataType = "arraybuffer";
+    this.responseType = 'text';
+    this.dataType = 'arraybuffer';
     this.responseXML = null;
     this.status = 0;
-    this.statusText = "";
+    this.statusText = '';
     this.upload = {};
     this.withCredentials = false;
 
     _requestHeader.set(this, {
-      "content-type": "application/x-www-form-urlencoded",
+      'content-type': 'application/x-www-form-urlencoded',
     });
     _responseHeader.set(this, {});
   }
@@ -70,17 +70,17 @@ export default class $XMLHttpRequest extends EventTarget {
     const responseHeader = _responseHeader.get(this);
 
     return Object.keys(responseHeader)
-      .map((header) => {
+      .map(header => {
         return `${header}: ${responseHeader[header]}`;
       })
-      .join("\n");
+      .join('\n');
   }
 
   getResponseHeader(header) {
     return _responseHeader.get(this)[header];
   }
 
-  open(method, url ) {
+  open(method, url) {
     this._method = method;
     this._url = url;
     _changeReadyState.call(this, $XMLHttpRequest.OPENED);
@@ -88,10 +88,10 @@ export default class $XMLHttpRequest extends EventTarget {
 
   overrideMimeType() {}
 
-  send(data = "") {
+  send(data = '') {
     if (this.readyState !== $XMLHttpRequest.OPENED) {
       throw new Error(
-        "Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED."
+        "Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED.",
       );
     } else {
       const url = this._url;
@@ -102,23 +102,22 @@ export default class $XMLHttpRequest extends EventTarget {
       const relative = _isRelativePath(url);
       let encoding;
 
-      if (responseType === "arraybuffer") {
+      if (responseType === 'arraybuffer') {
         // encoding = 'binary'
       } else {
-        encoding = "utf8";
+        encoding = 'utf8';
       }
 
       delete this.response;
       this.response = null;
 
       const onSuccess = ({ data, statusCode, header }) => {
-
-        if (responseType === "arraybuffer") {
-          data = base64ToArrayBuffer(data)
+        if (responseType === 'arraybuffer') {
+          data = base64ToArrayBuffer(data);
         }
 
         statusCode = statusCode === undefined ? 200 : statusCode;
-        if (typeof data !== "string" && !(data instanceof ArrayBuffer)) {
+        if (typeof data !== 'string' && !(data instanceof ArrayBuffer)) {
           try {
             data = JSON.stringify(data);
           } catch (e) {}
@@ -128,39 +127,39 @@ export default class $XMLHttpRequest extends EventTarget {
         if (header) {
           _responseHeader.set(this, header);
         }
-        _triggerEvent.call(this, "loadstart");
+        _triggerEvent.call(this, 'loadstart');
         _changeReadyState.call(this, $XMLHttpRequest.HEADERS_RECEIVED);
         _changeReadyState.call(this, $XMLHttpRequest.LOADING);
 
         this.response = data;
 
         if (data instanceof ArrayBuffer) {
-          Object.defineProperty(this, "responseText", {
+          Object.defineProperty(this, 'responseText', {
             enumerable: true,
             configurable: true,
             get: function () {
-              throw "InvalidStateError : responseType is " + this.responseType;
+              throw 'InvalidStateError : responseType is ' + this.responseType;
             },
           });
         } else {
           this.responseText = data;
         }
         _changeReadyState.call(this, $XMLHttpRequest.DONE);
-        _triggerEvent.call(this, "load");
-        _triggerEvent.call(this, "loadend");
+        _triggerEvent.call(this, 'load');
+        _triggerEvent.call(this, 'loadend');
       };
 
       const onFail = ({ errorMessage }) => {
         // TODO 规范错误
 
-        if (errorMessage.indexOf("abort") !== -1) {
-          _triggerEvent.call(this, "abort");
+        if (errorMessage.indexOf('abort') !== -1) {
+          _triggerEvent.call(this, 'abort');
         } else {
-          _triggerEvent.call(this, "error", {
+          _triggerEvent.call(this, 'error', {
             message: errorMessage,
           });
         }
-        _triggerEvent.call(this, "loadend");
+        _triggerEvent.call(this, 'loadend');
 
         if (relative) {
           // 用户即使没监听error事件, 也给出相应的警告
@@ -181,11 +180,11 @@ export default class $XMLHttpRequest extends EventTarget {
         // }
         fs.access({
           path: url,
-          success: (res) => {
-            console.log("文件存在", res);
+          success: res => {
+            console.log('文件存在', res);
           },
-          fail: (err) => {
-            console.log("err:", err);
+          fail: err => {
+            console.log('err:', err);
           },
         });
         fs.readFile(options);
@@ -199,7 +198,7 @@ export default class $XMLHttpRequest extends EventTarget {
           const fs = my.getFileSystemManager();
           fs.readFile({
             filePath: apFilePath,
-            encoding: responseType === "arraybuffer" ? 'base64' : undefined,
+            encoding: responseType === 'arraybuffer' ? 'base64' : undefined,
             // encoding: 'arraybuffer', // 不写encoding默认ArrayBuffer
             success: onSuccess,
           });
@@ -228,19 +227,19 @@ export default class $XMLHttpRequest extends EventTarget {
   }
 
   addEventListener(type, listener) {
-    if (typeof listener !== "function") {
+    if (typeof listener !== 'function') {
       return;
     }
 
-    this["on" + type] = (event = {}) => {
+    this['on' + type] = (event = {}) => {
       event.target = event.target || this;
       listener.call(this, event);
     };
   }
 
   removeEventListener(type, listener) {
-    if (this["on" + type] === listener) {
-      this["on" + type] = null;
+    if (this['on' + type] === listener) {
+      this['on' + type] = null;
     }
   }
 }

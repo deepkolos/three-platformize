@@ -13,4 +13,7 @@ export class TaobaoPlatform {
   };
 
   dispose(): void;
+
+  enableDeviceOrientation(interval?: 'normal' | 'game' | 'ui'): void;
+  disableDeviceOrientation(): void;
 }

@@ -1,4 +1,3 @@
-
 /**
  * Implementation of atob() according to the HTML and Infra specs, except that
  * instead of throwing INVALID_CHARACTER_ERR we return null.
@@ -8,11 +7,11 @@ export default function atob(data) {
   // ToString, which in our case amounts to using a template literal.
   data = `${data}`;
   // "Remove all ASCII whitespace from data."
-  data = data.replace(/[ \t\n\f\r]/g, "");
+  data = data.replace(/[ \t\n\f\r]/g, '');
   // "If data's length divides by 4 leaving no remainder, then: if data ends
   // with one or two U+003D (=) code points, then remove them from data."
   if (data.length % 4 === 0) {
-    data = data.replace(/==?$/, "");
+    data = data.replace(/==?$/, '');
   }
   // "If data's length divides by 4 leaving a remainder of 1, then return
   // failure."
@@ -28,7 +27,7 @@ export default function atob(data) {
     return null;
   }
   // "Let output be an empty byte sequence."
-  let output = "";
+  let output = '';
   // "Let buffer be an empty buffer that can have bits appended to it."
   //
   // We append bits via left-shift and or.  accumulatedBits is used to track
@@ -85,7 +84,7 @@ export default function atob(data) {
  */
 
 const keystr =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 function atobLookup(chr) {
   const index = keystr.indexOf(chr);

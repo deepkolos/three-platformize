@@ -13,3 +13,5 @@ export let $OffscreenCanvas: any;
 export let $HTMLCanvasElement: any;
 export let $createImageBitmap: any;
 export let $requestAnimationFrame: any;
+export let $cancelAnimationFrame: any;
+

@@ -293,7 +293,8 @@
 			exports.$OffscreenCanvas = globals.OffscreenCanvas;
 			exports.$HTMLCanvasElement = globals.HTMLCanvasElement;
 			exports.$createImageBitmap = globals.createImageBitmap;
-			exports.$requestAnimationFrame = globals.requestAnimationFrame;
+			exports.$requestAnimationFrame = exports.$window.requestAnimationFrame;
+			exports.$window.cancelAnimationFrame;
 			exports.$URL = globals.window.URL;
 		};
 

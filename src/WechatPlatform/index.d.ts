@@ -13,4 +13,7 @@ export class WechatPlatform {
   };
 
   dispose(): void;
+
+  enableDeviceOrientation(interval?: 'normal' | 'game' | 'ui'): void;
+  disableDeviceOrientation(): void;
 }
