@@ -1,6 +1,6 @@
 const _events = new WeakMap();
 
-class Touch {
+export class Touch {
   constructor(touch) {
     // CanvasTouch{identifier, x, y}
     // Touch{identifier, pageX, pageY, clientX, clientY, force}
@@ -69,34 +69,17 @@ export default class EventTarget {
     if (typeof event.stopPropagation !== 'function') {
       event.stopPropagation = () => {};
     }
-    const listeners = _events.get(this)[event.type];
 
-    if (listeners) {
-      for (let i = 0; i < listeners.length; i++) {
-        listeners[i](event);
+    const events = _events.get(this)
+
+    if (events) {
+      const listeners = events[event.type];
+
+      if (listeners) {
+        for (let i = 0; i < listeners.length; i++) {
+          listeners[i](event);
+        }
       }
     }
-  }
-
-  dispatchTouchEvent(e = {}) {
-    const target = {
-      ...this,
-    };
-
-    const event = {
-      changedTouches: e.changedTouches.map(touch => new Touch(touch)),
-      touches: e.touches.map(touch => new Touch(touch)),
-      targetTouches: Array.prototype.slice.call(
-        e.touches.map(touch => new Touch(touch)),
-      ),
-      timeStamp: e.timeStamp,
-      target: target,
-      currentTarget: target,
-      type: e.type,
-      cancelBubble: false,
-      cancelable: false,
-    };
-
-    this.dispatchEvent(event);
   }
 }

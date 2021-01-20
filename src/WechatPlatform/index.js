@@ -1,7 +1,7 @@
 import URL from '../libs/URL';
 import Blob from '../libs/Blob';
 import atob from '../libs/atob';
-import EventTarget from '../libs/EventTarget';
+import EventTarget, { Touch } from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
 
@@ -10,10 +10,12 @@ function OffscreenCanvas() {
 }
 
 export class WechatPlatform {
-  constructor(canvas) {
+  constructor(canvas, width, height) {
     const systemInfo = wx.getSystemInfoSync();
 
     this.canvas = canvas;
+    this.canvasW = width === undefined ? canvas.width : width;
+    this.canvasH = height === undefined ? canvas.height : height;
 
     this.document = {
       createElementNS(_, type) {
@@ -51,6 +53,8 @@ export class WechatPlatform {
   }
 
   patchCanvas() {
+    const { canvasH, canvasW } = this;
+
     Object.defineProperty(this.canvas, 'style', {
       get() {
         return {
@@ -62,15 +66,17 @@ export class WechatPlatform {
 
     Object.defineProperty(this.canvas, 'clientHeight', {
       get() {
-        return this.height;
+        return canvasH || this.height;
       },
     });
 
     Object.defineProperty(this.canvas, 'clientWidth', {
       get() {
-        return this.width;
+        return canvasW || this.width;
       },
     });
+
+    this.canvas.ownerDocument = this.document;
   }
 
   getGlobals() {
@@ -109,8 +115,31 @@ export class WechatPlatform {
     });
   }
 
+  dispatchTouchEvent(e = {}) {
+    const target = {
+      ...this,
+    };
+
+    const event = {
+      changedTouches: e.changedTouches.map(touch => new Touch(touch)),
+      touches: e.touches.map(touch => new Touch(touch)),
+      targetTouches: Array.prototype.slice.call(
+        e.touches.map(touch => new Touch(touch)),
+      ),
+      timeStamp: e.timeStamp,
+      target: target,
+      currentTarget: target,
+      type: e.type,
+      cancelBubble: false,
+      cancelable: false,
+    };
+
+    this.canvas.dispatchEvent(event);
+  }
+
   dispose() {
     this.disableDeviceOrientation();
+    this.canvas.ownerDocument = null;
     this.onGyroscopeChange = null;
     this.document = null;
     this.window = null;

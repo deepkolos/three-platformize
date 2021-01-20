@@ -1,5 +1,5 @@
 export class WechatPlatform {
-  constructor(canvas: any);
+  constructor(canvas: any, width?: number, height?: number);
 
   getGlobals(): {
     atob: Function;
@@ -16,4 +16,5 @@ export class WechatPlatform {
 
   enableDeviceOrientation(interval?: 'normal' | 'game' | 'ui'): void;
   disableDeviceOrientation(): void;
+  dispatchTouchEvent(e: any): void;
 }

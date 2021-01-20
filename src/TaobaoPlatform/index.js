@@ -10,10 +10,12 @@ function OffscreenCanvas() {
 }
 
 export class TaobaoPlatform {
-  constructor(canvas) {
+  constructor(canvas, width, height) {
     const systemInfo = my.getSystemInfoSync();
 
     this.canvas = canvas;
+    this.canvasW = width === undefined ? canvas.width : width;
+    this.canvasH = height === undefined ? canvas.height : height;
 
     this.document = {
       createElementNS(_, type) {
@@ -32,7 +34,7 @@ export class TaobaoPlatform {
       cancelAnimationFrame: this.canvas.cancelAnimationFrame,
     };
 
-    [this.canvas, this.document, this.window].forEach(i => {
+    [this.document, this.window].forEach(i => {
       copyProperties(i.constructor.prototype, EventTarget.prototype);
     });
 
@@ -56,13 +58,13 @@ export class TaobaoPlatform {
 
     Object.defineProperty(this.canvas, 'clientHeight', {
       get() {
-        return this.height;
+        return canvasH || this.height;
       },
     });
 
     Object.defineProperty(this.canvas, 'clientWidth', {
       get() {
-        return this.width;
+        return canvasW || this.width;
       },
     });
   }
