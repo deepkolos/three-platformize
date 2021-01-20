@@ -48,6 +48,9 @@ export class WechatPlatform {
 
     this.onDeviceMotionChange = e => {
       e.type = 'deviceorientation';
+      e.alpha *= -1;
+      e.beta *= -1;
+      e.gamma *= -1;
       this.window.dispatchEvent(e);
     };
   }

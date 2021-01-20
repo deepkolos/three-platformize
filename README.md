@@ -41,7 +41,7 @@ PLATFORM.dispose();
 #### Controls
 
 0. OrbitControls
-1. DeviceOrientationControls (working)
+1. DeviceOrientationControls
 
 ## 实现
 
