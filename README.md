@@ -5,7 +5,7 @@
 0. 目前已适配微信小程序，淘宝小程序
 1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
-3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试，仅仅测试了 GLTFLoader）
+3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试）
 
 ## 使用
 
@@ -36,11 +36,11 @@ PLATFORM.dispose();
 
 0. GLTFLoader
 1. TextureLoader
-2.
+2. RGBELoader & PMREMGenerator
 
 #### Controls
 
-0. OrbitControls
+0. OrbitControls & MapControls
 1. DeviceOrientationControls
 
 ## 实现
