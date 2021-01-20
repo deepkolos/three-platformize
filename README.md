@@ -7,7 +7,7 @@
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试，仅仅测试了 GLTFLoader）
 
-# 使用
+## 使用
 
 ```js
 import { PLATFORM } from 'three-platformize';
@@ -19,7 +19,7 @@ PLATFORM.set(new WechatPlatform(canvas)); // webgl canvas
 PLATFORM.dispose();
 ```
 
-# DEMO
+## DEMO
 
 <div>
   <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
@@ -30,24 +30,24 @@ PLATFORM.dispose();
 
 [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
 
-# 已测试模块
+## 已测试模块
 
-### Loader
+#### Loader
 
 0. GLTFLoader
 1. TextureLoader
 2.
 
-### Controls
+#### Controls
 
 0. OrbitControls
 1. DeviceOrientationControls (working)
 
-# 实现
+## 实现
 
 构建时替换平台相关的 api 调用，转发到 PLATFORM 的引用，通过 PLATFORM.set 更新
 
-# 维护
+## 维护
 
 ### 如何更新 Three 的版本？
 
@@ -75,11 +75,11 @@ PLATFORM.dispose();
 > npm run build
 ```
 
-# TODO
+## TODO
 
 0. 适配陀螺仪
 1. 适配头条小程序
 
-# Bug
+## Bug
 
 ~~Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 小程序 由于 API 没抄全，加载 glb 有问题)~~ 已修复，淘宝小程序也可以加载 GLB (v1.0.1)
