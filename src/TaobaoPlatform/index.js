@@ -4,6 +4,7 @@ import atob from '../libs/atob';
 import EventTarget from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
+import { $DOMParser as DOMParser } from '../libs/DOMParser';
 
 function OffscreenCanvas() {
   return my.createOffscreenCanvas();
@@ -28,8 +29,10 @@ export class TaobaoPlatform {
       innerWidth: systemInfo.windowWidth,
       innerHeight: systemInfo.windowHeight,
       devicePixelRatio: systemInfo.pixelRatio,
-      AudioContext: function () {},
+
+      DOMParser,
       URL: new URL(),
+      AudioContext: function () {},
       requestAnimationFrame: this.canvas.requestAnimationFrame,
       cancelAnimationFrame: this.canvas.cancelAnimationFrame,
     };

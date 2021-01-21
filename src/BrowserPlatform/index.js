@@ -9,6 +9,7 @@ export class BrowserPlatform {
       Blob,
       window,
       document,
+      DOMParser,
       EventTarget,
       XMLHttpRequest,
       HTMLCanvasElement,

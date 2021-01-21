@@ -7,7 +7,7 @@
   "sideEffects": false,
   "types": "src/Three.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo TODO",
     "link": "symlink-dir ./node_modules/three ./three",
     "build": "npm run build-three && npm run build-jsm",
     "build-three": "rollup -c config/rollup.config.three.js",

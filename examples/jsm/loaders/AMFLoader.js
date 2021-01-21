@@ -1,3 +1,4 @@
+import { $DOMParser } from '../../../build/three.module.js';
 import { Loader, FileLoader, Group, MeshPhongMaterial, Float32BufferAttribute, Color, BufferGeometry, Mesh, LoaderUtils } from '../../../build/three.module.js';
 import { JSZip } from '../libs/jszip.module.min.js';
 
@@ -109,7 +110,7 @@ AMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 			}
 
 			var fileText = LoaderUtils.decodeText( view );
-			var xmlData = new DOMParser().parseFromString( fileText, 'application/xml' );
+			var xmlData = new $DOMParser().parseFromString( fileText, 'application/xml' );
 
 			if ( xmlData.documentElement.nodeName.toLowerCase() !== 'amf' ) {
 

@@ -4,6 +4,8 @@ import atob from '../libs/atob';
 import EventTarget, { Touch } from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
+// import { DOMParser } from 'xmldom';
+import { $DOMParser as DOMParser } from '../libs/DOMParser';
 
 function OffscreenCanvas() {
   return wx.createOffscreenCanvas();
@@ -20,7 +22,6 @@ export class WechatPlatform {
     this.document = {
       createElementNS(_, type) {
         if (type === 'canvas') return canvas;
-
         if (type === 'img') return canvas.createImage();
       },
     };
@@ -29,8 +30,9 @@ export class WechatPlatform {
       innerWidth: systemInfo.windowWidth,
       innerHeight: systemInfo.windowHeight,
       devicePixelRatio: systemInfo.pixelRatio,
-      AudioContext: function () {},
+
       URL: new URL(),
+      AudioContext: function () {},
       requestAnimationFrame: this.canvas.requestAnimationFrame,
       cancelAnimationFrame: this.canvas.cancelAnimationFrame,
       DeviceOrientationEvent: {
@@ -38,6 +40,7 @@ export class WechatPlatform {
           return Promise.resolve('granted');
         },
       },
+      DOMParser,
     };
 
     [this.canvas, this.document, this.window].forEach(i => {

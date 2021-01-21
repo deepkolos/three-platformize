@@ -3,6 +3,7 @@ let $atob = null;
 let $Blob = null;
 let $window = null;
 let $document = null;
+let $DOMParser = null;
 let $XMLHttpRequest = null;
 let $OffscreenCanvas = null;
 let $HTMLCanvasElement = null;
@@ -26,10 +27,11 @@ class Platform {
     $OffscreenCanvas = globals.OffscreenCanvas;
     $HTMLCanvasElement = globals.HTMLCanvasElement;
     $createImageBitmap = globals.createImageBitmap;
+
+    $URL = $window.URL;
+    $DOMParser = $window.DOMParser;
     $requestAnimationFrame = $window.requestAnimationFrame;
     $cancelAnimationFrame = $window.cancelAnimationFrame;
-
-    $URL = globals.window.URL;
   }
 
   dispose() {
@@ -40,6 +42,7 @@ class Platform {
     $atob = null;
     $window = null;
     $document = null;
+    $DOMParser = null;
     $XMLHttpRequest = null;
     $OffscreenCanvas = null;
     $HTMLCanvasElement = null;
@@ -51,15 +54,16 @@ class Platform {
 const PLATFORM = new Platform();
 
 export {
-  PLATFORM,
-  $window,
-  $document,
-  $XMLHttpRequest,
+  $URL,
   $atob,
+  $Blob,
+  $window,
+  PLATFORM,
+  $document,
+  $DOMParser,
+  $XMLHttpRequest,
   $OffscreenCanvas,
   $HTMLCanvasElement,
-  $requestAnimationFrame,
-  $Blob,
-  $URL,
   $createImageBitmap,
+  $requestAnimationFrame,
 };

@@ -1,4 +1,4 @@
-import { $window } from '../../../build/three.module.js';
+import { $window, $DOMParser } from '../../../build/three.module.js';
 import { Loader, FileLoader, LoaderUtils, BufferGeometry, Float32BufferAttribute, BufferAttribute } from '../../../build/three.module.js';
 import { Inflate } from '../libs/inflate.module.min.js';
 
@@ -888,7 +888,7 @@ VTKLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 				try {
 
-					dom = ( new DOMParser() ).parseFromString( stringFile, 'text/xml' );
+					dom = ( new $DOMParser() ).parseFromString( stringFile, 'text/xml' );
 
 				} catch ( e ) {
 

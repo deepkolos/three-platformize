@@ -1,4 +1,4 @@
-import { $Blob, $URL } from '../../../build/three.module.js';
+import { $DOMParser, $Blob, $URL } from '../../../build/three.module.js';
 import { Loader, FileLoader, TextureLoader, LoaderUtils, Group, Color, Matrix4, BufferGeometry, Float32BufferAttribute, Mesh, MeshPhongMaterial, BufferAttribute, MeshStandardMaterial, sRGBEncoding, RepeatWrapping, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, LinearMipmapLinearFilter, NearestFilter } from '../../../build/three.module.js';
 import { JSZip } from '../libs/jszip.module.min.js';
 
@@ -149,7 +149,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 				var view = new Uint8Array( zip.file( modelPart ).asArrayBuffer() );
 
 				var fileText = LoaderUtils.decodeText( view );
-				var xmlData = new DOMParser().parseFromString( fileText, 'application/xml' );
+				var xmlData = new $DOMParser().parseFromString( fileText, 'application/xml' );
 
 				if ( xmlData.documentElement.nodeName.toLowerCase() !== 'model' ) {
 
@@ -208,7 +208,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 			var relationships = [];
 
-			var relsXmlData = new DOMParser().parseFromString( relsFileText, 'application/xml' );
+			var relsXmlData = new $DOMParser().parseFromString( relsFileText, 'application/xml' );
 
 			var relsNodes = relsXmlData.querySelectorAll( 'Relationship' );
 

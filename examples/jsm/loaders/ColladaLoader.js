@@ -1,3 +1,4 @@
+import { $DOMParser } from '../../../build/three.module.js';
 import { Loader, LoaderUtils, FileLoader, Vector3, Quaternion, Matrix4, MeshBasicMaterial, Scene, TextureLoader, Euler, MathUtils, AnimationClip, VectorKeyframeTrack, QuaternionKeyframeTrack, MeshLambertMaterial, MeshPhongMaterial, DoubleSide, PerspectiveCamera, OrthographicCamera, Color, AmbientLight, SpotLight, PointLight, DirectionalLight, BufferGeometry, Float32BufferAttribute, Skeleton, Bone, Group, LineBasicMaterial, SkinnedMesh, Mesh, Line, LineSegments, RepeatWrapping, ClampToEdgeWrapping } from '../../../build/three.module.js';
 import { TGALoader } from './TGALoader.js';
 
@@ -3854,7 +3855,7 @@ ColladaLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 		}
 
-		var xml = new DOMParser().parseFromString( text, 'application/xml' );
+		var xml = new $DOMParser().parseFromString( text, 'application/xml' );
 
 		var collada = getElementsByTagName( xml, 'COLLADA' )[ 0 ];
 

@@ -270,6 +270,7 @@
 	exports.$Blob = null;
 	exports.$window = null;
 	exports.$document = null;
+	exports.$DOMParser = null;
 	exports.$XMLHttpRequest = null;
 	exports.$OffscreenCanvas = null;
 	exports.$HTMLCanvasElement = null;
@@ -293,9 +294,10 @@
 			exports.$OffscreenCanvas = globals.OffscreenCanvas;
 			exports.$HTMLCanvasElement = globals.HTMLCanvasElement;
 			exports.$createImageBitmap = globals.createImageBitmap;
+			exports.$URL = exports.$window.URL;
+			exports.$DOMParser = exports.$window.DOMParser;
 			exports.$requestAnimationFrame = exports.$window.requestAnimationFrame;
 			exports.$window.cancelAnimationFrame;
-			exports.$URL = globals.window.URL;
 		};
 
 		_proto.dispose = function dispose() {
@@ -305,6 +307,7 @@
 			exports.$atob = null;
 			exports.$window = null;
 			exports.$document = null;
+			exports.$DOMParser = null;
 			exports.$XMLHttpRequest = null;
 			exports.$OffscreenCanvas = null;
 			exports.$HTMLCanvasElement = null;
@@ -27399,7 +27402,7 @@
 							break;
 
 						case 'document':
-							var parser = new DOMParser();
+							var parser = new exports.$DOMParser();
 							response = parser.parseFromString(data, mimeType);
 							break;
 

@@ -13,7 +13,10 @@
 import { PLATFORM } from 'three-platformize';
 import WechatPlatform from 'three-platformize/src/WechatPlatform';
 
-PLATFORM.set(new WechatPlatform(canvas)); // webgl canvas
+const platform = new WechatPlatform(canvas);
+
+platform.enableDeviceOrientation('game'); // 开启DeviceOrientation
+PLATFORM.set(platform); // webgl canvas
 
 // 使用完毕后释放资源
 PLATFORM.dispose();
@@ -37,11 +40,16 @@ PLATFORM.dispose();
 0. GLTFLoader
 1. TextureLoader
 2. RGBELoader & PMREMGenerator
+3. SVGLoader
 
 #### Controls
 
 0. OrbitControls & MapControls
 1. DeviceOrientationControls
+
+## 不支持模块
+
+0. ImageBitmapLoader(微信小程序无 ImageBitmap)
 
 ## 实现
 

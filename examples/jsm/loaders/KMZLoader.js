@@ -1,4 +1,4 @@
-import { $Blob, $URL } from '../../../build/three.module.js';
+import { $Blob, $URL, $DOMParser } from '../../../build/three.module.js';
 import { Loader, FileLoader, LoadingManager, Group } from '../../../build/three.module.js';
 import { ColladaLoader } from './ColladaLoader.js';
 import { JSZip } from '../libs/jszip.module.min.js';
@@ -88,7 +88,7 @@ KMZLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 		if ( zip.files[ 'doc.kml' ] ) {
 
-			var xml = new DOMParser().parseFromString( zip.files[ 'doc.kml' ].asText(), 'application/xml' );
+			var xml = new $DOMParser().parseFromString( zip.files[ 'doc.kml' ].asText(), 'application/xml' );
 
 			var model = xml.querySelector( 'Placemark Model Link href' );
 

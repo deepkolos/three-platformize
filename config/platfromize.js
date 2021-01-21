@@ -7,6 +7,7 @@ export const platformVariables = [
   'Blob',
   'window',
   'document',
+  'DOMParser',
   'XMLHttpRequest',
   'OffscreenCanvas',
   'HTMLCanvasElement',

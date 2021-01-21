@@ -1,3 +1,4 @@
+import { $DOMParser } from '../../../build/three.module.js';
 import { Loader, FileLoader, Matrix3, Vector2, Vector3, BufferGeometry, Float32BufferAttribute, ShapePath, Path } from '../../../build/three.module.js';
 
 var SVGLoader = function ( manager ) {
@@ -1393,7 +1394,7 @@ SVGLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 		var currentTransform = new Matrix3();
 
-		var xml = new DOMParser().parseFromString( text, 'image/svg+xml' ); // application/xml
+		var xml = new $DOMParser().parseFromString( text, 'image/svg+xml' ); // application/xml
 
 		parseNode( xml.documentElement, {
 			fill: '#000',
