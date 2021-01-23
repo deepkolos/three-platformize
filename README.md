@@ -41,6 +41,7 @@ PLATFORM.dispose();
 1. TextureLoader
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
+4. BASISLoader (working)
 
 #### Controls
 
