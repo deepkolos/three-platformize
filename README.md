@@ -41,7 +41,7 @@ PLATFORM.dispose();
 1. TextureLoader
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
-4. BASISLoader (working)
+4. OBJLoader
 
 #### Controls
 
@@ -51,6 +51,10 @@ PLATFORM.dispose();
 ## 不支持模块
 
 0. ImageBitmapLoader(微信小程序无 ImageBitmap)
+
+## 有支持可能，但需要单独适配
+
+0. BasisTextureLoader(微信小程序的Worker不好转发，经测试安卓可在worker内使用WASM)
 
 ## 实现
 
@@ -86,9 +90,6 @@ PLATFORM.dispose();
 
 ## TODO
 
-0. 适配陀螺仪
 1. 适配头条小程序
 
-## Bug
-
-~~Blob 未完全适配，目前 gltf-loader 可加载 glb 文件(taobao 小程序 由于 API 没抄全，加载 glb 有问题)~~ 已修复，淘宝小程序也可以加载 GLB (v1.0.1)
+### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
