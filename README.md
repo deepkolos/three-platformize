@@ -13,10 +13,10 @@
 import { PLATFORM } from 'three-platformize';
 import WechatPlatform from 'three-platformize/src/WechatPlatform';
 
-const platform = new WechatPlatform(canvas);
+const platform = new WechatPlatform(canvas); // webgl canvas
 
 platform.enableDeviceOrientation('game'); // 开启DeviceOrientation
-PLATFORM.set(platform); // webgl canvas
+PLATFORM.set(platform);
 
 // 使用完毕后释放资源
 PLATFORM.dispose();
@@ -33,11 +33,13 @@ PLATFORM.dispose();
 
 [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
 
+> 注：运行DEMO时记得开启调试模式，取消域名验证
+
 ## 已测试模块
 
 #### Loader
 
-0. GLTFLoader
+0. GLTFLoader (支持带纹理的GLB) && (EXT_meshopt_compression 安卓)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
@@ -90,6 +92,7 @@ PLATFORM.dispose();
 
 ## TODO
 
+0. 更彻底dispose，减少内存泄漏
 1. 适配头条小程序
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)

@@ -145,7 +145,7 @@ export class WechatPlatform {
 
   dispose() {
     this.disableDeviceOrientation();
-    this.canvas.ownerDocument = null;
+    if (this.canvas) this.canvas.ownerDocument = null;
     this.onGyroscopeChange = null;
     this.document = null;
     this.window = null;
