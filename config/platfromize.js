@@ -8,6 +8,7 @@ export const platformVariables = [
   'window',
   'document',
   'DOMParser',
+  'TextDecoder',
   'XMLHttpRequest',
   'OffscreenCanvas',
   'HTMLCanvasElement',

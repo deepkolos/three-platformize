@@ -4,6 +4,7 @@ let $Blob = null;
 let $window = null;
 let $document = null;
 let $DOMParser = null;
+let $TextDecoder = null;
 let $XMLHttpRequest = null;
 let $OffscreenCanvas = null;
 let $HTMLCanvasElement = null;
@@ -30,6 +31,7 @@ class Platform {
 
     $URL = $window.URL;
     $DOMParser = $window.DOMParser;
+    $TextDecoder = $window.TextDecoder;
     $requestAnimationFrame = $window.requestAnimationFrame;
     $cancelAnimationFrame = $window.cancelAnimationFrame;
   }
@@ -43,6 +45,7 @@ class Platform {
     $window = null;
     $document = null;
     $DOMParser = null;
+    $TextDecoder = null;
     $XMLHttpRequest = null;
     $OffscreenCanvas = null;
     $HTMLCanvasElement = null;
@@ -61,6 +64,7 @@ export {
   PLATFORM,
   $document,
   $DOMParser,
+  $TextDecoder,
   $XMLHttpRequest,
   $OffscreenCanvas,
   $HTMLCanvasElement,

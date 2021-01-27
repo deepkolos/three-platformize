@@ -271,6 +271,7 @@
 	exports.$window = null;
 	exports.$document = null;
 	exports.$DOMParser = null;
+	exports.$TextDecoder = null;
 	exports.$XMLHttpRequest = null;
 	exports.$OffscreenCanvas = null;
 	exports.$HTMLCanvasElement = null;
@@ -296,6 +297,7 @@
 			exports.$createImageBitmap = globals.createImageBitmap;
 			exports.$URL = exports.$window.URL;
 			exports.$DOMParser = exports.$window.DOMParser;
+			exports.$TextDecoder = exports.$window.TextDecoder;
 			exports.$requestAnimationFrame = exports.$window.requestAnimationFrame;
 			exports.$window.cancelAnimationFrame;
 		};
@@ -308,6 +310,7 @@
 			exports.$window = null;
 			exports.$document = null;
 			exports.$DOMParser = null;
+			exports.$TextDecoder = null;
 			exports.$XMLHttpRequest = null;
 			exports.$OffscreenCanvas = null;
 			exports.$HTMLCanvasElement = null;
@@ -30185,8 +30188,8 @@
 
 	var LoaderUtils = {
 		decodeText: function decodeText(array) {
-			if (typeof TextDecoder !== 'undefined') {
-				return new TextDecoder().decode(array);
+			if (typeof exports.$TextDecoder !== 'undefined') {
+				return new exports.$TextDecoder().decode(array);
 			} // Avoid the String.fromCharCode.apply(null, array) shortcut, which
 			// throws a "maximum call stack size exceeded" error for large arrays.
 

@@ -44,6 +44,7 @@ PLATFORM.dispose();
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
 4. OBJLoader
+5. EXRLoader
 
 #### Controls
 

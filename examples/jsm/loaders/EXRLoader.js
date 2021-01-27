@@ -1,3 +1,4 @@
+import { $TextDecoder } from '../../../build/three.module.js';
 import { DataTextureLoader, FloatType, HalfFloatType, UnsignedByteType, RGBEFormat, RGBAFormat, LinearEncoding, LinearFilter, RGBEEncoding, NearestFilter, DataUtils } from '../../../build/three.module.js';
 import { Inflate } from '../libs/inflate.module.min.js';
 
@@ -1707,7 +1708,7 @@ EXRLoader.prototype = Object.assign( Object.create( DataTextureLoader.prototype 
 
 			}
 
-			var stringValue = new TextDecoder().decode(
+			var stringValue = new $TextDecoder().decode(
 				uintBuffer.slice( offset.value, offset.value + endOffset )
 			);
 
@@ -1719,7 +1720,7 @@ EXRLoader.prototype = Object.assign( Object.create( DataTextureLoader.prototype 
 
 		function parseFixedLengthString( buffer, offset, size ) {
 
-			var stringValue = new TextDecoder().decode(
+			var stringValue = new $TextDecoder().decode(
 				new Uint8Array( buffer ).slice( offset.value, offset.value + size )
 			);
 

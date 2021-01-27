@@ -6,6 +6,7 @@ import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
 // import { DOMParser } from 'xmldom';
 import { $DOMParser as DOMParser } from '../libs/DOMParser';
+import { $TextDecoder as TextDecoder } from '../libs/TextDecoder';
 
 function OffscreenCanvas() {
   return wx.createOffscreenCanvas();
@@ -41,6 +42,7 @@ export class WechatPlatform {
         },
       },
       DOMParser,
+      TextDecoder,
     };
 
     [this.canvas, this.document, this.window].forEach(i => {
