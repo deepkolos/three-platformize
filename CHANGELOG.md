@@ -1,3 +1,19 @@
+## [1.0.5](https://github.com/deepkolos/three-platformize/compare/v1.0.4...v1.0.5) (2021-01-27)
+
+
+### Bug Fixes
+
+* meshopt location at examples/jsm/libs ([4cda31b](https://github.com/deepkolos/three-platformize/commit/4cda31b66c6c24a588009b7995f81817f60f29ab))
+* update npmignore ([936eac9](https://github.com/deepkolos/three-platformize/commit/936eac97f44a9d732fe569f59778cd2741caf197))
+
+
+### Features
+
+* add meshopt & doc update & fix ownerDocument ([a6368e5](https://github.com/deepkolos/three-platformize/commit/a6368e53088f89c113adb4c2ee8bde7788a235e7))
+* add TextDecoder polyfill & EXRLoader works ([25ff7c7](https://github.com/deepkolos/three-platformize/commit/25ff7c7dfa2b48e3f7cf781b15e2855edab9be9e))
+
+
+
 ## [1.0.4](https://github.com/deepkolos/three-platformize/compare/v1.0.3...v1.0.4) (2021-01-21)
 
 
