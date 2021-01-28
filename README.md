@@ -44,7 +44,7 @@ PLATFORM.dispose();
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
 4. OBJLoader
-5. EXRLoader
+5. EXRLoader (需支持 OES_texture_float_linear 扩展)
 
 #### Controls
 
@@ -53,7 +53,7 @@ PLATFORM.dispose();
 
 ## 不支持模块
 
-0. ImageBitmapLoader(微信小程序无 ImageBitmap)
+0. ImageBitmapLoader(微信小程序未开放 ImageBitmap)
 
 ## 有支持可能，但需要单独适配
 
