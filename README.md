@@ -39,7 +39,7 @@ PLATFORM.dispose();
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的GLB) && (EXT_meshopt_compression 安卓)
+0. GLTFLoader (支持带纹理的GLB) && (EXT_meshopt_compression 需WASM 安卓可用)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator
 3. SVGLoader
