@@ -1,3 +1,18 @@
+## [1.0.6](https://github.com/deepkolos/three-platformize/compare/v1.0.5...v1.0.6) (2021-01-31)
+
+
+### Bug Fixes
+
+* toEnvMap import ([f4178ba](https://github.com/deepkolos/three-platformize/commit/f4178ba31b93c976ed26b5248a2039c800bf5ac6))
+
+
+### Features
+
+* add HDRPrefilterTexture ([11ff624](https://github.com/deepkolos/three-platformize/commit/11ff624fbc4cf8d83e1927043a393870685fdd68))
+* HDRPrefilterTexture -> toEnvMap ([8e59f69](https://github.com/deepkolos/three-platformize/commit/8e59f6995a9e8c97018d0f70a8bf26e944c829d3))
+
+
+
 ## [1.0.5](https://github.com/deepkolos/three-platformize/compare/v1.0.4...v1.0.5) (2021-01-27)
 
 
