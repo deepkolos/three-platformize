@@ -45,6 +45,8 @@ PLATFORM.dispose();
 3. SVGLoader
 4. OBJLoader
 5. EXRLoader (需支持 OES_texture_float_linear 扩展)
+6. MTLLoader
+7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展)
 
 #### Controls
 
