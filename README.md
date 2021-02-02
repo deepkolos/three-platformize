@@ -41,7 +41,7 @@ PLATFORM.dispose();
 
 0. GLTFLoader (支持带纹理的GLB) && (EXT_meshopt_compression 需WASM 安卓可用)
 1. TextureLoader
-2. RGBELoader & PMREMGenerator
+2. RGBELoader & PMREMGenerator (需支持 WEBGL_draw_buffers 扩展，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
 4. OBJLoader
 5. EXRLoader (需支持 OES_texture_float_linear 扩展)
