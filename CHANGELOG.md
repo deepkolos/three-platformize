@@ -1,3 +1,13 @@
+## [1.0.7](https://github.com/deepkolos/three-platformize/compare/v1.0.6...v1.0.7) (2021-02-02)
+
+
+### Features
+
+* add ldr support & doc update ([7a46f04](https://github.com/deepkolos/three-platformize/commit/7a46f041546688aa8d7d9d2f91c3d6e48039f4bf))
+* update three version 0.125.2 & fix $window type error ([019724b](https://github.com/deepkolos/three-platformize/commit/019724b8c818afdb7404485107f27ba543700d19))
+
+
+
 ## [1.0.6](https://github.com/deepkolos/three-platformize/compare/v1.0.5...v1.0.6) (2021-01-31)
 
 
