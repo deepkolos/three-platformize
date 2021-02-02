@@ -1,23 +1,9 @@
-import { Geometry, BufferGeometry, Float32BufferAttribute } from '../../../build/three.module.js';
+import { BufferGeometry, Float32BufferAttribute } from '../../../build/three.module.js';
 import { ConvexHull } from '../math/ConvexHull.js';
 
 // ConvexGeometry
 
 var ConvexGeometry = function ( points ) {
-
-	Geometry.call( this );
-
-	this.fromBufferGeometry( new ConvexBufferGeometry( points ) );
-	this.mergeVertices();
-
-};
-
-ConvexGeometry.prototype = Object.create( Geometry.prototype );
-ConvexGeometry.prototype.constructor = ConvexGeometry;
-
-// ConvexBufferGeometry
-
-var ConvexBufferGeometry = function ( points ) {
 
 	BufferGeometry.call( this );
 
@@ -65,7 +51,7 @@ var ConvexBufferGeometry = function ( points ) {
 
 };
 
-ConvexBufferGeometry.prototype = Object.create( BufferGeometry.prototype );
-ConvexBufferGeometry.prototype.constructor = ConvexBufferGeometry;
+ConvexGeometry.prototype = Object.create( BufferGeometry.prototype );
+ConvexGeometry.prototype.constructor = ConvexGeometry;
 
-export { ConvexBufferGeometry, ConvexGeometry };
+export { ConvexGeometry };

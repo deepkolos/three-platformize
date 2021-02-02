@@ -1,4 +1,4 @@
-import { Vector2, WebGLRenderTarget, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry, LinearFilter, RGBAFormat } from '../../../../build/three.module.js';
+import { Vector2, WebGLRenderTarget, OrthographicCamera, Scene, Mesh, PlaneGeometry, LinearFilter, RGBAFormat } from '../../../../build/three.module.js';
 import { NodeMaterial } from '../materials/NodeMaterial.js';
 import { ScreenNode } from '../inputs/ScreenNode.js';
 
@@ -26,7 +26,7 @@ function NodePostProcessing( renderer, renderTarget ) {
 	this.camera = new OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
 	this.scene = new Scene();
 
-	this.quad = new Mesh( new PlaneBufferGeometry( 2, 2 ), this.material );
+	this.quad = new Mesh( new PlaneGeometry( 2, 2 ), this.material );
 	this.quad.frustumCulled = false; // Avoid getting clipped
 	this.scene.add( this.quad );
 

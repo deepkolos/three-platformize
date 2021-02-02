@@ -1,4 +1,4 @@
-import { Scene, BoxBufferGeometry, MeshStandardMaterial, BackSide, PointLight, Mesh, MeshBasicMaterial } from '../../../build/three.module.js';
+import { Scene, BoxGeometry, MeshStandardMaterial, BackSide, PointLight, Mesh, MeshBasicMaterial } from '../../../build/three.module.js';
 
 /**
  * https://github.com/google/model-viewer/blob/master/packages/model-viewer/src/three-components/EnvironmentScene.ts
@@ -8,7 +8,7 @@ function RoomEnvironment() {
 
 	const scene = new Scene();
 
-	const geometry = new BoxBufferGeometry();
+	const geometry = new BoxGeometry();
 	geometry.deleteAttribute( 'uv' );
 
 	const roomMaterial = new MeshStandardMaterial( { side: BackSide } );

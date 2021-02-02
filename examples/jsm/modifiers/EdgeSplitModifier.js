@@ -1,4 +1,4 @@
-import { Vector3, BufferGeometry, BufferAttribute } from '../../../build/three.module.js';
+import { Vector3, BufferAttribute, BufferGeometry } from '../../../build/three.module.js';
 import { BufferGeometryUtils } from '../utils/BufferGeometryUtils.js';
 
 var EdgeSplitModifier = function () {
@@ -10,7 +10,6 @@ var EdgeSplitModifier = function () {
 	var positions, normals;
 	var indexes;
 	var pointToIndexMap, splitIndexes;
-
 	let oldNormals;
 
 
@@ -157,36 +156,37 @@ var EdgeSplitModifier = function () {
 
 	this.modify = function ( geometry, cutOffAngle, tryKeepNormals = true ) {
 
-		const wasNotBufferGeometry = geometry.isBufferGeometry === undefined;
-		if ( ! geometry.isBufferGeometry ) {
+		if ( geometry.isGeometry === true ) {
 
-			geometry = new BufferGeometry().fromGeometry( geometry );
+			console.error( 'THREE.EdgeSplitModifier no longer supports THREE.Geometry. Use BufferGeometry instead.' );
+			return;
 
 		}
 
-
 		let hadNormals = false;
 		oldNormals = null;
+
 		if ( geometry.attributes.normal ) {
 
 			hadNormals = true;
 
-			if ( wasNotBufferGeometry === false )
-				geometry = geometry.clone();
+			geometry = geometry.clone();
 
-			if ( tryKeepNormals && geometry.index )
+			if ( tryKeepNormals === true && geometry.index !== null ) {
+
 				oldNormals = geometry.attributes.normal.array;
+
+			}
 
 			geometry.deleteAttribute( 'normal' );
 
 		}
 
-
-		if ( ! geometry.index ) {
+		if ( geometry.index == null ) {
 
 			if ( BufferGeometryUtils === undefined ) {
 
-			 	throw 'THREE.EdgeSplitModifier relies on BufferGeometryUtils';
+				throw 'THREE.EdgeSplitModifier relies on BufferGeometryUtils';
 
 			}
 

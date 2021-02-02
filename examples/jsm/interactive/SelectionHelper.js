@@ -22,7 +22,7 @@ var SelectionHelper = ( function () {
 			this.isDown = true;
 			this.onSelectStart( event );
 
-		}.bind( this ), false );
+		}.bind( this ) );
 
 		this.renderer.domElement.addEventListener( 'pointermove', function ( event ) {
 
@@ -32,14 +32,14 @@ var SelectionHelper = ( function () {
 
 			}
 
-		}.bind( this ), false );
+		}.bind( this ) );
 
 		this.renderer.domElement.addEventListener( 'pointerup', function ( event ) {
 
 			this.isDown = false;
 			this.onSelectOver( event );
 
-		}.bind( this ), false );
+		}.bind( this ) );
 
 	}
 

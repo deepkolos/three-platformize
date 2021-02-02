@@ -1,4 +1,4 @@
-import { ShaderMaterial, UniformsUtils, BackSide, Mesh, BoxBufferGeometry, Vector3 } from '../../../build/three.module.js';
+import { ShaderMaterial, UniformsUtils, BackSide, Mesh, BoxGeometry, Vector3 } from '../../../build/three.module.js';
 
 /**
  * Based on "A Practical Analytic Model for Daylight"
@@ -27,7 +27,7 @@ var Sky = function () {
 		depthWrite: false
 	} );
 
-	Mesh.call( this, new BoxBufferGeometry( 1, 1, 1 ), material );
+	Mesh.call( this, new BoxGeometry( 1, 1, 1 ), material );
 
 };
 

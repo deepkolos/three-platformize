@@ -36,6 +36,6 @@
     "symlink-dir": "^4.1.0"
   },
   "dependencies": {
-    "three": "^0.124.0"
+    "three": "^0.125.2"
   }
 }

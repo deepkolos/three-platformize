@@ -1,6 +1,6 @@
 import { $DOMParser, $Blob, $URL } from '../../../build/three.module.js';
 import { Loader, FileLoader, TextureLoader, LoaderUtils, Group, Color, Matrix4, BufferGeometry, Float32BufferAttribute, Mesh, MeshPhongMaterial, BufferAttribute, MeshStandardMaterial, sRGBEncoding, RepeatWrapping, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, LinearMipmapLinearFilter, NearestFilter } from '../../../build/three.module.js';
-import { JSZip } from '../libs/jszip.module.min.js';
+import { unzipSync } from '../libs/fflate.module.min.js';
 
 /**
  *
@@ -90,20 +90,20 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 			try {
 
-				zip = new JSZip( data ); // eslint-disable-line no-undef
+				zip = unzipSync( new Uint8Array( data ) ); // eslint-disable-line no-undef
 
 			} catch ( e ) {
 
 				if ( e instanceof ReferenceError ) {
 
-					console.error( 'THREE.3MFLoader: jszip missing and file is compressed.' );
+					console.error( 'THREE.3MFLoader: fflate missing and file is compressed.' );
 					return null;
 
 				}
 
 			}
 
-			for ( file in zip.files ) {
+			for ( file in zip ) {
 
 				if ( file.match( /\_rels\/.rels$/ ) ) {
 
@@ -127,7 +127,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 			//
 
-			var relsView = new Uint8Array( zip.file( relsName ).asArrayBuffer() );
+			var relsView = zip[ relsName ];
 			var relsFileText = LoaderUtils.decodeText( relsView );
 			rels = parseRelsXml( relsFileText );
 
@@ -135,7 +135,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 
 			if ( modelRelsName ) {
 
-				var relsView = new Uint8Array( zip.file( modelRelsName ).asArrayBuffer() );
+				var relsView = zip[ modelRelsName ];
 				var relsFileText = LoaderUtils.decodeText( relsView );
 				modelRels = parseRelsXml( relsFileText );
 
@@ -146,7 +146,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 			for ( var i = 0; i < modelPartNames.length; i ++ ) {
 
 				var modelPart = modelPartNames[ i ];
-				var view = new Uint8Array( zip.file( modelPart ).asArrayBuffer() );
+				var view = zip[ modelPart ];
 
 				var fileText = LoaderUtils.decodeText( view );
 				var xmlData = new $DOMParser().parseFromString( fileText, 'application/xml' );
@@ -189,7 +189,7 @@ ThreeMFLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 			for ( var i = 0; i < texturesPartNames.length; i ++ ) {
 
 				var texturesPartName = texturesPartNames[ i ];
-				texturesParts[ texturesPartName ] = zip.file( texturesPartName ).asArrayBuffer();
+				texturesParts[ texturesPartName ] = zip[ texturesPartName ].buffer;
 
 			}
 

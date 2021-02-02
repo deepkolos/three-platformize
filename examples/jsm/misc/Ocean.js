@@ -1,5 +1,5 @@
 import { $window } from '../../../build/three.module.js';
-import { OrthographicCamera, Scene, Vector3, HalfFloatType, FloatType, WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Mesh, PlaneBufferGeometry, DataTexture, RGBAFormat, ClampToEdgeWrapping, LinearFilter, NearestFilter, RepeatWrapping } from '../../../build/three.module.js';
+import { OrthographicCamera, Scene, Vector3, HalfFloatType, FloatType, WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Mesh, PlaneGeometry, DataTexture, RGBAFormat, ClampToEdgeWrapping, LinearFilter, NearestFilter, RepeatWrapping } from '../../../build/three.module.js';
 import { OceanShaders } from '../shaders/OceanShaders.js';
 
 var Ocean = function ( renderer, camera, scene, options ) {
@@ -192,7 +192,7 @@ var Ocean = function ( renderer, camera, scene, options ) {
 	this.materialOcean.blending = 0;
 
 	// Create the simulation plane
-	this.screenQuad = new Mesh( new PlaneBufferGeometry( 2, 2 ) );
+	this.screenQuad = new Mesh( new PlaneGeometry( 2, 2 ) );
 	this.scene.add( this.screenQuad );
 
 	// Initialise spectrum data
@@ -205,7 +205,7 @@ var Ocean = function ( renderer, camera, scene, options ) {
 
 Ocean.prototype.generateMesh = function () {
 
-	var geometry = new PlaneBufferGeometry( this.geometrySize, this.geometrySize, this.geometryResolution, this.geometryResolution );
+	var geometry = new PlaneGeometry( this.geometrySize, this.geometrySize, this.geometryResolution, this.geometryResolution );
 
 	geometry.rotateX( - Math.PI / 2 );
 

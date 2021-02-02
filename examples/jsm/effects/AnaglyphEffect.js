@@ -1,4 +1,4 @@
-import { Matrix3, OrthographicCamera, Scene, StereoCamera, WebGLRenderTarget, ShaderMaterial, Mesh, PlaneBufferGeometry, LinearFilter, NearestFilter, RGBAFormat } from '../../../build/three.module.js';
+import { Matrix3, OrthographicCamera, Scene, StereoCamera, WebGLRenderTarget, ShaderMaterial, Mesh, PlaneGeometry, LinearFilter, NearestFilter, RGBAFormat } from '../../../build/three.module.js';
 
 var AnaglyphEffect = function ( renderer, width, height ) {
 
@@ -109,7 +109,7 @@ var AnaglyphEffect = function ( renderer, width, height ) {
 
 	} );
 
-	var _mesh = new Mesh( new PlaneBufferGeometry( 2, 2 ), _material );
+	var _mesh = new Mesh( new PlaneGeometry( 2, 2 ), _material );
 	_scene.add( _mesh );
 
 	this.setSize = function ( width, height ) {

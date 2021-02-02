@@ -1,4 +1,4 @@
-import { Quaternion, Vector3, Object3D, SphereBufferGeometry, MeshBasicMaterial, Color, LineBasicMaterial, Matrix4, Mesh, Line, BufferGeometry, BufferAttribute } from '../../../build/three.module.js';
+import { Quaternion, Vector3, Object3D, SphereGeometry, MeshBasicMaterial, Color, LineBasicMaterial, Matrix4, Mesh, Line, BufferGeometry, BufferAttribute } from '../../../build/three.module.js';
 
 /**
  * CCD Algorithm
@@ -259,7 +259,7 @@ var CCDIKSolver = ( function () {
 		this.matrix.copy( mesh.matrixWorld );
 		this.matrixAutoUpdate = false;
 
-		this.sphereGeometry = new SphereBufferGeometry( 0.25, 16, 8 );
+		this.sphereGeometry = new SphereGeometry( 0.25, 16, 8 );
 
 		this.targetSphereMaterial = new MeshBasicMaterial( {
 			color: new Color( 0xff8888 ),

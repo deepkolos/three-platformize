@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Scene, Fog, Color, Group, ImageBitmapLoader, CanvasTexture, IcosahedronBufferGeometry, MeshMatcapMaterial, Mesh, WebGLRenderer } from '../../../build/three.module.js';
+import { PerspectiveCamera, Scene, Fog, Color, Group, ImageBitmapLoader, CanvasTexture, IcosahedronGeometry, MeshMatcapMaterial, Mesh, WebGLRenderer } from '../../../build/three.module.js';
 
 var camera, scene, renderer, group;
 
@@ -22,7 +22,7 @@ function init( canvas, width, height, pixelRatio, path ) {
 
 		var texture = new CanvasTexture( imageBitmap );
 
-		var geometry = new IcosahedronBufferGeometry( 5, 8 );
+		var geometry = new IcosahedronGeometry( 5, 8 );
 		var materials = [
 			new MeshMatcapMaterial( { color: 0xaa24df, matcap: texture } ),
 			new MeshMatcapMaterial( { color: 0x605d90, matcap: texture } ),

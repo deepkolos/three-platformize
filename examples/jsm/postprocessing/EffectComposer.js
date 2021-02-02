@@ -1,4 +1,4 @@
-import { Vector2, WebGLRenderTarget, Clock, OrthographicCamera, PlaneBufferGeometry, LinearFilter, RGBAFormat, Mesh } from '../../../build/three.module.js';
+import { Vector2, WebGLRenderTarget, Clock, OrthographicCamera, PlaneGeometry, LinearFilter, RGBAFormat, Mesh } from '../../../build/three.module.js';
 import { CopyShader } from '../shaders/CopyShader.js';
 import { ShaderPass } from './ShaderPass.js';
 import { MaskPass, ClearMaskPass } from './MaskPass.js';
@@ -266,7 +266,7 @@ Object.assign( Pass.prototype, {
 Pass.FullScreenQuad = ( function () {
 
 	var camera = new OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
-	var geometry = new PlaneBufferGeometry( 2, 2 );
+	var geometry = new PlaneGeometry( 2, 2 );
 
 	var FullScreenQuad = function ( material ) {
 

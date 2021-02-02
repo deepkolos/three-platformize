@@ -1,4 +1,4 @@
-import { OrthographicCamera, Scene, StereoCamera, WebGLRenderTarget, ShaderMaterial, Mesh, PlaneBufferGeometry, LinearFilter, NearestFilter, RGBAFormat } from '../../../build/three.module.js';
+import { OrthographicCamera, Scene, StereoCamera, WebGLRenderTarget, ShaderMaterial, Mesh, PlaneGeometry, LinearFilter, NearestFilter, RGBAFormat } from '../../../build/three.module.js';
 
 var ParallaxBarrierEffect = function ( renderer ) {
 
@@ -61,7 +61,7 @@ var ParallaxBarrierEffect = function ( renderer ) {
 
 	} );
 
-	var mesh = new Mesh( new PlaneBufferGeometry( 2, 2 ), _material );
+	var mesh = new Mesh( new PlaneGeometry( 2, 2 ), _material );
 	_scene.add( mesh );
 
 	this.setSize = function ( width, height ) {

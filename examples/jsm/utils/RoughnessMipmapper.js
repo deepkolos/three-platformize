@@ -1,4 +1,4 @@
-import { Mesh, PlaneBufferGeometry, OrthographicCamera, MathUtils, WebGLRenderTarget, Vector2, RawShaderMaterial, NoBlending } from '../../../build/three.module.js';
+import { Mesh, PlaneGeometry, OrthographicCamera, MathUtils, WebGLRenderTarget, Vector2, RawShaderMaterial, NoBlending } from '../../../build/three.module.js';
 
 /**
  * This class generates custom mipmaps for a roughness map by encoding the lost variation in the
@@ -10,7 +10,7 @@ import { Mesh, PlaneBufferGeometry, OrthographicCamera, MathUtils, WebGLRenderTa
 
 var _mipmapMaterial = _getMipmapMaterial();
 
-var _mesh = new Mesh( new PlaneBufferGeometry( 2, 2 ), _mipmapMaterial );
+var _mesh = new Mesh( new PlaneGeometry( 2, 2 ), _mipmapMaterial );
 
 var _flatCamera = new OrthographicCamera( 0, 1, 0, 1, 0, 1 );
 

@@ -1,16 +1,16 @@
-let $URL = null;
-let $atob = null;
-let $Blob = null;
-let $window = null;
-let $document = null;
-let $DOMParser = null;
-let $TextDecoder = null;
-let $XMLHttpRequest = null;
-let $OffscreenCanvas = null;
-let $HTMLCanvasElement = null;
-let $createImageBitmap = null;
-let $requestAnimationFrame = null;
-let $cancelAnimationFrame = null;
+let $URL = undefined;
+let $atob = undefined;
+let $Blob = undefined;
+let $window = undefined;
+let $document = undefined;
+let $DOMParser = undefined;
+let $TextDecoder = undefined;
+let $XMLHttpRequest = undefined;
+let $OffscreenCanvas = undefined;
+let $HTMLCanvasElement = undefined;
+let $createImageBitmap = undefined;
+let $requestAnimationFrame = undefined;
+let $cancelAnimationFrame = undefined;
 
 class Platform {
   set(platform) {

@@ -1,5 +1,5 @@
 import { $window } from '../../../build/three.module.js';
-import { PerspectiveCamera, ShaderMaterial, Scene, OrthographicCamera, WebGLRenderTarget, UniformsUtils, Mesh, PlaneBufferGeometry, LinearFilter, RGBFormat } from '../../../build/three.module.js';
+import { PerspectiveCamera, ShaderMaterial, Scene, OrthographicCamera, WebGLRenderTarget, UniformsUtils, Mesh, PlaneGeometry, LinearFilter, RGBFormat } from '../../../build/three.module.js';
 import { BokehDepthShader, BokehShader } from '../shaders/BokehShader2.js';
 
 var CinematicCamera = function ( fov, aspect, near, far ) {
@@ -162,7 +162,7 @@ CinematicCamera.prototype.initPostProcessing = function () {
 			}
 		} );
 
-		this.postprocessing.quad = new Mesh( new PlaneBufferGeometry( $window.innerWidth, $window.innerHeight ), this.postprocessing.materialBokeh );
+		this.postprocessing.quad = new Mesh( new PlaneGeometry( $window.innerWidth, $window.innerHeight ), this.postprocessing.materialBokeh );
 		this.postprocessing.quad.position.z = - 500;
 		this.postprocessing.scene.add( this.postprocessing.quad );
 

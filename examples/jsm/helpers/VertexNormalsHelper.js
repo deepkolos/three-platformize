@@ -3,7 +3,6 @@ import { Vector3, Matrix3, BufferGeometry, Float32BufferAttribute, LineSegments,
 var _v1 = new Vector3();
 var _v2 = new Vector3();
 var _normalMatrix = new Matrix3();
-var _keys = [ 'a', 'b', 'c' ];
 
 function VertexNormalsHelper( object, size, hex ) {
 
@@ -21,7 +20,8 @@ function VertexNormalsHelper( object, size, hex ) {
 
 	if ( objGeometry && objGeometry.isGeometry ) {
 
-		nNormals = objGeometry.faces.length * 3;
+		console.error( 'THREE.VertexNormalsHelper no longer supports Geometry. Use BufferGeometry instead.' );
+		return;
 
 	} else if ( objGeometry && objGeometry.isBufferGeometry ) {
 
@@ -68,37 +68,8 @@ VertexNormalsHelper.prototype.update = function () {
 
 	if ( objGeometry && objGeometry.isGeometry ) {
 
-		var vertices = objGeometry.vertices;
-
-		var faces = objGeometry.faces;
-
-		var idx = 0;
-
-		for ( var i = 0, l = faces.length; i < l; i ++ ) {
-
-			var face = faces[ i ];
-
-			for ( var j = 0, jl = face.vertexNormals.length; j < jl; j ++ ) {
-
-				var vertex = vertices[ face[ _keys[ j ] ] ];
-
-				var normal = face.vertexNormals[ j ];
-
-				_v1.copy( vertex ).applyMatrix4( matrixWorld );
-
-				_v2.copy( normal ).applyMatrix3( _normalMatrix ).normalize().multiplyScalar( this.size ).add( _v1 );
-
-				position.setXYZ( idx, _v1.x, _v1.y, _v1.z );
-
-				idx = idx + 1;
-
-				position.setXYZ( idx, _v2.x, _v2.y, _v2.z );
-
-				idx = idx + 1;
-
-			}
-
-		}
+		console.error( 'THREE.VertexNormalsHelper no longer supports Geometry. Use BufferGeometry instead.' );
+		return;
 
 	} else if ( objGeometry && objGeometry.isBufferGeometry ) {
 

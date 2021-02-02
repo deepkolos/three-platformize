@@ -1,4 +1,4 @@
-import { Scene, Camera, Mesh, PlaneBufferGeometry, ShaderMaterial, WebGLRenderTarget, RGBAFormat, DataTexture, FloatType, NearestFilter, ClampToEdgeWrapping } from '../../../build/three.module.js';
+import { Scene, Camera, Mesh, PlaneGeometry, ShaderMaterial, WebGLRenderTarget, RGBAFormat, DataTexture, FloatType, NearestFilter, ClampToEdgeWrapping } from '../../../build/three.module.js';
 
 /**
  * GPUComputationRenderer, based on SimulationRenderer by zz85
@@ -116,7 +116,7 @@ var GPUComputationRenderer = function ( sizeX, sizeY, renderer ) {
 
 	var passThruShader = createShaderMaterial( getPassThroughFragmentShader(), passThruUniforms );
 
-	var mesh = new Mesh( new PlaneBufferGeometry( 2, 2 ), passThruShader );
+	var mesh = new Mesh( new PlaneGeometry( 2, 2 ), passThruShader );
 	scene.add( mesh );
 
 
