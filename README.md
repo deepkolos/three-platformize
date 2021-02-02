@@ -45,8 +45,8 @@ PLATFORM.dispose();
 3. SVGLoader
 4. OBJLoader
 5. EXRLoader (需支持 OES_texture_float_linear 扩展)
-6. MTLLoader
-7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展)
+6. MTLLoader (小程序使用JPG纹理即可)
+7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端GPU不支持)
 
 #### Controls
 
@@ -67,17 +67,34 @@ PLATFORM.dispose();
 
 ## 维护
 
-### 如何更新 Three 的版本？
+### 如何更新/降级 Three 的版本？
 
 ```shell
-# 更新依赖three的版本
+# 拉取源码
+> git clone https://github.com/deepkolos/three-platformize
+
+# 安装依赖
+> npm i
+
+# 更新到最新的three版本
 > npm i -S three@latest
+# 或者指定three版本
+> npm i -S three@0.122.0
 
 # 建立软链接
 > npm run link
 
 # 构建
 > npm run build
+
+# 使用
+> npm link
+
+# 到使用的项目目录，并链接
+> cd your-project
+> npm link three-platformize
+
+# 或者自行发NPM包
 ```
 
 ### 如何平台化自定义的 Three？
