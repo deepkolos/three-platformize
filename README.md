@@ -7,6 +7,47 @@
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试）
 
+## DEMO
+
+<div>
+  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
+  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
+</div>
+
+[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)
+
+[淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
+
+> 注：运行 DEMO 时记得开启调试模式，取消域名验证
+
+### 已测试模块
+
+#### Loader
+
+0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 需 WASM 安卓可用)
+1. TextureLoader
+2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
+3. SVGLoader
+4. OBJLoader
+5. EXRLoader (需支持 OES_texture_float_linear 扩展，部分移动端 GPU 不支持)
+6. MTLLoader (小程序使用 JPG 纹理即可)
+7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端 GPU 不支持)
+8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
+9. FBXLoader
+
+#### Controls
+
+0. OrbitControls & MapControls
+1. DeviceOrientationControls
+
+### 不支持模块
+
+0. ImageBitmapLoader(微信小程序未开放 ImageBitmap)
+
+### 有支持可能，但需要单独适配
+
+0. BasisTextureLoader(微信小程序的 Worker 不好转发，经测试安卓可在 worker 内使用 WASM)
+
 ## 使用
 
 ```js
@@ -21,46 +62,6 @@ PLATFORM.set(platform);
 // 使用完毕后释放资源
 PLATFORM.dispose();
 ```
-
-## DEMO
-
-<div>
-  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
-  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
-</div>
-
-[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)
-
-[淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
-
-> 注：运行 DEMO 时记得开启调试模式，取消域名验证
-
-## 已测试模块
-
-#### Loader
-
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 需 WASM 安卓可用)
-1. TextureLoader
-2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
-3. SVGLoader
-4. OBJLoader
-5. EXRLoader (需支持 OES_texture_float_linear 扩展)
-6. MTLLoader (小程序使用 JPG 纹理即可)
-7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端 GPU 不支持)
-8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
-
-#### Controls
-
-0. OrbitControls & MapControls
-1. DeviceOrientationControls
-
-## 不支持模块
-
-0. ImageBitmapLoader(微信小程序未开放 ImageBitmap)
-
-## 有支持可能，但需要单独适配
-
-0. BasisTextureLoader(微信小程序的 Worker 不好转发，经测试安卓可在 worker 内使用 WASM)
 
 ## 实现
 
