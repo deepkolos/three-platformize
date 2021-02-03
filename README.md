@@ -34,6 +34,7 @@
 7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端 GPU 不支持)
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
+10. BVHLoader
 
 #### Controls
 
