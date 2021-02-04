@@ -36,7 +36,7 @@
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
 10. BVHLoader
-11. ColladaLoader (TGALoader尚未适配，需要把canvas2d的请求转发的gl的framebuffer)
+11. ColladaLoader (TGALoader尚未适配)
 
 #### Controls
 
