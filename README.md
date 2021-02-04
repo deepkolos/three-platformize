@@ -5,7 +5,8 @@
 0. 目前已适配微信小程序，淘宝小程序
 1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
-3. 适配 examples/jsm/\*\*/\*.js，types 正常（未完全测试）
+3. 适配 examples/jsm/\*\*/\*.js，types 正常
+4. 可升级、降级版本或使用自定义THREE
 
 ## DEMO
 
@@ -35,6 +36,7 @@
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
 10. BVHLoader
+11. ColladaLoader
 
 #### Controls
 

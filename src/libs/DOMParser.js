@@ -16,6 +16,16 @@ export class $DOMParser {
       getAttribute(key) {
         return this.attributes[key];
       },
+      getElementsByTagName(tag) {
+        // FIXME: slow operation
+        const result = [];
+        this.childNodes.forEach(i =>
+          walkTree(i, node => {
+            if (tag === node.name) result.push(node);
+          }),
+        );
+        return result;
+      },
     };
 
     // patch xml
@@ -36,12 +46,18 @@ export class $DOMParser {
           },
         },
       );
+      node.textContent = node.content;
       node.childNodes = node.children;
       node.__proto__ = nodeBase;
     });
 
-    return {
+    const out = {
       documentElement: xml.root,
+      childNodes: [xml.root],
     };
+
+    out.__proto__ = nodeBase;
+
+    return out;
   }
 }
