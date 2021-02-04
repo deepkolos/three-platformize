@@ -1,3 +1,12 @@
+## [1.0.8](https://github.com/deepkolos/three-platformize/compare/v1.0.7...v1.0.8) (2021-02-04)
+
+
+### Features
+
+* add adapter for ColladaLoader & doc update ([8e2e437](https://github.com/deepkolos/three-platformize/commit/8e2e4376dc4b1ca719d38504dc3dbff653046021))
+
+
+
 ## [1.0.7](https://github.com/deepkolos/three-platformize/compare/v1.0.6...v1.0.7) (2021-02-02)
 
 
