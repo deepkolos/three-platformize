@@ -1,3 +1,17 @@
+## [1.0.9](https://github.com/deepkolos/three-platformize/compare/v1.0.8...v1.0.9) (2021-02-05)
+
+
+### Bug Fixes
+
+* [#1](https://github.com/deepkolos/three-platformize/issues/1) TextDecoder ios doesn't work ([b054065](https://github.com/deepkolos/three-platformize/commit/b054065bbb3c70745b9f2af239f8affd540e6ce9))
+
+
+### Features
+
+* adapte TTFLoader ([d75be59](https://github.com/deepkolos/three-platformize/commit/d75be597b60c3631eb5258e0b32ac3ce9497b167))
+
+
+
 ## [1.0.8](https://github.com/deepkolos/three-platformize/compare/v1.0.7...v1.0.8) (2021-02-04)
 
 
