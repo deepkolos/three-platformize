@@ -17,12 +17,10 @@ export class $DOMParser {
         return this.attributes[key];
       },
       getElementsByTagName(tag) {
-        // FIXME: slow operation
+        // 看了dae的文件结构，xml的节点不算庞大，所以还能接受
         const result = [];
         this.childNodes.forEach(i =>
-          walkTree(i, node => {
-            if (tag === node.name) result.push(node);
-          }),
+          walkTree(i, node => tag === node.name && result.push(node)),
         );
         return result;
       },

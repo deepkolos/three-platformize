@@ -6,7 +6,7 @@
 1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
-4. 可升级、降级版本或使用自定义THREE
+4. 可升级、降级版本或使用自定义 THREE
 
 ## DEMO
 
@@ -25,7 +25,7 @@
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 需 WASM 安卓可用)
+0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 需 WASM 安卓可用) && (KHR_mesh_quantization，网格压缩比 Draco 好，小程序可用)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
@@ -36,7 +36,7 @@
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
 10. BVHLoader
-11. ColladaLoader (TGALoader尚未适配)
+11. ColladaLoader (TGALoader 尚未适配)
 
 #### Controls
 
