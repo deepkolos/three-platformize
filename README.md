@@ -37,6 +37,7 @@
 9. FBXLoader
 10. BVHLoader
 11. ColladaLoader (TGALoader 尚未适配)
+12. TTFLoader
 
 #### Controls
 

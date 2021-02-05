@@ -65,3 +65,19 @@ export function importFromPlatfromizedThree() {
     },
   };
 }
+
+export function useReadOpentypeModule() {
+  return {
+    transform(code) {
+      code = code.replace(
+        `import { opentype } from '../libs/opentype.module.min.js'`,
+        `import opentype from '../libs/opentype.module.js'`,
+      );
+
+      return {
+        code: code,
+        map: null,
+      };
+    },
+  };
+}
