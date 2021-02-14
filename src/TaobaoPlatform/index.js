@@ -64,13 +64,13 @@ export class TaobaoPlatform {
 
     Object.defineProperty(this.canvas, 'clientHeight', {
       get() {
-        return canvasH || this.height;
+        return this.canvasH || this.height;
       },
     });
 
     Object.defineProperty(this.canvas, 'clientWidth', {
       get() {
-        return canvasW || this.width;
+        return this.canvasW || this.width;
       },
     });
   }
