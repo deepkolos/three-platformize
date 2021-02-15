@@ -56,16 +56,18 @@
 ## 使用
 
 ```js
-import { PLATFORM } from 'three-platformize';
+import * as THREE from 'three-platformize';
 import WechatPlatform from 'three-platformize/src/WechatPlatform';
 
 const platform = new WechatPlatform(canvas); // webgl canvas
 
 platform.enableDeviceOrientation('game'); // 开启DeviceOrientation
-PLATFORM.set(platform);
+THREE.PLATFORM.set(platform);
 
 // 使用完毕后释放资源
-PLATFORM.dispose();
+THREE.PLATFORM.dispose();
+
+// 正常使用three即可
 ```
 
 ## 实现
