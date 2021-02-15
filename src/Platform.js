@@ -69,5 +69,6 @@ export {
   $OffscreenCanvas,
   $HTMLCanvasElement,
   $createImageBitmap,
+  $cancelAnimationFrame,
   $requestAnimationFrame,
 };
