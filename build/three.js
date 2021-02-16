@@ -17,6 +17,7 @@
 	exports.$HTMLCanvasElement = undefined;
 	exports.$createImageBitmap = undefined;
 	exports.$requestAnimationFrame = undefined;
+	exports.$cancelAnimationFrame = undefined;
 
 	var Platform = /*#__PURE__*/function () {
 		function Platform() {}
@@ -39,7 +40,7 @@
 			exports.$DOMParser = exports.$window.DOMParser;
 			exports.$TextDecoder = exports.$window.TextDecoder;
 			exports.$requestAnimationFrame = exports.$window.requestAnimationFrame;
-			exports.$window.cancelAnimationFrame;
+			exports.$cancelAnimationFrame = exports.$window.cancelAnimationFrame;
 		};
 
 		_proto.dispose = function dispose() {

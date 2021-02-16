@@ -1,3 +1,18 @@
+## [1.0.10](https://github.com/deepkolos/three-platformize/compare/v1.0.9...v1.0.10) (2021-02-16)
+
+
+### Bug Fixes
+
+* export cancelAnimationFrame ([c056f74](https://github.com/deepkolos/three-platformize/commit/c056f74f51e158920ce3ed464d93fc92d9f329a8))
+* taobao canvas h w ([27f2731](https://github.com/deepkolos/three-platformize/commit/27f2731ac791e6a4ee1410f47e11c4a947ccb56c))
+
+
+### Features
+
+* add MeshoptDecoder asm ([0d6b77e](https://github.com/deepkolos/three-platformize/commit/0d6b77eb52d0ad5e38d98538ef142b0720a49c74))
+
+
+
 ## [1.0.9](https://github.com/deepkolos/three-platformize/compare/v1.0.8...v1.0.9) (2021-02-05)
 
 
