@@ -25,7 +25,7 @@
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 需 WASM 安卓可用) && (KHR_mesh_quantization，网格压缩比 Draco 好，小程序可用)
+0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用WASM，ios可用ASM版，见tools) && (KHR_mesh_quantization，网格压缩比 Draco 好，小程序可用)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
