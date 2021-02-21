@@ -39,6 +39,7 @@
 11. ColladaLoader (TGALoader 尚未适配)
 12. TTFLoader
 13. STLLoader
+14. PDBLoader
 
 #### Controls
 
