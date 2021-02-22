@@ -19,7 +19,7 @@
 
 [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
 
-> 注：运行 DEMO 时记得开启调试模式，取消域名验证，淘宝小程序由于缺少真机调试账号，所以仅仅测试模拟器的情况，真机尚未测试
+> 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
 ### 已测试模块
 
