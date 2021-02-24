@@ -9,8 +9,10 @@
   "scripts": {
     "test": "echo TODO",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "dev": "rollup -w -c config/rollup.config.tests.js",
     "link": "symlink-dir ./node_modules/three ./three",
     "build": "npm run build-three && npm run build-jsm",
+    "build-tests": "rollup -c config/rollup.config.tests.js",
     "build-three": "rollup -c config/rollup.config.three.js",
     "build-jsm": "rollup -c config/rollup.config.jsm.js && node config/post-jsm.js",
     "build-platform": "rollup -c config/rollup.config.platform.js"
