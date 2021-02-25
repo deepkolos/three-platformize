@@ -5,6 +5,7 @@ import EventTarget from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
 import { $DOMParser as DOMParser } from '../libs/DOMParser';
+import { $TextDecoder as TextDecoder } from '../libs/TextDecoder';
 
 function OffscreenCanvas() {
   return my.createOffscreenCanvas();
@@ -31,10 +32,17 @@ export class TaobaoPlatform {
       devicePixelRatio: systemInfo.pixelRatio,
 
       DOMParser,
+      TextDecoder,
       URL: new URL(),
       AudioContext: function () {},
-      requestAnimationFrame: this.canvas.requestAnimationFrame,
-      cancelAnimationFrame: this.canvas.cancelAnimationFrame,
+      requestAnimationFrame: cb => this.canvas.requestAnimationFrame(cb),
+      cancelAnimationFrame: cb => this.canvas.cancelAnimationFrame(cb),
+
+      DeviceOrientationEvent: {
+        requestPermission() {
+          return Promise.resolve('granted');
+        },
+      },
     };
 
     [this.document, this.window].forEach(i => {
@@ -50,6 +58,8 @@ export class TaobaoPlatform {
       e.gamma *= -1;
       this.window.dispatchEvent(e);
     };
+
+    // this.canvas.ownerDocument = this.document;
   }
 
   patchCanvas() {
@@ -98,7 +108,7 @@ export class TaobaoPlatform {
 
   dispose() {
     this.disableDeviceOrientation();
-    this.onDeviceMotionChange = null
+    this.onDeviceMotionChange = null;
     this.document = null;
     this.window = null;
     this.canvas = null;

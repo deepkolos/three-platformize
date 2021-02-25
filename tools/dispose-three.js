@@ -42,8 +42,8 @@ export function disposeNode(node) {
       }
     }
   } else if (node.isScene) {
-    if (node.background && node.background.isTexture) node.background.dispose();
-    if (node.environment && node.environment.isTexture) node.environment.dispose();
+    if (node.background && node.background.dispose) node.background.dispose();
+    if (node.environment && node.environment.dispose) node.environment.dispose();
   }
 }
 

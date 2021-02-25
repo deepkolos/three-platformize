@@ -131,9 +131,7 @@ export class WechatPlatform {
     const event = {
       changedTouches: e.changedTouches.map(touch => new Touch(touch)),
       touches: e.touches.map(touch => new Touch(touch)),
-      targetTouches: Array.prototype.slice.call(
-        e.touches.map(touch => new Touch(touch)),
-      ),
+      targetTouches: Array.prototype.slice.call(e.touches.map(touch => new Touch(touch))),
       timeStamp: e.timeStamp,
       target: target,
       currentTarget: target,
@@ -148,7 +146,7 @@ export class WechatPlatform {
   dispose() {
     this.disableDeviceOrientation();
     if (this.canvas) this.canvas.ownerDocument = null;
-    this.onGyroscopeChange = null;
+    this.onDeviceMotionChange = null;
     this.document = null;
     this.window = null;
     this.canvas = null;
