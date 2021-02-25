@@ -1,7 +1,8 @@
-import * as THREE from '../build/three.module.js';
-import { BrowserPlatform } from '../src/BrowserPlatform/index.js';
-import { GLTFLoader } from '../examples/jsm/loaders/GLTFLoader.js';
-import { MeshoptDecoder } from '../examples/jsm/libs/meshopt_decoder.module.js';
+import * as THREE from '../../build/three.module.js';
+import { BrowserPlatform } from '../../src/BrowserPlatform/index.js';
+import { GLTFLoader } from '../../examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from '../../examples/jsm/libs/meshopt_decoder.module.js';
+import { disposeHierarchy, disposeNode } from '../../tools/dispose-three.js';
 
 async function main() {
   THREE.PLATFORM.set(new BrowserPlatform());
@@ -16,7 +17,7 @@ async function main() {
   renderer.setPixelRatio(devicePixelRatio);
   loader.setMeshoptDecoder(MeshoptDecoder);
 
-  const gltf = await loader.loadAsync('./WaterBottle-EXT_meshopt_compression.glb');
+  const gltf = await loader.loadAsync('../WaterBottle-EXT_meshopt_compression.glb');
   scene.add(gltf.scene);
   scene.add(new THREE.AmbientLight(0xffffff, 1.0));
   scene.add(new THREE.DirectionalLight(0xffffff, 1.0));
@@ -34,10 +35,13 @@ async function main() {
 
   setTimeout(() => {
     // dispose
+    // renderer.forceContextLoss();
+    disposeHierarchy(scene, disposeNode);
     cancelAnimationFrame(frame);
     document.body.removeChild(renderer.domElement);
     THREE.PLATFORM.dispose();
     renderer?.dispose();
+    // renderer.domElement = null;
     // camera?.dispose();
     // loader?.dispose();
     // scene?.dispose();

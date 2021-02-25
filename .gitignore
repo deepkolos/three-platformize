@@ -1,4 +1,4 @@
 node_modules
 three
-tests/WaterBottle-EXT_meshopt_compression.glb
+tests/WaterBottle-*.glb
 tests/*.bundle.js

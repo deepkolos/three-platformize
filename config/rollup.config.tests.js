@@ -1,9 +1,9 @@
 export default [
   {
-    input: `tests/memory.js`,
+    input: `tests/memory/memory.js`,
     output: {
       format: 'esm',
-      file: `tests/memory.bundle.js`,
+      file: `tests/memory/memory.bundle.js`,
     },
   },
 ];
