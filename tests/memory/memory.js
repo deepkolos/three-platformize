@@ -36,7 +36,7 @@ async function main() {
   setTimeout(() => {
     // dispose
     // renderer.forceContextLoss();
-    disposeHierarchy(scene, disposeNode);
+    // disposeHierarchy(scene, disposeNode);
     cancelAnimationFrame(frame);
     document.body.removeChild(renderer.domElement);
     THREE.PLATFORM.dispose();

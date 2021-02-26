@@ -1,7 +1,7 @@
 import URL from '../libs/URL';
 import Blob from '../libs/Blob';
 import atob from '../libs/atob';
-import EventTarget from '../libs/EventTarget';
+import EventTarget, { Touch } from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
 import { $DOMParser as DOMParser } from '../libs/DOMParser';
@@ -22,7 +22,12 @@ export class TaobaoPlatform {
     this.document = {
       createElementNS(_, type) {
         if (type === 'canvas') return canvas;
-        if (type === 'img') return canvas.createImage();
+        if (type === 'img') {
+          const img = canvas.createImage();
+          img.addEventListener = (name, cb) => (img[`on${name}`] = cb);
+          img.removeEventListener = (name, cb) => (img[`on${name}`] = null);
+          return img;
+        }
       },
     };
 
@@ -104,6 +109,26 @@ export class TaobaoPlatform {
 
   disableDeviceOrientation() {
     my.offDeviceMotionChange(this.onDeviceMotionChange);
+  }
+
+  dispatchTouchEvent(e = {}) {
+    const target = {
+      ...this,
+    };
+
+    const event = {
+      changedTouches: e.changedTouches.map(touch => new Touch(touch)),
+      touches: e.touches.map(touch => new Touch(touch)),
+      targetTouches: Array.prototype.slice.call(e.touches.map(touch => new Touch(touch))),
+      timeStamp: e.timeStamp,
+      target: target,
+      currentTarget: target,
+      type: e.type.toLowerCase(),
+      cancelBubble: false,
+      cancelable: false,
+    };
+
+    this.canvas.dispatchEvent(event);
   }
 
   dispose() {
