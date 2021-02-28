@@ -1,3 +1,20 @@
+## [1.0.11](https://github.com/deepkolos/three-platformize/compare/v1.0.10...v1.0.11) (2021-02-28)
+
+
+### Bug Fixes
+
+* [#4](https://github.com/deepkolos/three-platformize/issues/4) taobao phone preview error ([077df6c](https://github.com/deepkolos/three-platformize/commit/077df6c89651f077e0e59f1cff6dc1998ee1c9be))
+* TaobaoPlatformTextureLoader & touchevent ([61985ec](https://github.com/deepkolos/three-platformize/commit/61985ece7b5d7c44c4852bb87192013dc307f7ed))
+* update Platform.d.ts ([9325f7b](https://github.com/deepkolos/three-platformize/commit/9325f7bc173a9e253fdd37c189641162c2cf3929))
+
+
+### Features
+
+* add flip ([1289c17](https://github.com/deepkolos/three-platformize/commit/1289c173af1eab08cbc7339284e6a11feca5bfeb))
+* TGALoader ([6558fc9](https://github.com/deepkolos/three-platformize/commit/6558fc925f75be792dd24aa9f31286b161e13caf))
+
+
+
 ## [1.0.10](https://github.com/deepkolos/three-platformize/compare/v1.0.9...v1.0.10) (2021-02-16)
 
 
