@@ -1,4 +1,4 @@
 node_modules
 three
 tests/WaterBottle-*.glb
-tests/*.bundle.js
+tests/**/*.bundle.js
