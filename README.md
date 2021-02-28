@@ -36,10 +36,11 @@
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
 10. BVHLoader
-11. ColladaLoader (TGALoader 尚未适配)
+11. ColladaLoader (DOMParser querySelector未适配) 
 12. TTFLoader
 13. STLLoader
 14. PDBLoader
+15. TGALoader (改用DataTextureLoader已提交PR)
 
 #### Controls
 

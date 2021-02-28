@@ -7,3 +7,8 @@ fs.copyFileSync(
   p('../tools/opentype.module.js'),
   p('../examples/jsm/libs/opentype.module.js'),
 );
+
+fs.copyFileSync(
+  p('../tools/TGALoader.js'),
+  p('../examples/jsm/loaders/TGALoader.js'),
+);
