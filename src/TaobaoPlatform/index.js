@@ -11,6 +11,8 @@ function OffscreenCanvas() {
   return my.createOffscreenCanvas();
 }
 
+const radianToDegree = 180 / Math.PI;
+
 export class TaobaoPlatform {
   constructor(canvas, width, height) {
     const systemInfo = my.getSystemInfoSync();
@@ -50,18 +52,19 @@ export class TaobaoPlatform {
       },
     };
 
-    [this.document, this.window].forEach(i => {
+    [this.document, this.window, this.canvas].forEach(i => {
       copyProperties(i.constructor.prototype, EventTarget.prototype);
     });
 
     this.patchCanvas();
 
     this.onDeviceMotionChange = e => {
-      e.type = 'deviceorientation';
-      e.alpha *= -1;
-      e.beta *= -1;
-      e.gamma *= -1;
-      this.window.dispatchEvent(e);
+      this.window.dispatchEvent({
+        type: 'deviceorientation',
+        alpha: e.alpha * radianToDegree,
+        beta: e.beta * radianToDegree,
+        gamma: e.gamma * radianToDegree,
+      });
     };
 
     // this.canvas.ownerDocument = this.document;

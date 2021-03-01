@@ -25,7 +25,7 @@
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用WASM，ios可用ASM版，见tools) && (KHR_mesh_quantization，小程序可用)
+0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
@@ -36,16 +36,16 @@
 8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
 9. FBXLoader
 10. BVHLoader
-11. ColladaLoader (DOMParser querySelector未适配) 
+11. ColladaLoader (DOMParser querySelector 未适配)
 12. TTFLoader
 13. STLLoader
 14. PDBLoader
-15. TGALoader (改用DataTextureLoader已提交PR)
+15. TGALoader (改用 DataTextureLoader 已提交 PR)
 
 #### Controls
 
 0. OrbitControls & MapControls
-1. DeviceOrientationControls
+1. DeviceOrientationControls (微信、淘宝小程序下 onDeviceMotionChange，返回数据质量极其低下，基本不可用，社区 bug 反馈 3 年多了，官方毫无修复意愿)
 
 ### 不支持模块
 
