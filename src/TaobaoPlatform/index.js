@@ -62,7 +62,7 @@ export class TaobaoPlatform {
       this.window.dispatchEvent({
         type: 'deviceorientation',
         alpha: e.alpha * radianToDegree,
-        beta: e.beta * radianToDegree,
+        beta: -e.beta * radianToDegree,
         gamma: e.gamma * radianToDegree,
       });
     };

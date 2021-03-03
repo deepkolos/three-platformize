@@ -40,7 +40,7 @@
 12. TTFLoader
 13. STLLoader
 14. PDBLoader
-15. TGALoader (改用 DataTextureLoader 已提交 PR)
+15. TGALoader (改用 DataTextureLoader PR 已合并，r127 可用)
 
 #### Controls
 
@@ -71,6 +71,10 @@ THREE.PLATFORM.dispose();
 
 // 正常使用three即可
 ```
+
+### 经验
+
+0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)
 
 ## 实现
 
