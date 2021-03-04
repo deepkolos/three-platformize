@@ -18,3 +18,4 @@ export let $HTMLCanvasElement: HTMLCanvasElement;
 export let $createImageBitmap: Window['createImageBitmap'];
 export let $cancelAnimationFrame: Window['cancelAnimationFrame'];
 export let $requestAnimationFrame: Window['requestAnimationFrame'];
+export let $defaultWebGLExtensions: Object;

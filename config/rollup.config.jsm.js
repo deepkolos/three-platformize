@@ -4,7 +4,7 @@ import * as fastGlob from 'fast-glob';
 import {
   platformVariables,
   platformize,
-  useReadOpentypeModule,
+  useRealOpentypeModule,
 } from './platfromize';
 
 const ThreeOrigin = path.resolve(__dirname, '../three/build/three.module.js');
@@ -19,7 +19,7 @@ export default fastGlob.sync('three/examples/jsm/**/*.js').map(input => {
     external: () => true,
     plugins: [
       platformize(platformVariables, ThreeOrigin),
-      useReadOpentypeModule(),
+      useRealOpentypeModule(),
       copy({
         targets: [
           {

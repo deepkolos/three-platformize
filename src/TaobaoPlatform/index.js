@@ -26,7 +26,7 @@ export class TaobaoPlatform {
         if (type === 'canvas') return canvas;
         if (type === 'img') {
           const img = canvas.createImage();
-          img.addEventListener = (name, cb) => (img[`on${name}`] = cb);
+          img.addEventListener = (name, cb) => (img[`on${name}`] = cb.bind(img));
           img.removeEventListener = (name, cb) => (img[`on${name}`] = null);
           return img;
         }
@@ -91,6 +91,12 @@ export class TaobaoPlatform {
         return this.canvasW || this.width;
       },
     });
+  }
+
+  setWebGLExtensions() {
+    return {
+      EXT_blend_minmax: null,
+    };
   }
 
   getGlobals() {

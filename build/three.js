@@ -18,6 +18,7 @@
 	exports.$createImageBitmap = undefined;
 	exports.$requestAnimationFrame = undefined;
 	exports.$cancelAnimationFrame = undefined;
+	exports.$defaultWebGLExtensions = {};
 
 	var Platform = /*#__PURE__*/function () {
 		function Platform() {}
@@ -41,6 +42,7 @@
 			exports.$TextDecoder = exports.$window.TextDecoder;
 			exports.$requestAnimationFrame = exports.$window.requestAnimationFrame;
 			exports.$cancelAnimationFrame = exports.$window.cancelAnimationFrame;
+			if (platform.setWebGLExtensions) exports.$defaultWebGLExtensions = platform.setWebGLExtensions();
 		};
 
 		_proto.dispose = function dispose() {
@@ -57,6 +59,7 @@
 			exports.$HTMLCanvasElement = null;
 			exports.$createImageBitmap = null;
 			exports.$requestAnimationFrame = null;
+			exports.$defaultWebGLExtensions = null;
 		};
 
 		return Platform;
@@ -11641,7 +11644,7 @@
 	}
 
 	function WebGLExtensions(gl) {
-		var extensions = {};
+		var extensions = exports.$defaultWebGLExtensions || {};
 
 		function getExtension(name) {
 			if (extensions[name] !== undefined) {

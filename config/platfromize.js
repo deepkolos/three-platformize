@@ -40,6 +40,11 @@ export function injectPlatformCode() {
         code += "\nexport * from '../../src/Platform.js';\n";
       }
 
+      if (filePath.endsWith('WebGLExtensions.js')) {
+        code = `import { $defaultWebGLExtensions } from "../../../../src/Platform.js"\n` + code;
+        code = code.replace('const extensions = {};', `const extensions = $defaultWebGLExtensions || {};`)
+      }
+
       return {
         code: code,
         map: null,
@@ -66,7 +71,7 @@ export function importFromPlatfromizedThree() {
   };
 }
 
-export function useReadOpentypeModule() {
+export function useRealOpentypeModule() {
   return {
     transform(code) {
       code = code.replace(

@@ -11,6 +11,7 @@ let $HTMLCanvasElement = undefined;
 let $createImageBitmap = undefined;
 let $requestAnimationFrame = undefined;
 let $cancelAnimationFrame = undefined;
+let $defaultWebGLExtensions = {};
 
 class Platform {
   set(platform) {
@@ -34,6 +35,8 @@ class Platform {
     $TextDecoder = $window.TextDecoder;
     $requestAnimationFrame = $window.requestAnimationFrame;
     $cancelAnimationFrame = $window.cancelAnimationFrame;
+
+    if (platform.setWebGLExtensions) $defaultWebGLExtensions = platform.setWebGLExtensions();
   }
 
   dispose() {
@@ -51,6 +54,7 @@ class Platform {
     $HTMLCanvasElement = null;
     $createImageBitmap = null;
     $requestAnimationFrame = null;
+    $defaultWebGLExtensions = null;
   }
 }
 
@@ -71,4 +75,5 @@ export {
   $createImageBitmap,
   $cancelAnimationFrame,
   $requestAnimationFrame,
+  $defaultWebGLExtensions,
 };

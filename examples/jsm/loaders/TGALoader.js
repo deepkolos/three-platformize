@@ -1,4 +1,8 @@
-import { DataTextureLoader } from '../../../build/three.module.js';
+import {
+	DataTextureLoader,
+	LinearFilter,
+	LinearMipmapLinearFilter
+} from '../../../build/three.module.js';
 
 var TGALoader = function ( manager ) {
 
@@ -9,6 +13,24 @@ var TGALoader = function ( manager ) {
 TGALoader.prototype = Object.assign( Object.create( DataTextureLoader.prototype ), {
 
 	constructor: TGALoader,
+
+	load: function ( url, onLoad, onProgress, onError ) {
+
+		function onDataTextureLoad( texture, texData ) {
+
+			texture.flipY = true;
+			texture.generateMipmaps = true;
+			texture.unpackAlignment = 4;
+			texture.magFilter = LinearFilter;
+			texture.minFilter = LinearMipmapLinearFilter;
+
+			if ( onLoad ) onLoad( texture, texData );
+
+		}
+
+		return DataTextureLoader.prototype.load.call( this, url, onDataTextureLoad, onProgress, onError );
+
+	},
 
 	parse: function ( buffer ) {
 
@@ -495,15 +517,15 @@ TGALoader.prototype = Object.assign( Object.create( DataTextureLoader.prototype 
 
 		//
 
-		var imageData = new Uint8Array(header.width * header.height * 4);
+		var imageData = new Uint8Array( header.width * header.height * 4 );
 		var result = tgaParse( use_rle, use_pal, header, offset, content );
 		getTgaRGBA( imageData, header.width, header.height, result.pixel_data, result.palettes );
 
 		return {
 
+			data: imageData,
 			width: header.width,
 			height: header.height,
-			data: imageData,
 
 		};
 
