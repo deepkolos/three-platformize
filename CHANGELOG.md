@@ -1,3 +1,23 @@
+## [1.0.13](https://github.com/deepkolos/three-platformize/compare/v1.0.12...v1.0.13) (2021-03-04)
+
+
+### Bug Fixes
+
+* [#3](https://github.com/deepkolos/three-platformize/issues/3) taobao ios load texture & EXT_blend_minmax error ([28a2d3f](https://github.com/deepkolos/three-platformize/commit/28a2d3f2d734cc0153e0acff08305bf0c8b2233f))
+* taobao onDeviceMotionChange ([ecbdfa6](https://github.com/deepkolos/three-platformize/commit/ecbdfa6f63c3f7e58c1504a028514cd6a2417bb9))
+* TGALoader's texture default setting ([473e942](https://github.com/deepkolos/three-platformize/commit/473e94256e5c1e7829bf57c8faf353887ab719b1))
+
+
+
+## [1.0.12](https://github.com/deepkolos/three-platformize/compare/v1.0.11...v1.0.12) (2021-02-28)
+
+
+### Bug Fixes
+
+* npmignore ([527651f](https://github.com/deepkolos/three-platformize/commit/527651f1fc164df95c7588f7b68dc2ae5b2d6baf))
+
+
+
 ## [1.0.11](https://github.com/deepkolos/three-platformize/compare/v1.0.10...v1.0.11) (2021-02-28)
 
 
