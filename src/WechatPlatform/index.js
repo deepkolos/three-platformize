@@ -4,7 +4,6 @@ import atob from '../libs/atob';
 import EventTarget, { Touch } from '../libs/EventTarget';
 import XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
-// import { DOMParser } from 'xmldom';
 import { $DOMParser as DOMParser } from '../libs/DOMParser';
 import { $TextDecoder as TextDecoder } from '../libs/TextDecoder';
 
@@ -103,10 +102,12 @@ export class WechatPlatform {
   enableDeviceOrientation(interval) {
     return new Promise((resolve, reject) => {
       wx.onDeviceMotionChange(this.onDeviceMotionChange);
-
       wx.startDeviceMotionListening({
         interval,
-        success: resolve,
+        success: e => {
+          resolve(e);
+          this.enabledDeviceMotion = true;
+        },
         fail: reject,
       });
     });
@@ -116,17 +117,16 @@ export class WechatPlatform {
     return new Promise((resolve, reject) => {
       wx.offDeviceMotionChange(this.onDeviceMotionChange);
 
-      wx.stopDeviceMotionListening({
-        success: resolve,
-        fail: reject,
-      });
+      this.enabledDeviceMotion &&
+        wx.stopDeviceMotionListening({
+          success: resolve,
+          fail: reject,
+        });
     });
   }
 
   dispatchTouchEvent(e = {}) {
-    const target = {
-      ...this,
-    };
+    const target = { ...this };
 
     const event = {
       changedTouches: e.changedTouches.map(touch => new Touch(touch)),

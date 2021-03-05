@@ -47,7 +47,7 @@ export function disposeNode(node) {
   }
 }
 
-export function disposeHierarchy(node, callback) {
+export function disposeHierarchy(node, callback = disposeNode) {
   for (var i = node.children.length - 1; i >= 0; i--) {
     var child = node.children[i];
     disposeHierarchy(child, callback);

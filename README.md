@@ -2,7 +2,7 @@
 
 一个让 THREE 平台化的项目
 
-0. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器)
+0. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(真机+模拟器)
 1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
@@ -127,7 +127,7 @@ THREE.PLATFORM.dispose();
 
 ## TODO
 
-0. 更彻底 dispose，减少内存泄漏
+0. 更彻底 dispose，减少内存泄漏，Web测试用例已增加，缺微信小程序
 1. 适配头条小程序
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
