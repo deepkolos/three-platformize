@@ -75,6 +75,7 @@ THREE.PLATFORM.dispose();
 ### 经验
 
 0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)
+1. r126 不能设置全pixelRatio，可以设置为一半，或者2，不能是3
 
 ## 实现
 
