@@ -2,7 +2,7 @@ import URL from '../libs/URL';
 import Blob from '../libs/Blob';
 import atob from '../libs/atob';
 import EventTarget, { Touch } from '../libs/EventTarget';
-import XMLHttpRequest from './XMLHttpRequest';
+import $XMLHttpRequest from './XMLHttpRequest';
 import copyProperties from '../libs/copyProperties';
 import { $DOMParser as DOMParser } from '../libs/DOMParser';
 import { $TextDecoder as TextDecoder } from '../libs/TextDecoder';
@@ -53,7 +53,10 @@ export class TaobaoPlatform {
     };
 
     [this.document, this.window, this.canvas].forEach(i => {
-      copyProperties(i.constructor.prototype, EventTarget.prototype);
+      const old = i.__proto__;
+      i.__proto__ = {};
+      i.__proto__.__proto__ = old;
+      copyProperties(i.__proto__, EventTarget.prototype);
     });
 
     this.patchCanvas();
@@ -106,7 +109,7 @@ export class TaobaoPlatform {
       window: this.window,
       document: this.document,
       HTMLCanvasElement: undefined,
-      XMLHttpRequest: XMLHttpRequest,
+      XMLHttpRequest: $XMLHttpRequest,
       OffscreenCanvas: OffscreenCanvas,
       createImageBitmap: undefined,
     };
