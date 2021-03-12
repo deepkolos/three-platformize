@@ -14,6 +14,7 @@ function OffscreenCanvas() {
 export class WechatPlatform {
   constructor(canvas, width, height) {
     const systemInfo = wx.getSystemInfoSync();
+    const isAndroid = systemInfo.platform === 'android';
 
     this.canvas = canvas;
     this.canvasW = width === undefined ? canvas.width : width;
@@ -52,9 +53,11 @@ export class WechatPlatform {
 
     this.onDeviceMotionChange = e => {
       e.type = 'deviceorientation';
-      e.alpha *= -1;
-      e.beta *= -1;
-      e.gamma *= -1;
+      if (isAndroid) {
+        e.alpha *= -1;
+        e.beta *= -1;
+        e.gamma *= -1;
+      }
       this.window.dispatchEvent(e);
     };
   }
