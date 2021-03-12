@@ -122,7 +122,10 @@ export class WechatPlatform {
 
       this.enabledDeviceMotion &&
         wx.stopDeviceMotionListening({
-          success: resolve,
+          success: () => {
+            resolve();
+            this.enabledDeviceMotion = false;
+          },
           fail: reject,
         });
     });
