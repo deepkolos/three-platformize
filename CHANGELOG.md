@@ -1,3 +1,15 @@
+## [1.0.14](https://github.com/deepkolos/three-platformize/compare/v1.0.13...v1.0.14) (2021-03-13)
+
+
+### Bug Fixes
+
+* taobao新版IDE 加载glb失败问题 ([03b9af3](https://github.com/deepkolos/three-platformize/commit/03b9af35c774469c074a0764158dcee87da12ae5))
+* wechat disableDeviceOrientation ([0f0353d](https://github.com/deepkolos/three-platformize/commit/0f0353d66deb083a3029dae444a46c3b010df6bb))
+* wechat dispose error ([c08bb19](https://github.com/deepkolos/three-platformize/commit/c08bb19a974f4236cbaf6392cb7f48a65bcbab4d))
+* wechat onDeviceMotionChange ([55ac960](https://github.com/deepkolos/three-platformize/commit/55ac96014481029952c5387435590864f2a4778f))
+
+
+
 ## [1.0.13](https://github.com/deepkolos/three-platformize/compare/v1.0.12...v1.0.13) (2021-03-04)
 
 
