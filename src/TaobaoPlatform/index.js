@@ -124,7 +124,7 @@ export class TaobaoPlatform {
   }
 
   dispatchTouchEvent(e = {}) {
-    const target = Object.create(this);
+    const target = Object.assign({}, this);
 
     const event = {
       changedTouches: e.changedTouches.map(touch => new Touch(touch)),
