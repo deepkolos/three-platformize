@@ -46,7 +46,10 @@ export class WechatPlatform {
     };
 
     [this.canvas, this.document, this.window].forEach(i => {
-      copyProperties(i.constructor.prototype, EventTarget.prototype);
+      const old = i.__proto__;
+      i.__proto__ = {};
+      i.__proto__.__proto__ = old;
+      copyProperties(i.__proto__, EventTarget.prototype);
     });
 
     this.patchCanvas();
