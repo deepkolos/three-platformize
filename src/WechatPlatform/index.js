@@ -154,6 +154,9 @@ export class WechatPlatform {
 
   dispose() {
     this.disableDeviceOrientation();
+    // 缓解ios内存泄漏, 前后进出页面多几次，降低pixelRatio也可行
+    this.canvas.width = 0;
+    this.canvas.height = 0;
     if (this.canvas) this.canvas.ownerDocument = null;
     this.onDeviceMotionChange = null;
     this.document = null;

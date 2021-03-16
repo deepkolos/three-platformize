@@ -77,6 +77,7 @@ THREE.PLATFORM.dispose();
 0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)
 1. r126 不能设置全 pixelRatio，可以设置为一半，或者 2，不能是 3
 2. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)
+3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
 
 ## 实现
 
@@ -129,7 +130,7 @@ THREE.PLATFORM.dispose();
 
 ## TODO
 
-0. 更彻底 dispose，减少内存泄漏，Web 测试用例已增加，缺微信小程序
+0. 更彻底 dispose，减少内存泄漏，Web 测试用例已增加，微信小程序已增加，IOS 内存问题比较大
 1. 适配头条小程序
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
