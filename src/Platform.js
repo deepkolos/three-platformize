@@ -15,8 +15,6 @@ let $defaultWebGLExtensions = {};
 
 class Platform {
   set(platform) {
-    this.platform && this.platform.dispose();
-
     this.platform = platform;
 
     const globals = platform.getGlobals();
@@ -41,6 +39,7 @@ class Platform {
 
   dispose() {
     this.platform && this.platform.dispose();
+    this.platform = null;
 
     $URL = null;
     $Blob = null;

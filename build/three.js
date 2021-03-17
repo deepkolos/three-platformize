@@ -26,7 +26,6 @@
 		var _proto = Platform.prototype;
 
 		_proto.set = function set(platform) {
-			this.platform && this.platform.dispose();
 			this.platform = platform;
 			var globals = platform.getGlobals();
 			exports.$atob = globals.atob;
@@ -47,6 +46,7 @@
 
 		_proto.dispose = function dispose() {
 			this.platform && this.platform.dispose();
+			this.platform = null;
 			exports.$URL = null;
 			exports.$Blob = null;
 			exports.$atob = null;
@@ -2892,11 +2892,11 @@
 				console.error('THREE.Vector3: .applyEuler() now expects an Euler rotation rather than a Vector3 and order.');
 			}
 
-			return this.applyQuaternion(_quaternion.setFromEuler(euler));
+			return this.applyQuaternion(_quaternion$4.setFromEuler(euler));
 		};
 
 		_proto.applyAxisAngle = function applyAxisAngle(axis, angle) {
-			return this.applyQuaternion(_quaternion.setFromAxisAngle(axis, angle));
+			return this.applyQuaternion(_quaternion$4.setFromAxisAngle(axis, angle));
 		};
 
 		_proto.applyMatrix3 = function applyMatrix3(m) {
@@ -3116,15 +3116,15 @@
 		};
 
 		_proto.projectOnPlane = function projectOnPlane(planeNormal) {
-			_vector.copy(this).projectOnVector(planeNormal);
+			_vector$c.copy(this).projectOnVector(planeNormal);
 
-			return this.sub(_vector);
+			return this.sub(_vector$c);
 		};
 
 		_proto.reflect = function reflect(normal) {
 			// reflect incident vector off plane orthogonal to normal
 			// normal is assumed to have unit length
-			return this.sub(_vector.copy(normal).multiplyScalar(2 * this.dot(normal)));
+			return this.sub(_vector$c.copy(normal).multiplyScalar(2 * this.dot(normal)));
 		};
 
 		_proto.angleTo = function angleTo(v) {
@@ -3250,9 +3250,9 @@
 		return Vector3;
 	}();
 
-	var _vector = /*@__PURE__*/new Vector3();
+	var _vector$c = /*@__PURE__*/new Vector3();
 
-	var _quaternion = /*@__PURE__*/new Quaternion();
+	var _quaternion$4 = /*@__PURE__*/new Quaternion();
 
 	var Box3 = /*#__PURE__*/function () {
 		function Box3(min, max) {
@@ -3332,7 +3332,7 @@
 		};
 
 		_proto.setFromCenterAndSize = function setFromCenterAndSize(center, size) {
-			var halfSize = _vector$1.copy(size).multiplyScalar(0.5);
+			var halfSize = _vector$b.copy(size).multiplyScalar(0.5);
 
 			this.min.copy(center).sub(halfSize);
 			this.max.copy(center).add(halfSize);
@@ -3412,11 +3412,11 @@
 					geometry.computeBoundingBox();
 				}
 
-				_box.copy(geometry.boundingBox);
+				_box$3.copy(geometry.boundingBox);
 
-				_box.applyMatrix4(object.matrixWorld);
+				_box$3.applyMatrix4(object.matrixWorld);
 
-				this.union(_box);
+				this.union(_box$3);
 			}
 
 			var children = object.children;
@@ -3454,9 +3454,9 @@
 
 		_proto.intersectsSphere = function intersectsSphere(sphere) {
 			// Find the point on the AABB closest to the sphere center.
-			this.clampPoint(sphere.center, _vector$1); // If that point is inside the sphere, the AABB and sphere intersect.
+			this.clampPoint(sphere.center, _vector$b); // If that point is inside the sphere, the AABB and sphere intersect.
 
-			return _vector$1.distanceToSquared(sphere.center) <= sphere.radius * sphere.radius;
+			return _vector$b.distanceToSquared(sphere.center) <= sphere.radius * sphere.radius;
 		};
 
 		_proto.intersectsPlane = function intersectsPlane(plane) {
@@ -3502,32 +3502,32 @@
 			_extents.subVectors(this.max, _center); // translate triangle to aabb origin
 
 
-			_v0.subVectors(triangle.a, _center);
+			_v0$2.subVectors(triangle.a, _center);
 
-			_v1.subVectors(triangle.b, _center);
+			_v1$6.subVectors(triangle.b, _center);
 
-			_v2.subVectors(triangle.c, _center); // compute edge vectors for triangle
+			_v2$3.subVectors(triangle.c, _center); // compute edge vectors for triangle
 
 
-			_f0.subVectors(_v1, _v0);
+			_f0.subVectors(_v1$6, _v0$2);
 
-			_f1.subVectors(_v2, _v1);
+			_f1.subVectors(_v2$3, _v1$6);
 
-			_f2.subVectors(_v0, _v2); // test against axes that are given by cross product combinations of the edges of the triangle and the edges of the aabb
+			_f2.subVectors(_v0$2, _v2$3); // test against axes that are given by cross product combinations of the edges of the triangle and the edges of the aabb
 			// make an axis testing of each of the 3 sides of the aabb against each of the 3 sides of the triangle = 9 axis of separation
 			// axis_ij = u_i x f_j (u0, u1, u2 = face normals of aabb = x,y,z axes vectors since aabb is axis aligned)
 
 
 			var axes = [0, -_f0.z, _f0.y, 0, -_f1.z, _f1.y, 0, -_f2.z, _f2.y, _f0.z, 0, -_f0.x, _f1.z, 0, -_f1.x, _f2.z, 0, -_f2.x, -_f0.y, _f0.x, 0, -_f1.y, _f1.x, 0, -_f2.y, _f2.x, 0];
 
-			if (!satForAxes(axes, _v0, _v1, _v2, _extents)) {
+			if (!satForAxes(axes, _v0$2, _v1$6, _v2$3, _extents)) {
 				return false;
 			} // test 3 face normals from the aabb
 
 
 			axes = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 
-			if (!satForAxes(axes, _v0, _v1, _v2, _extents)) {
+			if (!satForAxes(axes, _v0$2, _v1$6, _v2$3, _extents)) {
 				return false;
 			} // finally testing the face normal of the triangle
 			// use already existing triangle edge vectors here
@@ -3536,7 +3536,7 @@
 			_triangleNormal.crossVectors(_f0, _f1);
 
 			axes = [_triangleNormal.x, _triangleNormal.y, _triangleNormal.z];
-			return satForAxes(axes, _v0, _v1, _v2, _extents);
+			return satForAxes(axes, _v0$2, _v1$6, _v2$3, _extents);
 		};
 
 		_proto.clampPoint = function clampPoint(point, target) {
@@ -3549,7 +3549,7 @@
 		};
 
 		_proto.distanceToPoint = function distanceToPoint(point) {
-			var clampedPoint = _vector$1.copy(point).clamp(this.min, this.max);
+			var clampedPoint = _vector$b.copy(point).clamp(this.min, this.max);
 
 			return clampedPoint.sub(point).length();
 		};
@@ -3560,7 +3560,7 @@
 			}
 
 			this.getCenter(target.center);
-			target.radius = this.getSize(_vector$1).length() * 0.5;
+			target.radius = this.getSize(_vector$b).length() * 0.5;
 			return target;
 		};
 
@@ -3646,16 +3646,16 @@
 
 	var _points = [/*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3(), /*@__PURE__*/new Vector3()];
 
-	var _vector$1 = /*@__PURE__*/new Vector3();
+	var _vector$b = /*@__PURE__*/new Vector3();
 
-	var _box = /*@__PURE__*/new Box3(); // triangle centered vertices
+	var _box$3 = /*@__PURE__*/new Box3(); // triangle centered vertices
 
 
-	var _v0 = /*@__PURE__*/new Vector3();
+	var _v0$2 = /*@__PURE__*/new Vector3();
 
-	var _v1 = /*@__PURE__*/new Vector3();
+	var _v1$6 = /*@__PURE__*/new Vector3();
 
-	var _v2 = /*@__PURE__*/new Vector3(); // triangle edge vectors
+	var _v2$3 = /*@__PURE__*/new Vector3(); // triangle edge vectors
 
 
 	var _f0 = /*@__PURE__*/new Vector3();
@@ -3672,7 +3672,7 @@
 
 	var _testAxis = /*@__PURE__*/new Vector3();
 
-	var _box$1 = /*@__PURE__*/new Box3();
+	var _box$2 = /*@__PURE__*/new Box3();
 
 	var Sphere = /*#__PURE__*/function () {
 		function Sphere(center, radius) {
@@ -3694,7 +3694,7 @@
 			if (optionalCenter !== undefined) {
 				center.copy(optionalCenter);
 			} else {
-				_box$1.setFromPoints(points).getCenter(center);
+				_box$2.setFromPoints(points).getCenter(center);
 			}
 
 			var maxRadiusSq = 0;
@@ -3801,7 +3801,7 @@
 		return Sphere;
 	}();
 
-	var _vector$2 = /*@__PURE__*/new Vector3();
+	var _vector$a = /*@__PURE__*/new Vector3();
 
 	var _segCenter = /*@__PURE__*/new Vector3();
 
@@ -3813,7 +3813,7 @@
 
 	var _edge2 = /*@__PURE__*/new Vector3();
 
-	var _normal = /*@__PURE__*/new Vector3();
+	var _normal$1 = /*@__PURE__*/new Vector3();
 
 	var Ray = /*#__PURE__*/function () {
 		function Ray(origin, direction) {
@@ -3854,7 +3854,7 @@
 		};
 
 		_proto.recast = function recast(t) {
-			this.origin.copy(this.at(t, _vector$2));
+			this.origin.copy(this.at(t, _vector$a));
 			return this;
 		};
 
@@ -3879,16 +3879,16 @@
 		};
 
 		_proto.distanceSqToPoint = function distanceSqToPoint(point) {
-			var directionDistance = _vector$2.subVectors(point, this.origin).dot(this.direction); // point behind the ray
+			var directionDistance = _vector$a.subVectors(point, this.origin).dot(this.direction); // point behind the ray
 
 
 			if (directionDistance < 0) {
 				return this.origin.distanceToSquared(point);
 			}
 
-			_vector$2.copy(this.direction).multiplyScalar(directionDistance).add(this.origin);
+			_vector$a.copy(this.direction).multiplyScalar(directionDistance).add(this.origin);
 
-			return _vector$2.distanceToSquared(point);
+			return _vector$a.distanceToSquared(point);
 		};
 
 		_proto.distanceSqToSegment = function distanceSqToSegment(v0, v1, optionalPointOnRay, optionalPointOnSegment) {
@@ -3980,11 +3980,11 @@
 		};
 
 		_proto.intersectSphere = function intersectSphere(sphere, target) {
-			_vector$2.subVectors(sphere.center, this.origin);
+			_vector$a.subVectors(sphere.center, this.origin);
 
-			var tca = _vector$2.dot(this.direction);
+			var tca = _vector$a.dot(this.direction);
 
-			var d2 = _vector$2.dot(_vector$2) - tca * tca;
+			var d2 = _vector$a.dot(_vector$a) - tca * tca;
 			var radius2 = sphere.radius * sphere.radius;
 			if (d2 > radius2) return null;
 			var thc = Math.sqrt(radius2 - d2); // t0 = first intersect point - entrance on front of sphere
@@ -4098,7 +4098,7 @@
 		};
 
 		_proto.intersectsBox = function intersectsBox(box) {
-			return this.intersectBox(box, _vector$2) !== null;
+			return this.intersectBox(box, _vector$a) !== null;
 		};
 
 		_proto.intersectTriangle = function intersectTriangle(a, b, c, backfaceCulling, target) {
@@ -4108,14 +4108,14 @@
 
 			_edge2.subVectors(c, a);
 
-			_normal.crossVectors(_edge1, _edge2); // Solve Q + t*D = b1*E1 + b2*E2 (Q = kDiff, D = ray direction,
+			_normal$1.crossVectors(_edge1, _edge2); // Solve Q + t*D = b1*E1 + b2*E2 (Q = kDiff, D = ray direction,
 			// E1 = kEdge1, E2 = kEdge2, N = Cross(E1,E2)) by
 			//	 |Dot(D,N)|*b1 = sign(Dot(D,N))*Dot(D,Cross(Q,E2))
 			//	 |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
 			//	 |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
 
 
-			var DdN = this.direction.dot(_normal);
+			var DdN = this.direction.dot(_normal$1);
 			var sign;
 
 			if (DdN > 0) {
@@ -4148,7 +4148,7 @@
 			} // Line intersects triangle, check if ray does.
 
 
-			var QdN = -sign * _diff.dot(_normal); // t < 0, no intersection
+			var QdN = -sign * _diff.dot(_normal$1); // t < 0, no intersection
 
 
 			if (QdN < 0) {
@@ -4270,11 +4270,11 @@
 			var te = this.elements;
 			var me = m.elements;
 
-			var scaleX = 1 / _v1$1.setFromMatrixColumn(m, 0).length();
+			var scaleX = 1 / _v1$5.setFromMatrixColumn(m, 0).length();
 
-			var scaleY = 1 / _v1$1.setFromMatrixColumn(m, 1).length();
+			var scaleY = 1 / _v1$5.setFromMatrixColumn(m, 1).length();
 
-			var scaleZ = 1 / _v1$1.setFromMatrixColumn(m, 2).length();
+			var scaleZ = 1 / _v1$5.setFromMatrixColumn(m, 2).length();
 
 			te[0] = me[0] * scaleX;
 			te[1] = me[1] * scaleX;
@@ -4777,11 +4777,11 @@
 		_proto.decompose = function decompose(position, quaternion, scale) {
 			var te = this.elements;
 
-			var sx = _v1$1.set(te[0], te[1], te[2]).length();
+			var sx = _v1$5.set(te[0], te[1], te[2]).length();
 
-			var sy = _v1$1.set(te[4], te[5], te[6]).length();
+			var sy = _v1$5.set(te[4], te[5], te[6]).length();
 
-			var sz = _v1$1.set(te[8], te[9], te[10]).length(); // if determine is negative, we need to invert one scale
+			var sz = _v1$5.set(te[8], te[9], te[10]).length(); // if determine is negative, we need to invert one scale
 
 
 			var det = this.determinant();
@@ -4790,21 +4790,21 @@
 			position.y = te[13];
 			position.z = te[14]; // scale the rotation part
 
-			_m1.copy(this);
+			_m1$2.copy(this);
 
 			var invSX = 1 / sx;
 			var invSY = 1 / sy;
 			var invSZ = 1 / sz;
-			_m1.elements[0] *= invSX;
-			_m1.elements[1] *= invSX;
-			_m1.elements[2] *= invSX;
-			_m1.elements[4] *= invSY;
-			_m1.elements[5] *= invSY;
-			_m1.elements[6] *= invSY;
-			_m1.elements[8] *= invSZ;
-			_m1.elements[9] *= invSZ;
-			_m1.elements[10] *= invSZ;
-			quaternion.setFromRotationMatrix(_m1);
+			_m1$2.elements[0] *= invSX;
+			_m1$2.elements[1] *= invSX;
+			_m1$2.elements[2] *= invSX;
+			_m1$2.elements[4] *= invSY;
+			_m1$2.elements[5] *= invSY;
+			_m1$2.elements[6] *= invSY;
+			_m1$2.elements[8] *= invSZ;
+			_m1$2.elements[9] *= invSZ;
+			_m1$2.elements[10] *= invSZ;
+			quaternion.setFromRotationMatrix(_m1$2);
 			scale.x = sx;
 			scale.y = sy;
 			scale.z = sz;
@@ -4924,9 +4924,9 @@
 		return Matrix4;
 	}();
 
-	var _v1$1 = /*@__PURE__*/new Vector3();
+	var _v1$5 = /*@__PURE__*/new Vector3();
 
-	var _m1 = /*@__PURE__*/new Matrix4();
+	var _m1$2 = /*@__PURE__*/new Matrix4();
 
 	var _zero = /*@__PURE__*/new Vector3(0, 0, 0);
 
@@ -5097,9 +5097,9 @@
 		};
 
 		_proto.setFromQuaternion = function setFromQuaternion(q, order, update) {
-			_matrix.makeRotationFromQuaternion(q);
+			_matrix$1.makeRotationFromQuaternion(q);
 
-			return this.setFromRotationMatrix(_matrix, order, update);
+			return this.setFromRotationMatrix(_matrix$1, order, update);
 		};
 
 		_proto.setFromVector3 = function setFromVector3(v, order) {
@@ -5108,9 +5108,9 @@
 
 		_proto.reorder = function reorder(newOrder) {
 			// WARNING: this discards revolution information -bhouston
-			_quaternion$1.setFromEuler(this);
+			_quaternion$3.setFromEuler(this);
 
-			return this.setFromQuaternion(_quaternion$1, newOrder);
+			return this.setFromQuaternion(_quaternion$3, newOrder);
 		};
 
 		_proto.equals = function equals(euler) {
@@ -5207,9 +5207,9 @@
 	Euler.DefaultOrder = 'XYZ';
 	Euler.RotationOrders = ['XYZ', 'YZX', 'ZXY', 'XZY', 'YXZ', 'ZYX'];
 
-	var _matrix = /*@__PURE__*/new Matrix4();
+	var _matrix$1 = /*@__PURE__*/new Matrix4();
 
-	var _quaternion$1 = /*@__PURE__*/new Quaternion();
+	var _quaternion$3 = /*@__PURE__*/new Quaternion();
 
 	var Layers = /*#__PURE__*/function () {
 		function Layers() {
@@ -5251,7 +5251,7 @@
 
 	var _object3DId = 0;
 
-	var _v1$2 = new Vector3();
+	var _v1$4 = new Vector3();
 
 	var _q1 = new Quaternion();
 
@@ -5259,9 +5259,9 @@
 
 	var _target = new Vector3();
 
-	var _position = new Vector3();
+	var _position$3 = new Vector3();
 
-	var _scale = new Vector3();
+	var _scale$2 = new Vector3();
 
 	var _quaternion$2 = new Quaternion();
 
@@ -5407,9 +5407,9 @@
 		translateOnAxis: function translateOnAxis(axis, distance) {
 			// translate object by distance along axis in object space
 			// axis is assumed to be normalized
-			_v1$2.copy(axis).applyQuaternion(this.quaternion);
+			_v1$4.copy(axis).applyQuaternion(this.quaternion);
 
-			this.position.add(_v1$2.multiplyScalar(distance));
+			this.position.add(_v1$4.multiplyScalar(distance));
 			return this;
 		},
 		translateX: function translateX(distance) {
@@ -5438,12 +5438,12 @@
 			var parent = this.parent;
 			this.updateWorldMatrix(true, false);
 
-			_position.setFromMatrixPosition(this.matrixWorld);
+			_position$3.setFromMatrixPosition(this.matrixWorld);
 
 			if (this.isCamera || this.isLight) {
-				_m1$1.lookAt(_position, _target, this.up);
+				_m1$1.lookAt(_position$3, _target, this.up);
 			} else {
-				_m1$1.lookAt(_target, _position, this.up);
+				_m1$1.lookAt(_target, _position$3, this.up);
 			}
 
 			this.quaternion.setFromRotationMatrix(_m1$1);
@@ -5566,7 +5566,7 @@
 			}
 
 			this.updateWorldMatrix(true, false);
-			this.matrixWorld.decompose(_position, target, _scale);
+			this.matrixWorld.decompose(_position$3, target, _scale$2);
 			return target;
 		},
 		getWorldScale: function getWorldScale(target) {
@@ -5576,7 +5576,7 @@
 			}
 
 			this.updateWorldMatrix(true, false);
-			this.matrixWorld.decompose(_position, _quaternion$2, target);
+			this.matrixWorld.decompose(_position$3, _quaternion$2, target);
 			return target;
 		},
 		getWorldDirection: function getWorldDirection(target) {
@@ -5855,7 +5855,7 @@
 
 	var _vector1 = /*@__PURE__*/new Vector3();
 
-	var _vector2 = /*@__PURE__*/new Vector3();
+	var _vector2$1 = /*@__PURE__*/new Vector3();
 
 	var _normalMatrix = /*@__PURE__*/new Matrix3();
 
@@ -5890,7 +5890,7 @@
 		};
 
 		_proto.setFromCoplanarPoints = function setFromCoplanarPoints(a, b, c) {
-			var normal = _vector1.subVectors(c, b).cross(_vector2.subVectors(a, b)).normalize(); // Q: should an error be thrown if normal is zero (e.g. degenerate plane)?
+			var normal = _vector1.subVectors(c, b).cross(_vector2$1.subVectors(a, b)).normalize(); // Q: should an error be thrown if normal is zero (e.g. degenerate plane)?
 
 
 			this.setFromNormalAndCoplanarPoint(normal, a);
@@ -6015,9 +6015,9 @@
 
 	var _v1$3 = /*@__PURE__*/new Vector3();
 
-	var _v2$1 = /*@__PURE__*/new Vector3();
+	var _v2$2 = /*@__PURE__*/new Vector3();
 
-	var _v3 = /*@__PURE__*/new Vector3();
+	var _v3$1 = /*@__PURE__*/new Vector3();
 
 	var _vab = /*@__PURE__*/new Vector3();
 
@@ -6065,17 +6065,17 @@
 
 			_v1$3.subVectors(b, a);
 
-			_v2$1.subVectors(point, a);
+			_v2$2.subVectors(point, a);
 
 			var dot00 = _v0$1.dot(_v0$1);
 
 			var dot01 = _v0$1.dot(_v1$3);
 
-			var dot02 = _v0$1.dot(_v2$1);
+			var dot02 = _v0$1.dot(_v2$2);
 
 			var dot11 = _v1$3.dot(_v1$3);
 
-			var dot12 = _v1$3.dot(_v2$1);
+			var dot12 = _v1$3.dot(_v2$2);
 
 			var denom = dot00 * dot11 - dot01 * dot01;
 
@@ -6099,16 +6099,16 @@
 		};
 
 		Triangle.containsPoint = function containsPoint(point, a, b, c) {
-			this.getBarycoord(point, a, b, c, _v3);
-			return _v3.x >= 0 && _v3.y >= 0 && _v3.x + _v3.y <= 1;
+			this.getBarycoord(point, a, b, c, _v3$1);
+			return _v3$1.x >= 0 && _v3$1.y >= 0 && _v3$1.x + _v3$1.y <= 1;
 		};
 
 		Triangle.getUV = function getUV(point, p1, p2, p3, uv1, uv2, uv3, target) {
-			this.getBarycoord(point, p1, p2, p3, _v3);
+			this.getBarycoord(point, p1, p2, p3, _v3$1);
 			target.set(0, 0);
-			target.addScaledVector(uv1, _v3.x);
-			target.addScaledVector(uv2, _v3.y);
-			target.addScaledVector(uv3, _v3.z);
+			target.addScaledVector(uv1, _v3$1.x);
+			target.addScaledVector(uv2, _v3$1.y);
+			target.addScaledVector(uv3, _v3$1.z);
 			return target;
 		};
 
@@ -7296,9 +7296,9 @@
 		return this;
 	};
 
-	var _vector$3 = new Vector3();
+	var _vector$9 = new Vector3();
 
-	var _vector2$1 = new Vector2();
+	var _vector2 = new Vector2();
 
 	function BufferAttribute(array, itemSize, normalized) {
 		if (Array.isArray(array)) {
@@ -7432,19 +7432,19 @@
 		applyMatrix3: function applyMatrix3(m) {
 			if (this.itemSize === 2) {
 				for (var i = 0, l = this.count; i < l; i++) {
-					_vector2$1.fromBufferAttribute(this, i);
+					_vector2.fromBufferAttribute(this, i);
 
-					_vector2$1.applyMatrix3(m);
+					_vector2.applyMatrix3(m);
 
-					this.setXY(i, _vector2$1.x, _vector2$1.y);
+					this.setXY(i, _vector2.x, _vector2.y);
 				}
 			} else if (this.itemSize === 3) {
 				for (var _i = 0, _l = this.count; _i < _l; _i++) {
-					_vector$3.fromBufferAttribute(this, _i);
+					_vector$9.fromBufferAttribute(this, _i);
 
-					_vector$3.applyMatrix3(m);
+					_vector$9.applyMatrix3(m);
 
-					this.setXYZ(_i, _vector$3.x, _vector$3.y, _vector$3.z);
+					this.setXYZ(_i, _vector$9.x, _vector$9.y, _vector$9.z);
 				}
 			}
 
@@ -7452,39 +7452,39 @@
 		},
 		applyMatrix4: function applyMatrix4(m) {
 			for (var i = 0, l = this.count; i < l; i++) {
-				_vector$3.x = this.getX(i);
-				_vector$3.y = this.getY(i);
-				_vector$3.z = this.getZ(i);
+				_vector$9.x = this.getX(i);
+				_vector$9.y = this.getY(i);
+				_vector$9.z = this.getZ(i);
 
-				_vector$3.applyMatrix4(m);
+				_vector$9.applyMatrix4(m);
 
-				this.setXYZ(i, _vector$3.x, _vector$3.y, _vector$3.z);
+				this.setXYZ(i, _vector$9.x, _vector$9.y, _vector$9.z);
 			}
 
 			return this;
 		},
 		applyNormalMatrix: function applyNormalMatrix(m) {
 			for (var i = 0, l = this.count; i < l; i++) {
-				_vector$3.x = this.getX(i);
-				_vector$3.y = this.getY(i);
-				_vector$3.z = this.getZ(i);
+				_vector$9.x = this.getX(i);
+				_vector$9.y = this.getY(i);
+				_vector$9.z = this.getZ(i);
 
-				_vector$3.applyNormalMatrix(m);
+				_vector$9.applyNormalMatrix(m);
 
-				this.setXYZ(i, _vector$3.x, _vector$3.y, _vector$3.z);
+				this.setXYZ(i, _vector$9.x, _vector$9.y, _vector$9.z);
 			}
 
 			return this;
 		},
 		transformDirection: function transformDirection(m) {
 			for (var i = 0, l = this.count; i < l; i++) {
-				_vector$3.x = this.getX(i);
-				_vector$3.y = this.getY(i);
-				_vector$3.z = this.getZ(i);
+				_vector$9.x = this.getX(i);
+				_vector$9.y = this.getY(i);
+				_vector$9.z = this.getZ(i);
 
-				_vector$3.transformDirection(m);
+				_vector$9.transformDirection(m);
 
-				this.setXYZ(i, _vector$3.x, _vector$3.y, _vector$3.z);
+				this.setXYZ(i, _vector$9.x, _vector$9.y, _vector$9.z);
 			}
 
 			return this;
@@ -7664,17 +7664,17 @@
 
 	var _id = 0;
 
-	var _m1$2 = new Matrix4();
+	var _m1 = new Matrix4();
 
 	var _obj = new Object3D();
 
 	var _offset = new Vector3();
 
-	var _box$2 = new Box3();
+	var _box$1 = new Box3();
 
 	var _boxMorphTargets = new Box3();
 
-	var _vector$4 = new Vector3();
+	var _vector$8 = new Vector3();
 
 	function BufferGeometry() {
 		Object.defineProperty(this, 'id', {
@@ -7779,37 +7779,37 @@
 		},
 		rotateX: function rotateX(angle) {
 			// rotate geometry around world x-axis
-			_m1$2.makeRotationX(angle);
+			_m1.makeRotationX(angle);
 
-			this.applyMatrix4(_m1$2);
+			this.applyMatrix4(_m1);
 			return this;
 		},
 		rotateY: function rotateY(angle) {
 			// rotate geometry around world y-axis
-			_m1$2.makeRotationY(angle);
+			_m1.makeRotationY(angle);
 
-			this.applyMatrix4(_m1$2);
+			this.applyMatrix4(_m1);
 			return this;
 		},
 		rotateZ: function rotateZ(angle) {
 			// rotate geometry around world z-axis
-			_m1$2.makeRotationZ(angle);
+			_m1.makeRotationZ(angle);
 
-			this.applyMatrix4(_m1$2);
+			this.applyMatrix4(_m1);
 			return this;
 		},
 		translate: function translate(x, y, z) {
 			// translate geometry
-			_m1$2.makeTranslation(x, y, z);
+			_m1.makeTranslation(x, y, z);
 
-			this.applyMatrix4(_m1$2);
+			this.applyMatrix4(_m1);
 			return this;
 		},
 		scale: function scale(x, y, z) {
 			// scale geometry
-			_m1$2.makeScale(x, y, z);
+			_m1.makeScale(x, y, z);
 
-			this.applyMatrix4(_m1$2);
+			this.applyMatrix4(_m1);
 			return this;
 		},
 		lookAt: function lookAt(vector) {
@@ -7858,19 +7858,19 @@
 					for (var i = 0, il = morphAttributesPosition.length; i < il; i++) {
 						var morphAttribute = morphAttributesPosition[i];
 
-						_box$2.setFromBufferAttribute(morphAttribute);
+						_box$1.setFromBufferAttribute(morphAttribute);
 
 						if (this.morphTargetsRelative) {
-							_vector$4.addVectors(this.boundingBox.min, _box$2.min);
+							_vector$8.addVectors(this.boundingBox.min, _box$1.min);
 
-							this.boundingBox.expandByPoint(_vector$4);
+							this.boundingBox.expandByPoint(_vector$8);
 
-							_vector$4.addVectors(this.boundingBox.max, _box$2.max);
+							_vector$8.addVectors(this.boundingBox.max, _box$1.max);
 
-							this.boundingBox.expandByPoint(_vector$4);
+							this.boundingBox.expandByPoint(_vector$8);
 						} else {
-							this.boundingBox.expandByPoint(_box$2.min);
-							this.boundingBox.expandByPoint(_box$2.max);
+							this.boundingBox.expandByPoint(_box$1.min);
+							this.boundingBox.expandByPoint(_box$1.max);
 						}
 					}
 				}
@@ -7900,7 +7900,7 @@
 				// first, find the center of the bounding sphere
 				var center = this.boundingSphere.center;
 
-				_box$2.setFromBufferAttribute(position); // process morph attributes if present
+				_box$1.setFromBufferAttribute(position); // process morph attributes if present
 
 
 				if (morphAttributesPosition) {
@@ -7910,31 +7910,31 @@
 						_boxMorphTargets.setFromBufferAttribute(morphAttribute);
 
 						if (this.morphTargetsRelative) {
-							_vector$4.addVectors(_box$2.min, _boxMorphTargets.min);
+							_vector$8.addVectors(_box$1.min, _boxMorphTargets.min);
 
-							_box$2.expandByPoint(_vector$4);
+							_box$1.expandByPoint(_vector$8);
 
-							_vector$4.addVectors(_box$2.max, _boxMorphTargets.max);
+							_vector$8.addVectors(_box$1.max, _boxMorphTargets.max);
 
-							_box$2.expandByPoint(_vector$4);
+							_box$1.expandByPoint(_vector$8);
 						} else {
-							_box$2.expandByPoint(_boxMorphTargets.min);
+							_box$1.expandByPoint(_boxMorphTargets.min);
 
-							_box$2.expandByPoint(_boxMorphTargets.max);
+							_box$1.expandByPoint(_boxMorphTargets.max);
 						}
 					}
 				}
 
-				_box$2.getCenter(center); // second, try to find a boundingSphere with a radius smaller than the
+				_box$1.getCenter(center); // second, try to find a boundingSphere with a radius smaller than the
 				// boundingSphere of the boundingBox: sqrt(3) smaller in the best case
 
 
 				var maxRadiusSq = 0;
 
 				for (var _i = 0, _il = position.count; _i < _il; _i++) {
-					_vector$4.fromBufferAttribute(position, _i);
+					_vector$8.fromBufferAttribute(position, _i);
 
-					maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(_vector$4));
+					maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(_vector$8));
 				} // process morph attributes if present
 
 
@@ -7944,15 +7944,15 @@
 						var morphTargetsRelative = this.morphTargetsRelative;
 
 						for (var j = 0, jl = _morphAttribute.count; j < jl; j++) {
-							_vector$4.fromBufferAttribute(_morphAttribute, j);
+							_vector$8.fromBufferAttribute(_morphAttribute, j);
 
 							if (morphTargetsRelative) {
 								_offset.fromBufferAttribute(position, j);
 
-								_vector$4.add(_offset);
+								_vector$8.add(_offset);
 							}
 
-							maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(_vector$4));
+							maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(_vector$8));
 						}
 					}
 				}
@@ -8180,11 +8180,11 @@
 			var normals = this.attributes.normal;
 
 			for (var i = 0, il = normals.count; i < il; i++) {
-				_vector$4.fromBufferAttribute(normals, i);
+				_vector$8.fromBufferAttribute(normals, i);
 
-				_vector$4.normalize();
+				_vector$8.normalize();
 
-				normals.setXYZ(i, _vector$4.x, _vector$4.y, _vector$4.z);
+				normals.setXYZ(i, _vector$8.x, _vector$8.y, _vector$8.z);
 			}
 		},
 		toNonIndexed: function toNonIndexed() {
@@ -8436,17 +8436,17 @@
 		}
 	});
 
-	var _inverseMatrix = new Matrix4();
+	var _inverseMatrix$2 = new Matrix4();
 
-	var _ray = new Ray();
+	var _ray$2 = new Ray();
 
-	var _sphere = new Sphere();
+	var _sphere$3 = new Sphere();
 
-	var _vA = new Vector3();
+	var _vA$1 = new Vector3();
 
-	var _vB = new Vector3();
+	var _vB$1 = new Vector3();
 
-	var _vC = new Vector3();
+	var _vC$1 = new Vector3();
 
 	var _tempA = new Vector3();
 
@@ -8460,11 +8460,11 @@
 
 	var _morphC = new Vector3();
 
-	var _uvA = new Vector2();
+	var _uvA$1 = new Vector2();
 
-	var _uvB = new Vector2();
+	var _uvB$1 = new Vector2();
 
-	var _uvC = new Vector2();
+	var _uvC$1 = new Vector2();
 
 	var _intersectionPoint = new Vector3();
 
@@ -8541,19 +8541,19 @@
 
 			if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
 
-			_sphere.copy(geometry.boundingSphere);
+			_sphere$3.copy(geometry.boundingSphere);
 
-			_sphere.applyMatrix4(matrixWorld);
+			_sphere$3.applyMatrix4(matrixWorld);
 
-			if (raycaster.ray.intersectsSphere(_sphere) === false) return; //
+			if (raycaster.ray.intersectsSphere(_sphere$3) === false) return; //
 
-			_inverseMatrix.copy(matrixWorld).invert();
+			_inverseMatrix$2.copy(matrixWorld).invert();
 
-			_ray.copy(raycaster.ray).applyMatrix4(_inverseMatrix); // Check boundingBox before continuing
+			_ray$2.copy(raycaster.ray).applyMatrix4(_inverseMatrix$2); // Check boundingBox before continuing
 
 
 			if (geometry.boundingBox !== null) {
-				if (_ray.intersectsBox(geometry.boundingBox) === false) return;
+				if (_ray$2.intersectsBox(geometry.boundingBox) === false) return;
 			}
 
 			var intersection;
@@ -8581,7 +8581,7 @@
 								var a = index.getX(j);
 								var b = index.getX(j + 1);
 								var c = index.getX(j + 2);
-								intersection = checkBufferGeometryIntersection(this, groupMaterial, raycaster, _ray, position, morphPosition, morphTargetsRelative, uv, uv2, a, b, c);
+								intersection = checkBufferGeometryIntersection(this, groupMaterial, raycaster, _ray$2, position, morphPosition, morphTargetsRelative, uv, uv2, a, b, c);
 
 								if (intersection) {
 									intersection.faceIndex = Math.floor(j / 3); // triangle number in indexed buffer semantics
@@ -8603,7 +8603,7 @@
 
 							var _c = index.getX(_i + 2);
 
-							intersection = checkBufferGeometryIntersection(this, material, raycaster, _ray, position, morphPosition, morphTargetsRelative, uv, uv2, _a, _b, _c);
+							intersection = checkBufferGeometryIntersection(this, material, raycaster, _ray$2, position, morphPosition, morphTargetsRelative, uv, uv2, _a, _b, _c);
 
 							if (intersection) {
 								intersection.faceIndex = Math.floor(_i / 3); // triangle number in indexed buffer semantics
@@ -8630,7 +8630,7 @@
 
 								var _c2 = _j + 2;
 
-								intersection = checkBufferGeometryIntersection(this, _groupMaterial, raycaster, _ray, position, morphPosition, morphTargetsRelative, uv, uv2, _a2, _b2, _c2);
+								intersection = checkBufferGeometryIntersection(this, _groupMaterial, raycaster, _ray$2, position, morphPosition, morphTargetsRelative, uv, uv2, _a2, _b2, _c2);
 
 								if (intersection) {
 									intersection.faceIndex = Math.floor(_j / 3); // triangle number in non-indexed buffer semantics
@@ -8652,7 +8652,7 @@
 
 							var _c3 = _i3 + 2;
 
-							intersection = checkBufferGeometryIntersection(this, material, raycaster, _ray, position, morphPosition, morphTargetsRelative, uv, uv2, _a3, _b3, _c3);
+							intersection = checkBufferGeometryIntersection(this, material, raycaster, _ray$2, position, morphPosition, morphTargetsRelative, uv, uv2, _a3, _b3, _c3);
 
 							if (intersection) {
 								intersection.faceIndex = Math.floor(_i3 / 3); // triangle number in non-indexed buffer semantics
@@ -8693,11 +8693,11 @@
 	}
 
 	function checkBufferGeometryIntersection(object, material, raycaster, ray, position, morphPosition, morphTargetsRelative, uv, uv2, a, b, c) {
-		_vA.fromBufferAttribute(position, a);
+		_vA$1.fromBufferAttribute(position, a);
 
-		_vB.fromBufferAttribute(position, b);
+		_vB$1.fromBufferAttribute(position, b);
 
-		_vC.fromBufferAttribute(position, c);
+		_vC$1.fromBufferAttribute(position, c);
 
 		var morphInfluences = object.morphTargetInfluences;
 
@@ -8726,48 +8726,48 @@
 
 					_morphC.addScaledVector(_tempC, influence);
 				} else {
-					_morphA.addScaledVector(_tempA.sub(_vA), influence);
+					_morphA.addScaledVector(_tempA.sub(_vA$1), influence);
 
-					_morphB.addScaledVector(_tempB.sub(_vB), influence);
+					_morphB.addScaledVector(_tempB.sub(_vB$1), influence);
 
-					_morphC.addScaledVector(_tempC.sub(_vC), influence);
+					_morphC.addScaledVector(_tempC.sub(_vC$1), influence);
 				}
 			}
 
-			_vA.add(_morphA);
+			_vA$1.add(_morphA);
 
-			_vB.add(_morphB);
+			_vB$1.add(_morphB);
 
-			_vC.add(_morphC);
+			_vC$1.add(_morphC);
 		}
 
 		if (object.isSkinnedMesh) {
-			object.boneTransform(a, _vA);
-			object.boneTransform(b, _vB);
-			object.boneTransform(c, _vC);
+			object.boneTransform(a, _vA$1);
+			object.boneTransform(b, _vB$1);
+			object.boneTransform(c, _vC$1);
 		}
 
-		var intersection = checkIntersection(object, material, raycaster, ray, _vA, _vB, _vC, _intersectionPoint);
+		var intersection = checkIntersection(object, material, raycaster, ray, _vA$1, _vB$1, _vC$1, _intersectionPoint);
 
 		if (intersection) {
 			if (uv) {
-				_uvA.fromBufferAttribute(uv, a);
+				_uvA$1.fromBufferAttribute(uv, a);
 
-				_uvB.fromBufferAttribute(uv, b);
+				_uvB$1.fromBufferAttribute(uv, b);
 
-				_uvC.fromBufferAttribute(uv, c);
+				_uvC$1.fromBufferAttribute(uv, c);
 
-				intersection.uv = Triangle.getUV(_intersectionPoint, _vA, _vB, _vC, _uvA, _uvB, _uvC, new Vector2());
+				intersection.uv = Triangle.getUV(_intersectionPoint, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2());
 			}
 
 			if (uv2) {
-				_uvA.fromBufferAttribute(uv2, a);
+				_uvA$1.fromBufferAttribute(uv2, a);
 
-				_uvB.fromBufferAttribute(uv2, b);
+				_uvB$1.fromBufferAttribute(uv2, b);
 
-				_uvC.fromBufferAttribute(uv2, c);
+				_uvC$1.fromBufferAttribute(uv2, c);
 
-				intersection.uv2 = Triangle.getUV(_intersectionPoint, _vA, _vB, _vC, _uvA, _uvB, _uvC, new Vector2());
+				intersection.uv2 = Triangle.getUV(_intersectionPoint, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2());
 			}
 
 			var face = {
@@ -8777,7 +8777,7 @@
 				normal: new Vector3(),
 				materialIndex: 0
 			};
-			Triangle.getNormal(_vA, _vB, _vC, face.normal);
+			Triangle.getNormal(_vA$1, _vB$1, _vC$1, face.normal);
 			intersection.face = face;
 		}
 
@@ -9562,9 +9562,9 @@
 	DataTexture.prototype.constructor = DataTexture;
 	DataTexture.prototype.isDataTexture = true;
 
-	var _sphere$1 = /*@__PURE__*/new Sphere();
+	var _sphere$2 = /*@__PURE__*/new Sphere();
 
-	var _vector$5 = /*@__PURE__*/new Vector3();
+	var _vector$7 = /*@__PURE__*/new Vector3();
 
 	var Frustum = /*#__PURE__*/function () {
 		function Frustum(p0, p1, p2, p3, p4, p5) {
@@ -9630,19 +9630,19 @@
 			var geometry = object.geometry;
 			if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
 
-			_sphere$1.copy(geometry.boundingSphere).applyMatrix4(object.matrixWorld);
+			_sphere$2.copy(geometry.boundingSphere).applyMatrix4(object.matrixWorld);
 
-			return this.intersectsSphere(_sphere$1);
+			return this.intersectsSphere(_sphere$2);
 		};
 
 		_proto.intersectsSprite = function intersectsSprite(sprite) {
-			_sphere$1.center.set(0, 0, 0);
+			_sphere$2.center.set(0, 0, 0);
 
-			_sphere$1.radius = 0.7071067811865476;
+			_sphere$2.radius = 0.7071067811865476;
 
-			_sphere$1.applyMatrix4(sprite.matrixWorld);
+			_sphere$2.applyMatrix4(sprite.matrixWorld);
 
-			return this.intersectsSphere(_sphere$1);
+			return this.intersectsSphere(_sphere$2);
 		};
 
 		_proto.intersectsSphere = function intersectsSphere(sphere) {
@@ -9667,11 +9667,11 @@
 			for (var i = 0; i < 6; i++) {
 				var plane = planes[i]; // corner at max distance
 
-				_vector$5.x = plane.normal.x > 0 ? box.max.x : box.min.x;
-				_vector$5.y = plane.normal.y > 0 ? box.max.y : box.min.y;
-				_vector$5.z = plane.normal.z > 0 ? box.max.z : box.min.z;
+				_vector$7.x = plane.normal.x > 0 ? box.max.x : box.min.x;
+				_vector$7.y = plane.normal.y > 0 ? box.max.y : box.min.y;
+				_vector$7.z = plane.normal.z > 0 ? box.max.z : box.min.z;
 
-				if (plane.distanceToPoint(_vector$5) < 0) {
+				if (plane.distanceToPoint(_vector$7) < 0) {
 					return false;
 				}
 			}
@@ -19155,17 +19155,17 @@
 
 	var _viewWorldMatrix = new Matrix4();
 
-	var _vA$1 = new Vector3();
+	var _vA = new Vector3();
 
-	var _vB$1 = new Vector3();
+	var _vB = new Vector3();
 
-	var _vC$1 = new Vector3();
+	var _vC = new Vector3();
 
-	var _uvA$1 = new Vector2();
+	var _uvA = new Vector2();
 
-	var _uvB$1 = new Vector2();
+	var _uvB = new Vector2();
 
-	var _uvC$1 = new Vector2();
+	var _uvC = new Vector2();
 
 	function Sprite(material) {
 		Object3D.call(this);
@@ -19217,26 +19217,26 @@
 			}
 
 			var center = this.center;
-			transformVertex(_vA$1.set(-0.5, -0.5, 0), _mvPosition, center, _worldScale, sin, cos);
-			transformVertex(_vB$1.set(0.5, -0.5, 0), _mvPosition, center, _worldScale, sin, cos);
-			transformVertex(_vC$1.set(0.5, 0.5, 0), _mvPosition, center, _worldScale, sin, cos);
+			transformVertex(_vA.set(-0.5, -0.5, 0), _mvPosition, center, _worldScale, sin, cos);
+			transformVertex(_vB.set(0.5, -0.5, 0), _mvPosition, center, _worldScale, sin, cos);
+			transformVertex(_vC.set(0.5, 0.5, 0), _mvPosition, center, _worldScale, sin, cos);
 
-			_uvA$1.set(0, 0);
+			_uvA.set(0, 0);
 
-			_uvB$1.set(1, 0);
+			_uvB.set(1, 0);
 
-			_uvC$1.set(1, 1); // check first triangle
+			_uvC.set(1, 1); // check first triangle
 
 
-			var intersect = raycaster.ray.intersectTriangle(_vA$1, _vB$1, _vC$1, false, _intersectPoint);
+			var intersect = raycaster.ray.intersectTriangle(_vA, _vB, _vC, false, _intersectPoint);
 
 			if (intersect === null) {
 				// check second triangle
-				transformVertex(_vB$1.set(-0.5, 0.5, 0), _mvPosition, center, _worldScale, sin, cos);
+				transformVertex(_vB.set(-0.5, 0.5, 0), _mvPosition, center, _worldScale, sin, cos);
 
-				_uvB$1.set(0, 1);
+				_uvB.set(0, 1);
 
-				intersect = raycaster.ray.intersectTriangle(_vA$1, _vC$1, _vB$1, false, _intersectPoint);
+				intersect = raycaster.ray.intersectTriangle(_vA, _vC, _vB, false, _intersectPoint);
 
 				if (intersect === null) {
 					return;
@@ -19248,7 +19248,7 @@
 			intersects.push({
 				distance: distance,
 				point: _intersectPoint.clone(),
-				uv: Triangle.getUV(_intersectPoint, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2()),
+				uv: Triangle.getUV(_intersectPoint, _vA, _vB, _vC, _uvA, _uvB, _uvC, new Vector2()),
 				face: null,
 				object: this
 			});
@@ -19280,9 +19280,9 @@
 		vertexPosition.applyMatrix4(_viewWorldMatrix);
 	}
 
-	var _v1$4 = new Vector3();
+	var _v1$2 = new Vector3();
 
-	var _v2$2 = new Vector3();
+	var _v2$1 = new Vector3();
 
 	function LOD() {
 		Object3D.call(this);
@@ -19358,9 +19358,9 @@
 			var levels = this.levels;
 
 			if (levels.length > 0) {
-				_v1$4.setFromMatrixPosition(this.matrixWorld);
+				_v1$2.setFromMatrixPosition(this.matrixWorld);
 
-				var distance = raycaster.ray.origin.distanceTo(_v1$4);
+				var distance = raycaster.ray.origin.distanceTo(_v1$2);
 				this.getObjectForDistance(distance).raycast(raycaster, intersects);
 			}
 		},
@@ -19368,11 +19368,11 @@
 			var levels = this.levels;
 
 			if (levels.length > 1) {
-				_v1$4.setFromMatrixPosition(camera.matrixWorld);
+				_v1$2.setFromMatrixPosition(camera.matrixWorld);
 
-				_v2$2.setFromMatrixPosition(this.matrixWorld);
+				_v2$1.setFromMatrixPosition(this.matrixWorld);
 
-				var distance = _v1$4.distanceTo(_v2$2) / camera.zoom;
+				var distance = _v1$2.distanceTo(_v2$1) / camera.zoom;
 				levels[0].object.visible = true;
 				var i, l;
 
@@ -19416,9 +19416,9 @@
 
 	var _skinWeight = new Vector4();
 
-	var _vector$7 = new Vector3();
+	var _vector$5 = new Vector3();
 
-	var _matrix$1 = new Matrix4();
+	var _matrix = new Matrix4();
 
 	function SkinnedMesh(geometry, material) {
 		if (geometry && geometry.isGeometry) {
@@ -19507,9 +19507,9 @@
 				if (weight !== 0) {
 					var boneIndex = _skinIndex.getComponent(i);
 
-					_matrix$1.multiplyMatrices(skeleton.bones[boneIndex].matrixWorld, skeleton.boneInverses[boneIndex]);
+					_matrix.multiplyMatrices(skeleton.bones[boneIndex].matrixWorld, skeleton.boneInverses[boneIndex]);
 
-					target.addScaledVector(_vector$7.copy(_basePosition).applyMatrix4(_matrix$1), weight);
+					target.addScaledVector(_vector$5.copy(_basePosition).applyMatrix4(_matrix), weight);
 				}
 			}
 
@@ -19808,15 +19808,15 @@
 		return this;
 	};
 
-	var _start = new Vector3();
+	var _start$1 = new Vector3();
 
-	var _end = new Vector3();
+	var _end$1 = new Vector3();
 
 	var _inverseMatrix$1 = new Matrix4();
 
 	var _ray$1 = new Ray();
 
-	var _sphere$2 = new Sphere();
+	var _sphere$1 = new Sphere();
 
 	function Line(geometry, material) {
 		if (geometry === void 0) {
@@ -19853,12 +19853,12 @@
 					var lineDistances = [0];
 
 					for (var i = 1, l = positionAttribute.count; i < l; i++) {
-						_start.fromBufferAttribute(positionAttribute, i - 1);
+						_start$1.fromBufferAttribute(positionAttribute, i - 1);
 
-						_end.fromBufferAttribute(positionAttribute, i);
+						_end$1.fromBufferAttribute(positionAttribute, i);
 
 						lineDistances[i] = lineDistances[i - 1];
-						lineDistances[i] += _start.distanceTo(_end);
+						lineDistances[i] += _start$1.distanceTo(_end$1);
 					}
 
 					geometry.setAttribute('lineDistance', new Float32BufferAttribute(lineDistances, 1));
@@ -19878,12 +19878,12 @@
 
 			if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
 
-			_sphere$2.copy(geometry.boundingSphere);
+			_sphere$1.copy(geometry.boundingSphere);
 
-			_sphere$2.applyMatrix4(matrixWorld);
+			_sphere$1.applyMatrix4(matrixWorld);
 
-			_sphere$2.radius += threshold;
-			if (raycaster.ray.intersectsSphere(_sphere$2) === false) return; //
+			_sphere$1.radius += threshold;
+			if (raycaster.ray.intersectsSphere(_sphere$1) === false) return; //
 
 			_inverseMatrix$1.copy(matrixWorld).invert();
 
@@ -19989,9 +19989,9 @@
 		}
 	});
 
-	var _start$1 = new Vector3();
+	var _start = new Vector3();
 
-	var _end$1 = new Vector3();
+	var _end = new Vector3();
 
 	function LineSegments(geometry, material) {
 		Line.call(this, geometry, material);
@@ -20011,12 +20011,12 @@
 					var lineDistances = [];
 
 					for (var i = 0, l = positionAttribute.count; i < l; i += 2) {
-						_start$1.fromBufferAttribute(positionAttribute, i);
+						_start.fromBufferAttribute(positionAttribute, i);
 
-						_end$1.fromBufferAttribute(positionAttribute, i + 1);
+						_end.fromBufferAttribute(positionAttribute, i + 1);
 
 						lineDistances[i] = i === 0 ? 0 : lineDistances[i - 1];
-						lineDistances[i + 1] = lineDistances[i] + _start$1.distanceTo(_end$1);
+						lineDistances[i + 1] = lineDistances[i] + _start.distanceTo(_end);
 					}
 
 					geometry.setAttribute('lineDistance', new Float32BufferAttribute(lineDistances, 1));
@@ -20082,13 +20082,13 @@
 		return this;
 	};
 
-	var _inverseMatrix$2 = new Matrix4();
+	var _inverseMatrix = new Matrix4();
 
-	var _ray$2 = new Ray();
+	var _ray = new Ray();
 
-	var _sphere$3 = new Sphere();
+	var _sphere = new Sphere();
 
-	var _position$1 = new Vector3();
+	var _position$2 = new Vector3();
 
 	function Points(geometry, material) {
 		if (geometry === void 0) {
@@ -20122,16 +20122,16 @@
 
 			if (geometry.boundingSphere === null) geometry.computeBoundingSphere();
 
-			_sphere$3.copy(geometry.boundingSphere);
+			_sphere.copy(geometry.boundingSphere);
 
-			_sphere$3.applyMatrix4(matrixWorld);
+			_sphere.applyMatrix4(matrixWorld);
 
-			_sphere$3.radius += threshold;
-			if (raycaster.ray.intersectsSphere(_sphere$3) === false) return; //
+			_sphere.radius += threshold;
+			if (raycaster.ray.intersectsSphere(_sphere) === false) return; //
 
-			_inverseMatrix$2.copy(matrixWorld).invert();
+			_inverseMatrix.copy(matrixWorld).invert();
 
-			_ray$2.copy(raycaster.ray).applyMatrix4(_inverseMatrix$2);
+			_ray.copy(raycaster.ray).applyMatrix4(_inverseMatrix);
 
 			var localThreshold = threshold / ((this.scale.x + this.scale.y + this.scale.z) / 3);
 			var localThresholdSq = localThreshold * localThreshold;
@@ -20147,15 +20147,15 @@
 					for (var i = 0, il = indices.length; i < il; i++) {
 						var a = indices[i];
 
-						_position$1.fromBufferAttribute(positionAttribute, a);
+						_position$2.fromBufferAttribute(positionAttribute, a);
 
-						testPoint(_position$1, a, localThresholdSq, matrixWorld, raycaster, intersects, this);
+						testPoint(_position$2, a, localThresholdSq, matrixWorld, raycaster, intersects, this);
 					}
 				} else {
 					for (var _i = 0, l = positionAttribute.count; _i < l; _i++) {
-						_position$1.fromBufferAttribute(positionAttribute, _i);
+						_position$2.fromBufferAttribute(positionAttribute, _i);
 
-						testPoint(_position$1, _i, localThresholdSq, matrixWorld, raycaster, intersects, this);
+						testPoint(_position$2, _i, localThresholdSq, matrixWorld, raycaster, intersects, this);
 					}
 				}
 			} else {
@@ -20194,12 +20194,12 @@
 	});
 
 	function testPoint(point, index, localThresholdSq, matrixWorld, raycaster, intersects, object) {
-		var rayPointDistanceSq = _ray$2.distanceSqToPoint(point);
+		var rayPointDistanceSq = _ray.distanceSqToPoint(point);
 
 		if (rayPointDistanceSq < localThresholdSq) {
 			var intersectPoint = new Vector3();
 
-			_ray$2.closestPointToPoint(point, intersectPoint);
+			_ray.closestPointToPoint(point, intersectPoint);
 
 			intersectPoint.applyMatrix4(matrixWorld);
 			var distance = raycaster.ray.origin.distanceTo(intersectPoint);
@@ -20886,11 +20886,11 @@
 		return DodecahedronGeometry;
 	}(PolyhedronGeometry);
 
-	var _v0$2 = new Vector3();
+	var _v0 = new Vector3();
 
-	var _v1$5 = new Vector3();
+	var _v1$1 = new Vector3();
 
-	var _normal$1 = new Vector3();
+	var _normal = new Vector3();
 
 	var _triangle = new Triangle();
 
@@ -20942,7 +20942,7 @@
 				b.fromBufferAttribute(positionAttr, indexArr[1]);
 				c.fromBufferAttribute(positionAttr, indexArr[2]);
 
-				_triangle.getNormal(_normal$1); // create hashes for the edge from the vertices
+				_triangle.getNormal(_normal); // create hashes for the edge from the vertices
 
 
 				hashes[0] = Math.round(a.x * precision) + "," + Math.round(a.y * precision) + "," + Math.round(a.z * precision);
@@ -20967,7 +20967,7 @@
 					if (reverseHash in edgeData && edgeData[reverseHash]) {
 						// if we found a sibling edge add it into the vertex array if
 						// it meets the angle threshold and delete the edge from the map.
-						if (_normal$1.dot(edgeData[reverseHash].normal) <= thresholdDot) {
+						if (_normal.dot(edgeData[reverseHash].normal) <= thresholdDot) {
 							vertices.push(v0.x, v0.y, v0.z);
 							vertices.push(v1.x, v1.y, v1.z);
 						}
@@ -20978,7 +20978,7 @@
 						edgeData[hash] = {
 							index0: indexArr[j],
 							index1: indexArr[jNext],
-							normal: _normal$1.clone()
+							normal: _normal.clone()
 						};
 					}
 				}
@@ -20991,12 +20991,12 @@
 							index0 = _edgeData$key.index0,
 							index1 = _edgeData$key.index1;
 
-					_v0$2.fromBufferAttribute(positionAttr, index0);
+					_v0.fromBufferAttribute(positionAttr, index0);
 
-					_v1$5.fromBufferAttribute(positionAttr, index1);
+					_v1$1.fromBufferAttribute(positionAttr, index1);
 
-					vertices.push(_v0$2.x, _v0$2.y, _v0$2.z);
-					vertices.push(_v1$5.x, _v1$5.y, _v1$5.z);
+					vertices.push(_v0.x, _v0.y, _v0.z);
+					vertices.push(_v1$1.x, _v1$1.y, _v1$1.z);
 				}
 			}
 
@@ -22115,7 +22115,7 @@
 			var data = BufferGeometry.prototype.toJSON.call(this);
 			var shapes = this.parameters.shapes;
 			var options = this.parameters.options;
-			return _toJSON(shapes, options, data);
+			return _toJSON$1(shapes, options, data);
 		};
 
 		return ExtrudeGeometry;
@@ -22153,7 +22153,7 @@
 		}
 	};
 
-	function _toJSON(shapes, options, data) {
+	function _toJSON$1(shapes, options, data) {
 		data.shapes = [];
 
 		if (Array.isArray(shapes)) {
@@ -22635,13 +22635,13 @@
 		_proto.toJSON = function toJSON() {
 			var data = BufferGeometry.prototype.toJSON.call(this);
 			var shapes = this.parameters.shapes;
-			return _toJSON$1(shapes, data);
+			return _toJSON(shapes, data);
 		};
 
 		return ShapeGeometry;
 	}(BufferGeometry);
 
-	function _toJSON$1(shapes, data) {
+	function _toJSON(shapes, data) {
 		data.shapes = [];
 
 		if (Array.isArray(shapes)) {
@@ -30031,13 +30031,13 @@
 		return (typeof performance === 'undefined' ? Date : performance).now(); // see #10732
 	}
 
-	var _position$2 = /*@__PURE__*/new Vector3();
+	var _position$1 = /*@__PURE__*/new Vector3();
 
-	var _quaternion$3 = /*@__PURE__*/new Quaternion();
+	var _quaternion$1 = /*@__PURE__*/new Quaternion();
 
 	var _scale$1 = /*@__PURE__*/new Vector3();
 
-	var _orientation = /*@__PURE__*/new Vector3();
+	var _orientation$1 = /*@__PURE__*/new Vector3();
 
 	var AudioListener = /*#__PURE__*/function (_Object3D) {
 		_inheritsLoose(AudioListener, _Object3D);
@@ -30109,25 +30109,25 @@
 			var listener = this.context.listener;
 			var up = this.up;
 			this.timeDelta = this._clock.getDelta();
-			this.matrixWorld.decompose(_position$2, _quaternion$3, _scale$1);
+			this.matrixWorld.decompose(_position$1, _quaternion$1, _scale$1);
 
-			_orientation.set(0, 0, -1).applyQuaternion(_quaternion$3);
+			_orientation$1.set(0, 0, -1).applyQuaternion(_quaternion$1);
 
 			if (listener.positionX) {
 				// code path for Chrome (see #14393)
 				var endTime = this.context.currentTime + this.timeDelta;
-				listener.positionX.linearRampToValueAtTime(_position$2.x, endTime);
-				listener.positionY.linearRampToValueAtTime(_position$2.y, endTime);
-				listener.positionZ.linearRampToValueAtTime(_position$2.z, endTime);
-				listener.forwardX.linearRampToValueAtTime(_orientation.x, endTime);
-				listener.forwardY.linearRampToValueAtTime(_orientation.y, endTime);
-				listener.forwardZ.linearRampToValueAtTime(_orientation.z, endTime);
+				listener.positionX.linearRampToValueAtTime(_position$1.x, endTime);
+				listener.positionY.linearRampToValueAtTime(_position$1.y, endTime);
+				listener.positionZ.linearRampToValueAtTime(_position$1.z, endTime);
+				listener.forwardX.linearRampToValueAtTime(_orientation$1.x, endTime);
+				listener.forwardY.linearRampToValueAtTime(_orientation$1.y, endTime);
+				listener.forwardZ.linearRampToValueAtTime(_orientation$1.z, endTime);
 				listener.upX.linearRampToValueAtTime(up.x, endTime);
 				listener.upY.linearRampToValueAtTime(up.y, endTime);
 				listener.upZ.linearRampToValueAtTime(up.z, endTime);
 			} else {
-				listener.setPosition(_position$2.x, _position$2.y, _position$2.z);
-				listener.setOrientation(_orientation.x, _orientation.y, _orientation.z, up.x, up.y, up.z);
+				listener.setPosition(_position$1.x, _position$1.y, _position$1.z);
+				listener.setOrientation(_orientation$1.x, _orientation$1.y, _orientation$1.z, up.x, up.y, up.z);
 			}
 		};
 
@@ -30415,13 +30415,13 @@
 		return Audio;
 	}(Object3D);
 
-	var _position$3 = /*@__PURE__*/new Vector3();
+	var _position = /*@__PURE__*/new Vector3();
 
-	var _quaternion$4 = /*@__PURE__*/new Quaternion();
+	var _quaternion = /*@__PURE__*/new Quaternion();
 
-	var _scale$2 = /*@__PURE__*/new Vector3();
+	var _scale = /*@__PURE__*/new Vector3();
 
-	var _orientation$1 = /*@__PURE__*/new Vector3();
+	var _orientation = /*@__PURE__*/new Vector3();
 
 	var PositionalAudio = /*#__PURE__*/function (_Audio) {
 		_inheritsLoose(PositionalAudio, _Audio);
@@ -30491,24 +30491,24 @@
 			_Audio.prototype.updateMatrixWorld.call(this, force);
 
 			if (this.hasPlaybackControl === true && this.isPlaying === false) return;
-			this.matrixWorld.decompose(_position$3, _quaternion$4, _scale$2);
+			this.matrixWorld.decompose(_position, _quaternion, _scale);
 
-			_orientation$1.set(0, 0, 1).applyQuaternion(_quaternion$4);
+			_orientation.set(0, 0, 1).applyQuaternion(_quaternion);
 
 			var panner = this.panner;
 
 			if (panner.positionX) {
 				// code path for Chrome and Firefox (see #14393)
 				var endTime = this.context.currentTime + this.listener.timeDelta;
-				panner.positionX.linearRampToValueAtTime(_position$3.x, endTime);
-				panner.positionY.linearRampToValueAtTime(_position$3.y, endTime);
-				panner.positionZ.linearRampToValueAtTime(_position$3.z, endTime);
-				panner.orientationX.linearRampToValueAtTime(_orientation$1.x, endTime);
-				panner.orientationY.linearRampToValueAtTime(_orientation$1.y, endTime);
-				panner.orientationZ.linearRampToValueAtTime(_orientation$1.z, endTime);
+				panner.positionX.linearRampToValueAtTime(_position.x, endTime);
+				panner.positionY.linearRampToValueAtTime(_position.y, endTime);
+				panner.positionZ.linearRampToValueAtTime(_position.z, endTime);
+				panner.orientationX.linearRampToValueAtTime(_orientation.x, endTime);
+				panner.orientationY.linearRampToValueAtTime(_orientation.y, endTime);
+				panner.orientationZ.linearRampToValueAtTime(_orientation.z, endTime);
 			} else {
-				panner.setPosition(_position$3.x, _position$3.y, _position$3.z);
-				panner.setOrientation(_orientation$1.x, _orientation$1.y, _orientation$1.z);
+				panner.setPosition(_position.x, _position.y, _position.z);
+				panner.setOrientation(_orientation.x, _orientation.y, _orientation.z);
 			}
 		};
 
@@ -32782,7 +32782,7 @@
 		return Cylindrical;
 	}();
 
-	var _vector$8 = /*@__PURE__*/new Vector2();
+	var _vector$4 = /*@__PURE__*/new Vector2();
 
 	var Box2 = /*#__PURE__*/function () {
 		function Box2(min, max) {
@@ -32812,7 +32812,7 @@
 		};
 
 		_proto.setFromCenterAndSize = function setFromCenterAndSize(center, size) {
-			var halfSize = _vector$8.copy(size).multiplyScalar(0.5);
+			var halfSize = _vector$4.copy(size).multiplyScalar(0.5);
 
 			this.min.copy(center).sub(halfSize);
 			this.max.copy(center).add(halfSize);
@@ -32910,7 +32910,7 @@
 		};
 
 		_proto.distanceToPoint = function distanceToPoint(point) {
-			var clampedPoint = _vector$8.copy(point).clamp(this.min, this.max);
+			var clampedPoint = _vector$4.copy(point).clamp(this.min, this.max);
 
 			return clampedPoint.sub(point).length();
 		};
@@ -33068,7 +33068,7 @@
 	ImmediateRenderObject.prototype.constructor = ImmediateRenderObject;
 	ImmediateRenderObject.prototype.isImmediateRenderObject = true;
 
-	var _vector$9 = /*@__PURE__*/new Vector3();
+	var _vector$3 = /*@__PURE__*/new Vector3();
 
 	var SpotLightHelper = /*#__PURE__*/function (_Object3D) {
 		_inheritsLoose(SpotLightHelper, _Object3D);
@@ -33120,9 +33120,9 @@
 			var coneWidth = coneLength * Math.tan(this.light.angle);
 			this.cone.scale.set(coneWidth, coneWidth, coneLength);
 
-			_vector$9.setFromMatrixPosition(this.light.target.matrixWorld);
+			_vector$3.setFromMatrixPosition(this.light.target.matrixWorld);
 
-			this.cone.lookAt(_vector$9);
+			this.cone.lookAt(_vector$3);
 
 			if (this.color !== undefined) {
 				this.cone.material.color.set(this.color);
@@ -33134,7 +33134,7 @@
 		return SpotLightHelper;
 	}(Object3D);
 
-	var _vector$a = /*@__PURE__*/new Vector3();
+	var _vector$2 = /*@__PURE__*/new Vector3();
 
 	var _boneMatrix = /*@__PURE__*/new Matrix4();
 
@@ -33198,15 +33198,15 @@
 				if (bone.parent && bone.parent.isBone) {
 					_boneMatrix.multiplyMatrices(_matrixWorldInv, bone.matrixWorld);
 
-					_vector$a.setFromMatrixPosition(_boneMatrix);
+					_vector$2.setFromMatrixPosition(_boneMatrix);
 
-					position.setXYZ(j, _vector$a.x, _vector$a.y, _vector$a.z);
+					position.setXYZ(j, _vector$2.x, _vector$2.y, _vector$2.z);
 
 					_boneMatrix.multiplyMatrices(_matrixWorldInv, bone.parent.matrixWorld);
 
-					_vector$a.setFromMatrixPosition(_boneMatrix);
+					_vector$2.setFromMatrixPosition(_boneMatrix);
 
-					position.setXYZ(j + 1, _vector$a.x, _vector$a.y, _vector$a.z);
+					position.setXYZ(j + 1, _vector$2.x, _vector$2.y, _vector$2.z);
 					j += 2;
 				}
 			}
@@ -33303,7 +33303,7 @@
 		return PointLightHelper;
 	}(Mesh);
 
-	var _vector$b = /*@__PURE__*/new Vector3();
+	var _vector$1 = /*@__PURE__*/new Vector3();
 
 	var _color1 = /*@__PURE__*/new Color();
 
@@ -33369,7 +33369,7 @@
 				colors.needsUpdate = true;
 			}
 
-			mesh.lookAt(_vector$b.setFromMatrixPosition(this.light.matrixWorld).negate());
+			mesh.lookAt(_vector$1.setFromMatrixPosition(this.light.matrixWorld).negate());
 		};
 
 		return HemisphereLightHelper;
@@ -33520,11 +33520,11 @@
 		return PolarGridHelper;
 	}(LineSegments);
 
-	var _v1$6 = /*@__PURE__*/new Vector3();
+	var _v1 = /*@__PURE__*/new Vector3();
 
-	var _v2$3 = /*@__PURE__*/new Vector3();
+	var _v2 = /*@__PURE__*/new Vector3();
 
-	var _v3$1 = /*@__PURE__*/new Vector3();
+	var _v3 = /*@__PURE__*/new Vector3();
 
 	var DirectionalLightHelper = /*#__PURE__*/function (_Object3D) {
 		_inheritsLoose(DirectionalLightHelper, _Object3D);
@@ -33572,13 +33572,13 @@
 		};
 
 		_proto.update = function update() {
-			_v1$6.setFromMatrixPosition(this.light.matrixWorld);
+			_v1.setFromMatrixPosition(this.light.matrixWorld);
 
-			_v2$3.setFromMatrixPosition(this.light.target.matrixWorld);
+			_v2.setFromMatrixPosition(this.light.target.matrixWorld);
 
-			_v3$1.subVectors(_v2$3, _v1$6);
+			_v3.subVectors(_v2, _v1);
 
-			this.lightPlane.lookAt(_v2$3);
+			this.lightPlane.lookAt(_v2);
 
 			if (this.color !== undefined) {
 				this.lightPlane.material.color.set(this.color);
@@ -33588,14 +33588,14 @@
 				this.targetLine.material.color.copy(this.light.color);
 			}
 
-			this.targetLine.lookAt(_v2$3);
-			this.targetLine.scale.z = _v3$1.length();
+			this.targetLine.lookAt(_v2);
+			this.targetLine.scale.z = _v3.length();
 		};
 
 		return DirectionalLightHelper;
 	}(Object3D);
 
-	var _vector$c = /*@__PURE__*/new Vector3();
+	var _vector = /*@__PURE__*/new Vector3();
 
 	var _camera = /*@__PURE__*/new Camera();
 	/**
@@ -33735,7 +33735,7 @@
 	}(LineSegments);
 
 	function setPoint(point, pointMap, geometry, camera, x, y, z) {
-		_vector$c.set(x, y, z).unproject(camera);
+		_vector.set(x, y, z).unproject(camera);
 
 		var points = pointMap[point];
 
@@ -33743,12 +33743,12 @@
 			var position = geometry.getAttribute('position');
 
 			for (var i = 0, l = points.length; i < l; i++) {
-				position.setXYZ(points[i], _vector$c.x, _vector$c.y, _vector$c.z);
+				position.setXYZ(points[i], _vector.x, _vector.y, _vector.z);
 			}
 		}
 	}
 
-	var _box$3 = /*@__PURE__*/new Box3();
+	var _box = /*@__PURE__*/new Box3();
 
 	var BoxHelper = /*#__PURE__*/function (_LineSegments) {
 		_inheritsLoose(BoxHelper, _LineSegments);
@@ -33786,12 +33786,12 @@
 			}
 
 			if (this.object !== undefined) {
-				_box$3.setFromObject(this.object);
+				_box.setFromObject(this.object);
 			}
 
-			if (_box$3.isEmpty()) return;
-			var min = _box$3.min;
-			var max = _box$3.max;
+			if (_box.isEmpty()) return;
+			var min = _box.min;
+			var max = _box.max;
 			/*
 				5____4
 			1/___0/|
