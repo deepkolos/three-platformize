@@ -5,6 +5,8 @@ export default class $URL {
   createObjectURL(obj) {
     if (obj instanceof Blob) {
       // TODO: use wasm to improve decode performance
+      // 经测试主要耗时在于字符串拼接，使用assemblyscript的字符串拼接比js拼接慢非常多
+
       // const t = Date.now();
       const base64 = ArrayBufferToBase64(obj.parts[0]);
       const url = `data:${obj.options.type};base64,${base64}`;
