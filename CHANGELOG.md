@@ -1,3 +1,15 @@
+## [1.0.15](https://github.com/deepkolos/three-platformize/compare/v1.0.14...v1.0.15) (2021-03-19)
+
+
+### Bug Fixes
+
+* 缓解 ios memory leak ([29926f6](https://github.com/deepkolos/three-platformize/commit/29926f62d05d677d421b8abde8ba12ced918d3d1))
+* platform dispose error ([69d2640](https://github.com/deepkolos/three-platformize/commit/69d264001ef75ac3c672d791e5bc397b5043ca66))
+* replace arraybuffer to base64 lib ([319a80a](https://github.com/deepkolos/three-platformize/commit/319a80a5d55e85323e976c382e383ffed36f7a74))
+* wechat multi instance event overwrite by other ([95611ad](https://github.com/deepkolos/three-platformize/commit/95611ade04d624cf89dd2442f17589e51a07eaf1))
+
+
+
 ## [1.0.14](https://github.com/deepkolos/three-platformize/compare/v1.0.13...v1.0.14) (2021-03-13)
 
 
