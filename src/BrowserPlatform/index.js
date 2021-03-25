@@ -1,24 +1,16 @@
-
 export class BrowserPlatform {
-
-	getGlobals() {
-
+  getGlobals() {
     return {
-
       atob,
       Blob,
       window,
       document,
-      DOMParser,
-      EventTarget,
       XMLHttpRequest,
+      OffscreenCanvas,
       HTMLCanvasElement,
-      requestAnimationFrame
-
+      createImageBitmap,
     };
-
   }
 
   dispose() {}
-
 }

@@ -7,6 +7,7 @@
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
 4. 可升级、降级版本或使用自定义 THREE
+5. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
 
 ## DEMO
 
@@ -126,6 +127,39 @@ THREE.PLATFORM.dispose();
 
 # 构建
 > npm run build
+```
+
+### 如何编写自定义平台？
+
+可参考`src/WechatPlatform`或者`src/TaobaoPlatform`
+
+```js
+class CustomPlatform {
+  getGlobals() {
+    // 自定义的polyfill
+    return {
+      atob,
+      Blob,
+      window,
+      document,
+      XMLHttpRequest,
+      OffscreenCanvas,
+      HTMLCanvasElement,
+      createImageBitmap,
+    };
+  }
+
+  setWebGLExtensions() {
+    return {
+      // 可覆盖gl返回值，比如淘宝小程序IOS返回值不为null，但是扩展不可用的bug
+      EXT_blend_minmax: null,
+    };
+  }
+
+  dispose() {
+    // 释放资源
+  }
+}
 ```
 
 ## TODO
