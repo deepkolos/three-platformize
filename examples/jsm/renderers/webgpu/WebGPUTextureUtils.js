@@ -118,7 +118,7 @@ class WebGPUTextureUtils {
 
 		}
 
-		this.device.defaultQueue.submit( [ commandEncoder.finish() ] );
+		this.device.queue.submit( [ commandEncoder.finish() ] );
 
 	}
 

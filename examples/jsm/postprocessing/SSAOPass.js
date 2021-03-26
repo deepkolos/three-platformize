@@ -1,4 +1,4 @@
-import { DepthTexture, UnsignedShortType, NearestFilter, WebGLRenderTarget, LinearFilter, RGBAFormat, ShaderMaterial, UniformsUtils, NoBlending, MeshNormalMaterial, DstColorFactor, ZeroFactor, AddEquation, DstAlphaFactor, Color, CustomBlending, Vector3, MathUtils, DataTexture, FloatType, RepeatWrapping } from '../../../build/three.module.js';
+import { DepthTexture, UnsignedShortType, WebGLRenderTarget, LinearFilter, RGBAFormat, NearestFilter, ShaderMaterial, UniformsUtils, NoBlending, MeshNormalMaterial, DstColorFactor, ZeroFactor, AddEquation, DstAlphaFactor, Color, CustomBlending, Vector3, MathUtils, DataTexture, FloatType, RepeatWrapping } from '../../../build/three.module.js';
 import { Pass } from './Pass.js';
 import { SimplexNoise } from '../math/SimplexNoise.js';
 import { SSAOShader, SSAOBlurShader, SSAODepthShader } from '../shaders/SSAOShader.js';
@@ -36,8 +36,6 @@ var SSAOPass = function ( scene, camera, width, height ) {
 
 	var depthTexture = new DepthTexture();
 	depthTexture.type = UnsignedShortType;
-	depthTexture.minFilter = NearestFilter;
-	depthTexture.maxFilter = NearestFilter;
 
 	this.beautyRenderTarget = new WebGLRenderTarget( this.width, this.height, {
 		minFilter: LinearFilter,

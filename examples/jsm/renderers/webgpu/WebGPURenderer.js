@@ -311,7 +311,7 @@ class WebGPURenderer {
 		// finish render pass
 
 		passEncoder.endPass();
-		device.defaultQueue.submit( [ cmdEncoder.finish() ] );
+		device.queue.submit( [ cmdEncoder.finish() ] );
 
 	}
 
@@ -567,7 +567,7 @@ class WebGPURenderer {
 		}
 
 		passEncoder.endPass();
-		device.defaultQueue.submit( [ cmdEncoder.finish() ] );
+		device.queue.submit( [ cmdEncoder.finish() ] );
 
 	}
 
@@ -847,11 +847,11 @@ class WebGPURenderer {
 				size: {
 					width: this._width * this._pixelRatio,
 					height: this._height * this._pixelRatio,
-					depth: 1
+					depthOrArrayLayers: 1
 				},
 				sampleCount: this._parameters.sampleCount,
 				format: GPUTextureFormat.BRGA8Unorm,
-				usage: GPUTextureUsage.OUTPUT_ATTACHMENT
+				usage: GPUTextureUsage.RENDER_ATTACHMENT
 			} );
 
 		}
@@ -870,11 +870,11 @@ class WebGPURenderer {
 				size: {
 					width: this._width * this._pixelRatio,
 					height: this._height * this._pixelRatio,
-					depth: 1
+					depthOrArrayLayers: 1
 				},
 				sampleCount: this._parameters.sampleCount,
 				format: GPUTextureFormat.Depth24PlusStencil8,
-				usage: GPUTextureUsage.OUTPUT_ATTACHMENT
+				usage: GPUTextureUsage.RENDER_ATTACHMENT
 			} );
 
 		}

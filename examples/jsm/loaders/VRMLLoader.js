@@ -726,6 +726,12 @@ var VRMLLoader = ( function () {
 
 				}
 
+				if ( build !== undefined && node.DEF !== undefined && build.hasOwnProperty( 'name' ) === true ) {
+
+					build.name = node.DEF;
+
+				}
+
 				return build;
 
 			}

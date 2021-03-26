@@ -1,4 +1,4 @@
-import { Loader, FileLoader, Mesh, BufferGeometry, Float32BufferAttribute, MeshStandardMaterial } from '../../../build/three.module.js';
+import { Loader, FileLoader, Mesh, BufferGeometry, Float32BufferAttribute, MeshStandardMaterial, DataTexture3D, RedFormat, NearestFilter, LinearFilter } from '../../../build/three.module.js';
 
 class VOXLoader extends Loader {
 
@@ -40,7 +40,7 @@ class VOXLoader extends Loader {
 
 		const data = new DataView( buffer );
 
-		const id = data.getInt32( 0, true );
+		const id = data.getUint32( 0, true );
 		const version = data.getUint32( 4, true );
 
 		if ( id !== 542658390 || version !== 150 ) {
@@ -96,18 +96,18 @@ class VOXLoader extends Loader {
 
 			for ( let j = 0; j < 4; j ++ ) {
 
-				id += String.fromCharCode( data.getInt8( i ++, true ) );
+				id += String.fromCharCode( data.getUint8( i ++, true ) );
 
 			}
 
-			const chunkSize = data.getInt32( i, true ); i += 4;
-			data.getInt32( i, true ); i += 4; // childChunks
+			const chunkSize = data.getUint32( i, true ); i += 4;
+			data.getUint32( i, true ); i += 4; // childChunks
 
 			if ( id === 'SIZE' ) {
 
-				const x = data.getInt32( i, true ); i += 4;
-				const y = data.getInt32( i, true ); i += 4;
-				const z = data.getInt32( i, true ); i += 4;
+				const x = data.getUint32( i, true ); i += 4;
+				const y = data.getUint32( i, true ); i += 4;
+				const z = data.getUint32( i, true ); i += 4;
 
 				chunk = {
 					palette: DEFAULT_PALETTE,
@@ -120,8 +120,8 @@ class VOXLoader extends Loader {
 
 			} else if ( id === 'XYZI' ) {
 
-				const numVoxels = data.getInt32( i, true ); i += 4;
-				chunk.data = new Int8Array( buffer, i, numVoxels * 4 );
+				const numVoxels = data.getUint32( i, true ); i += 4;
+				chunk.data = new Uint8Array( buffer, i, numVoxels * 4 );
 
 				i += numVoxels * 4;
 
@@ -131,7 +131,7 @@ class VOXLoader extends Loader {
 
 				for ( let j = 0; j < 256; j ++ ) {
 
-					palette[ j + 1 ] = data.getInt32( i, true ); i += 4;
+					palette[ j + 1 ] = data.getUint32( i, true ); i += 4;
 
 				}
 
@@ -240,9 +240,14 @@ class VOXMesh extends Mesh {
 		geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
 		geometry.computeVertexNormals();
 
-		if ( hasColors ) geometry.setAttribute( 'color', new Float32BufferAttribute( colors, 3 ) );
+		const material = new MeshStandardMaterial();
 
-		const material = new MeshStandardMaterial( { vertexColors: hasColors } );
+		if ( hasColors ) {
+
+			geometry.setAttribute( 'color', new Float32BufferAttribute( colors, 3 ) );
+			material.vertexColors = true;
+
+		}
 
 		super( geometry, material );
 
@@ -250,4 +255,39 @@ class VOXMesh extends Mesh {
 
 }
 
-export { VOXLoader, VOXMesh };
+class VOXDataTexture3D extends DataTexture3D {
+
+	constructor( chunk ) {
+
+		const data = chunk.data;
+		const size = chunk.size;
+
+		const offsety = size.x;
+		const offsetz = size.x * size.y;
+
+		const array = new Uint8Array( size.x * size.y * size.z );
+
+		for ( let j = 0; j < data.length; j += 4 ) {
+
+			const x = data[ j + 0 ];
+			const y = data[ j + 1 ];
+			const z = data[ j + 2 ];
+
+			const index = x + ( y * offsety ) + ( z * offsetz );
+
+			array[ index ] = 255;
+
+		}
+
+		super( array, size.x, size.y, size.z );
+
+		this.format = RedFormat;
+		this.minFilter = NearestFilter;
+		this.magFilter = LinearFilter;
+		this.unpackAlignment = 1;
+
+	}
+
+}
+
+export { VOXDataTexture3D, VOXLoader, VOXMesh };

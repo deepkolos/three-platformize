@@ -1852,4 +1852,4 @@ class Face3 {
 
 }
 
-export { Geometry };
+export { Face3, Geometry };
