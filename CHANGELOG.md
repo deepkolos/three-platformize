@@ -1,3 +1,12 @@
+## [1.0.16](https://github.com/deepkolos/three-platformize/compare/v1.0.15...v1.0.16) (2021-03-26)
+
+
+### Features
+
+* update three 126.1 & fix: disposeNode ([4933a7b](https://github.com/deepkolos/three-platformize/commit/4933a7b3b3ad702bbe8d1effebf0b79d3d69d774))
+
+
+
 ## [1.0.15](https://github.com/deepkolos/three-platformize/compare/v1.0.14...v1.0.15) (2021-03-19)
 
 
