@@ -1,3 +1,12 @@
+## [1.0.17](https://github.com/deepkolos/three-platformize/compare/v1.0.16...v1.0.17) (2021-04-02)
+
+
+### Features
+
+* add screenshot solution [#8](https://github.com/deepkolos/three-platformize/issues/8) ([de2760e](https://github.com/deepkolos/three-platformize/commit/de2760eb47392952f2af32a3b486103485c0ae42))
+
+
+
 ## [1.0.16](https://github.com/deepkolos/three-platformize/compare/v1.0.15...v1.0.16) (2021-03-26)
 
 
