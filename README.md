@@ -79,7 +79,7 @@ THREE.PLATFORM.dispose();
 1. r126 不能设置全 pixelRatio，可以设置为一半，或者 2，不能是 3
 2. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)
 3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
-4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）
+4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
 
 ## 实现
 
