@@ -1,4 +1,5 @@
 import {
+	AnimationClip,
 	Loader,
 	LoadingManager,
 	Scene
@@ -6,6 +7,7 @@ import {
 
 
 export interface Collada {
+	animations: AnimationClip[];
 	kinematics: object;
 	library: object;
 	scene: Scene;
@@ -16,7 +18,6 @@ export class ColladaLoader extends Loader {
 	constructor( manager?: LoadingManager );
 
 	load( url: string, onLoad: ( collada: Collada ) => void, onProgress?: ( event: ProgressEvent ) => void, onError?: ( event: ErrorEvent ) => void ) : void;
-	loadAsync( url: string, onProgress?: ( event: ProgressEvent ) => void ): Promise<Collada>;
 	parse( text: string, path: string ) : Collada;
 
 }

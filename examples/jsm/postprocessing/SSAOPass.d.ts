@@ -13,15 +13,6 @@ import {
 
 import { Pass } from './Pass';
 
-export enum OUTPUT {
-	Default,
-	SSAO,
-	Blur,
-	Beauty,
-	Depth,
-	Normal
-}
-
 export class SSAOPass extends Pass {
 
 	constructor( scene: Scene, camera: Camera, width?: number, height?: number );
@@ -34,7 +25,7 @@ export class SSAOPass extends Pass {
 	kernelSize: number;
 	kernel: Vector3[];
 	noiseTexture: DataTexture;
-	output: OUTPUT;
+	output: number;
 	minDistance: number;
 	maxDistance: number;
 	beautyRenderTarget: WebGLRenderTarget;
@@ -49,12 +40,21 @@ export class SSAOPass extends Pass {
 	fsQuad: object;
 	originalClearColor: Color;
 
-	static OUTPUT: OUTPUT;
+	static OUTPUT: {
+		Default: number;
+		SSAO: number;
+		Blur: number;
+		Beauty: number;
+		Depth: number;
+		Normal: number;
+	};
 
 	dipose(): void;
 	generateSampleKernel(): Vector3[];
 	generateRandomKernelRotations(): void;
-	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color | string | number, clearAlpha?: number ): void;
-	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color | string | number, clearAlpha?: number ): void;
+	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color, clearAlpha?: number ): void;
+	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: number, clearAlpha?: number ): void;
+	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color, clearAlpha?: number ): void;
+	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: number, clearAlpha?: number ): void;
 
 }

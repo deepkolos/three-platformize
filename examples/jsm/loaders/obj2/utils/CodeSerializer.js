@@ -1,4 +1,5 @@
 /**
+ * @author Kai Salmen / https://kaisalmen.de
  * Development repository: https://github.com/kaisalmen/WWOBJLoader
  */
 
@@ -17,15 +18,15 @@ const CodeSerializer = {
 	serializeClass: function ( targetPrototype, targetPrototypeInstance, basePrototypeName, overrideFunctions ) {
 
 		let objectPart, constructorString, i, funcInstructions, funcTemp;
-		const fullObjectName = targetPrototypeInstance.constructor.name;
-		const prototypeFunctions = [];
-		const objectProperties = [];
-		const objectFunctions = [];
-		const isExtended = ( basePrototypeName !== null && basePrototypeName !== undefined );
+		let fullObjectName = targetPrototypeInstance.constructor.name;
+		let prototypeFunctions = [];
+		let objectProperties = [];
+		let objectFunctions = [];
+		let isExtended = ( basePrototypeName !== null && basePrototypeName !== undefined );
 
 		if ( ! Array.isArray( overrideFunctions ) ) overrideFunctions = [];
 
-		for ( const name in targetPrototype.prototype ) {
+		for ( let name in targetPrototype.prototype ) {
 
 			objectPart = targetPrototype.prototype[ name ];
 			funcInstructions = new CodeSerializationInstruction( name, fullObjectName + '.prototype.' + name );
@@ -42,13 +43,11 @@ const CodeSerializer = {
 			} else if ( typeof objectPart === 'function' ) {
 
 				funcTemp = overrideFunctions[ name ];
-
 				if ( funcTemp instanceof CodeSerializationInstruction && funcTemp.getName() === funcInstructions.getName() ) {
 
 					funcInstructions = funcTemp;
 
 				}
-
 				if ( ! funcInstructions.isRemoveCode() ) {
 
 					if ( isExtended ) {
@@ -66,12 +65,10 @@ const CodeSerializer = {
 			}
 
 		}
-
-		for ( const name in targetPrototype ) {
+		for ( let name in targetPrototype ) {
 
 			objectPart = targetPrototype[ name ];
 			funcInstructions = new CodeSerializationInstruction( name, fullObjectName + '.' + name );
-
 			if ( typeof objectPart === 'function' ) {
 
 				funcTemp = overrideFunctions[ name ];
@@ -84,7 +81,6 @@ const CodeSerializer = {
 					funcInstructions.setCode( objectPart.toString() );
 
 				}
-
 				if ( ! funcInstructions.isRemoveCode() ) {
 
 					objectFunctions.push( funcInstructions.getFullName() + ' = ' + funcInstructions.getCode() + ';\n\n' );
@@ -100,14 +96,13 @@ const CodeSerializer = {
 				} else if ( typeof objectPart === 'object' ) {
 
 					console.log( 'Omitting object "' + funcInstructions.getName() + '" and replace it with empty object.' );
-					funcInstructions.setCode( '{}' );
+					funcInstructions.setCode( "{}" );
 
 				} else {
 
 					funcInstructions.setCode( objectPart );
 
 				}
-
 				if ( ! funcInstructions.isRemoveCode() ) {
 
 					objectProperties.push( funcInstructions.getFullName() + ' = ' + funcInstructions.getCode() + ';\n' );
@@ -117,15 +112,12 @@ const CodeSerializer = {
 			}
 
 		}
-
 		let objectString = constructorString + '\n\n';
-
 		if ( isExtended ) {
 
 			objectString += fullObjectName + '.prototype = Object.create( ' + basePrototypeName + '.prototype );\n';
 
 		}
-
 		objectString += fullObjectName + '.prototype.constructor = ' + fullObjectName + ';\n';
 		objectString += '\n\n';
 
@@ -134,7 +126,6 @@ const CodeSerializer = {
 			objectString += objectProperties[ i ];
 
 		}
-
 		objectString += '\n\n';
 
 		for ( i = 0; i < objectFunctions.length; i ++ ) {
@@ -142,7 +133,6 @@ const CodeSerializer = {
 			objectString += objectFunctions[ i ];
 
 		}
-
 		objectString += '\n\n';
 
 		if ( isExtended ) {
@@ -161,11 +151,9 @@ const CodeSerializer = {
 				objectString += prototypeFunctions[ i ];
 
 			}
-
 			objectString += '\n};';
 
 		}
-
 		objectString += '\n\n';
 
 		return objectString;

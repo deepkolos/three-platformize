@@ -1,6 +1,6 @@
 import {
-	Mesh,
-	Points
+	BufferGeometry,
+	Geometry
 } from '../../../src/Three';
 
 export interface DRACOExporterOptions {
@@ -17,6 +17,6 @@ export class DRACOExporter {
 
 	constructor();
 
-	parse( object: Mesh | Points, options: DRACOExporterOptions ): Int8Array;
+	parse( geometry: BufferGeometry | Geometry, options: DRACOExporterOptions ): Int8Array;
 
 }

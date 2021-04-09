@@ -1,4 +1,4 @@
-import { Mesh, Vector3, Color, FrontSide, Plane, Matrix4, Vector4, PerspectiveCamera, WebGLRenderTarget, MathUtils, UniformsUtils, UniformsLib, ShaderMaterial, LinearEncoding, NoToneMapping, LinearFilter, RGBFormat } from '../../../build/three.module.js';
+import { Mesh, Vector3, Color, FrontSide, Plane, Matrix4, Vector4, PerspectiveCamera, WebGLRenderTarget, MathUtils, UniformsUtils, UniformsLib, ShaderMaterial, LinearFilter, RGBFormat } from '../../../build/three.module.js';
 
 /**
  * Work based on :
@@ -284,24 +284,6 @@ var Water = function ( geometry, options ) {
 		eye.setFromMatrixPosition( camera.matrixWorld );
 
 		// Render
-
-		if ( renderer.outputEncoding !== LinearEncoding ) {
-
-			console.warn( 'THREE.Water: WebGLRenderer must use LinearEncoding as outputEncoding.' );
-			scope.onBeforeRender = function () {};
-
-			return;
-
-		}
-
-		if ( renderer.toneMapping !== NoToneMapping ) {
-
-			console.warn( 'THREE.Water: WebGLRenderer must use NoToneMapping as toneMapping.' );
-			scope.onBeforeRender = function () {};
-
-			return;
-
-		}
 
 		var currentRenderTarget = renderer.getRenderTarget();
 

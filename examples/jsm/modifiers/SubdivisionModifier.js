@@ -1,6 +1,9 @@
-import { Geometry, BufferGeometry, Vector3, Vector2, Face3 } from '../../../build/three.module.js';
+import { Geometry, Vector3, Vector2, Face3 } from '../../../build/three.module.js';
 
 /**
+ *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog
+ *	@author centerionware / http://www.centerionware.com
+ *
  *	Subdivision Geometry Modifier
  *		using Loop Subdivision Scheme
  *
@@ -22,9 +25,7 @@ var SubdivisionModifier = function ( subdivisions ) {
 // Applies the "modify" pattern
 SubdivisionModifier.prototype.modify = function ( geometry ) {
 
-	var isBufferGeometry = geometry.isBufferGeometry;
-
-	if ( isBufferGeometry ) {
+	if ( geometry.isBufferGeometry ) {
 
 		geometry = new Geometry().fromBufferGeometry( geometry );
 
@@ -34,7 +35,7 @@ SubdivisionModifier.prototype.modify = function ( geometry ) {
 
 	}
 
-	geometry.mergeVertices( 6 );
+	geometry.mergeVertices();
 
 	var repeats = this.subdivisions;
 
@@ -47,15 +48,7 @@ SubdivisionModifier.prototype.modify = function ( geometry ) {
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
 
-	if ( isBufferGeometry ) {
-
-		return new BufferGeometry().fromGeometry( geometry );
-
-	} else {
-
-		return geometry;
-
-	}
+	return geometry;
 
 };
 
@@ -70,7 +63,7 @@ SubdivisionModifier.prototype.modify = function ( geometry ) {
 		var vertexIndexA = Math.min( a, b );
 		var vertexIndexB = Math.max( a, b );
 
-		var key = vertexIndexA + '_' + vertexIndexB;
+		var key = vertexIndexA + "_" + vertexIndexB;
 
 		return map[ key ];
 
@@ -82,7 +75,7 @@ SubdivisionModifier.prototype.modify = function ( geometry ) {
 		var vertexIndexA = Math.min( a, b );
 		var vertexIndexB = Math.max( a, b );
 
-		var key = vertexIndexA + '_' + vertexIndexB;
+		var key = vertexIndexA + "_" + vertexIndexB;
 
 		var edge;
 

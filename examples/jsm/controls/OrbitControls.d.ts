@@ -50,8 +50,6 @@ export class OrbitControls {
 
 	update(): boolean;
 
-	listenToKeyEvents( domElement: HTMLElement ): void;
-
 	saveState(): void;
 
 	reset(): void;

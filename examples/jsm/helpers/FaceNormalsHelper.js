@@ -1,5 +1,10 @@
 import { Vector3, Matrix3, BufferGeometry, Float32BufferAttribute, LineSegments, LineBasicMaterial } from '../../../build/three.module.js';
 
+/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author WestLangley / http://github.com/WestLangley
+ */
+
 var _v1 = new Vector3();
 var _v2 = new Vector3();
 var _normalMatrix = new Matrix3();
@@ -41,8 +46,6 @@ function FaceNormalsHelper( object, size, hex, linewidth ) {
 	geometry.setAttribute( 'position', positions );
 
 	LineSegments.call( this, geometry, new LineBasicMaterial( { color: color, linewidth: width } ) );
-
-	this.type = 'FaceNormalsHelper';
 
 	//
 

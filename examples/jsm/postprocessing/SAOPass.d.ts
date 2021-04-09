@@ -13,16 +13,8 @@ import {
 
 import { Pass } from './Pass';
 
-export enum OUTPUT {
-	Beauty,
-	Default,
-	SAO,
-	Depth,
-	Normal
-}
-
 interface SAOPassParams {
-	output: OUTPUT;
+	output: SAOPass.OUTPUT;
 	saoBias: number;
 	saoIntensity: number;
 	saoScale: number;
@@ -32,6 +24,16 @@ interface SAOPassParams {
 	saoBlurRadius: number;
 	saoBlurStdDev: number;
 	saoBlurDepthCutoff: number;
+}
+
+export namespace SAOPass {
+	enum OUTPUT {
+		Default,
+		Beauty,
+		SAO,
+		Depth,
+		Normal
+	}
 }
 
 export class SAOPass extends Pass {
@@ -60,9 +62,9 @@ export class SAOPass extends Pass {
 	fsQuad: object;
 	params: SAOPassParams;
 
-	static OUTPUT: OUTPUT;
-
-	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color | string | number, clearAlpha?: number ): void;
-	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color | string | number, clearAlpha?: number ): void;
+	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color, clearAlpha?: number ): void;
+	renderPass( renderer: WebGLRenderer, passMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: number, clearAlpha?: number ): void;
+	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: Color, clearAlpha?: number ): void;
+	renderOverride( renderer: WebGLRenderer, overrideMaterial: Material, renderTarget: WebGLRenderTarget, clearColor?: number, clearAlpha?: number ): void;
 
 }

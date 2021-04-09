@@ -22,7 +22,6 @@ export class SVGRenderer {
 	overdraw: number;
 	info: {render: {vertices: number, faces: number}};
 
-	getSize(): { width: number, height: number };
 	setQuality( quality: string ): void;
 	setClearColor( color: Color, alpha: number ): void;
 	setPixelRatio(): void;

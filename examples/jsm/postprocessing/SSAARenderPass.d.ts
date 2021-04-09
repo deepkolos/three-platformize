@@ -2,8 +2,7 @@ import {
 	Scene,
 	Camera,
 	Color,
-	ShaderMaterial,
-	WebGLRenderTarget
+	ShaderMaterial
 } from '../../../src/Three';
 
 import { Pass } from './Pass';
@@ -20,6 +19,5 @@ export class SSAARenderPass extends Pass {
 	copyUniforms: object;
 	copyMaterial: ShaderMaterial;
 	fsQuad: object;
-	sampleRenderTarget: undefined | WebGLRenderTarget;
 
 }

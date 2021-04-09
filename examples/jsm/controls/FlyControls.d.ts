@@ -1,8 +1,8 @@
 import {
-	Camera, EventDispatcher
+	Camera
 } from '../../../src/Three';
 
-export class FlyControls extends EventDispatcher {
+export class FlyControls {
 
 	constructor( object: Camera, domElement?: HTMLElement );
 

@@ -25,10 +25,9 @@ export class BasisTextureLoader extends Loader {
 	workerSourceURL: string;
 
 	detectSupport( renderer: WebGLRenderer ): this;
+	dispose(): void;
 	load( url: string, onLoad: ( texture: CompressedTexture ) => void, onProgress?: ( event: ProgressEvent ) => void, onError?: ( event: ErrorEvent ) => void ): void;
-	loadAsync( url: string, onProgress?: ( event: ProgressEvent ) => void ): Promise<CompressedTexture>;
 	setTranscoderPath( path: string ): this;
 	setWorkerLimit( workerLimit: number ): this;
-	dispose(): void;
 
 }

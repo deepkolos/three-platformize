@@ -10,8 +10,8 @@ export class ColorSpaceNode extends TempNode {
 	method: string | undefined;
 	nodeType: string;
 
-	fromEncoding( encoding: number ): void;
-	fromDecoding( encoding: number ): void;
+	fromEncoding( encoding: number );
+	fromDecoding( encoding: number );
 	copy( source: ColorSpaceNode ): this;
 
 	static Nodes: {

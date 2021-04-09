@@ -1,4 +1,4 @@
-import { Object3D, Quaternion, SphereGeometry, MeshBasicMaterial, Mesh } from '../../../build/three.module.js';
+import { Object3D, SphereGeometry, MeshBasicMaterial, Mesh } from '../../../build/three.module.js';
 import { GLTFLoader } from '../loaders/GLTFLoader.js';
 import { Constants, fetchProfile, MotionController } from '../libs/motion-controllers.module.js';
 
@@ -74,10 +74,9 @@ XRControllerModel.prototype = Object.assign( Object.create( Object3D.prototype )
 
 				} else if ( valueNodeProperty === Constants.VisualResponseProperty.TRANSFORM ) {
 
-					Quaternion.slerp(
+					valueNode.quaternion.slerpQuaternions(
 						minNode.quaternion,
 						maxNode.quaternion,
-						valueNode.quaternion,
 						value
 					);
 
