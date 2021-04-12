@@ -1,4 +1,8 @@
-// threejs.org/license
+/**
+ * @license
+ * Copyright 2010-2021 Three.js Authors
+ * SPDX-License-Identifier: MIT
+ */
 let $URL = undefined;
 let $atob = undefined;
 let $Blob = undefined;
@@ -19958,8 +19962,8 @@ function WebGLState( gl, extensions, capabilities ) {
 		setPolygonOffset( material.polygonOffset, material.polygonOffsetFactor, material.polygonOffsetUnits );
 
 		material.alphaToCoverage === true
-			? enable( gl.SAMPLE_ALPHA_TO_COVERAGE )
-			: disable( gl.SAMPLE_ALPHA_TO_COVERAGE );
+			? enable( 32926 )
+			: disable( 32926 );
 
 	}
 
@@ -20204,7 +20208,7 @@ function WebGLState( gl, extensions, capabilities ) {
 		gl.disable( 32823 );
 		gl.disable( 3089 );
 		gl.disable( 2960 );
-		gl.disable( gl.SAMPLE_ALPHA_TO_COVERAGE );
+		gl.disable( 32926 );
 
 		gl.blendEquation( 32774 );
 		gl.blendFunc( 1, 0 );
@@ -20219,7 +20223,7 @@ function WebGLState( gl, extensions, capabilities ) {
 
 		gl.stencilMask( 0xffffffff );
 		gl.stencilFunc( 519, 0, 0xffffffff );
-		gl.stencilOp( gl.KEEP, gl.KEEP, gl.KEEP );
+		gl.stencilOp( 7680, 7680, 7680 );
 		gl.clearStencil( 0 );
 
 		gl.cullFace( 1029 );
@@ -20829,7 +20833,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 		_gl.pixelStorei( 37440, texture.flipY );
 		_gl.pixelStorei( 37441, texture.premultiplyAlpha );
 		_gl.pixelStorei( 3317, texture.unpackAlignment );
-		_gl.pixelStorei( _gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, _gl.NONE );
+		_gl.pixelStorei( 37443, 0 );
 
 		const needsPowerOfTwo = textureNeedsPowerOfTwo( texture ) && isPowerOfTwo( texture.image ) === false;
 		const image = resizeImage( texture.image, needsPowerOfTwo, false, maxTextureSize );
@@ -21039,7 +21043,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 		_gl.pixelStorei( 37440, texture.flipY );
 		_gl.pixelStorei( 37441, texture.premultiplyAlpha );
 		_gl.pixelStorei( 3317, texture.unpackAlignment );
-		_gl.pixelStorei( _gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, _gl.NONE );
+		_gl.pixelStorei( 37443, 0 );
 
 		const isCompressed = ( texture && ( texture.isCompressedTexture || texture.image[ 0 ].isCompressedTexture ) );
 		const isDataTexture = ( texture.image[ 0 ] && texture.image[ 0 ].isDataTexture );
@@ -25276,17 +25280,17 @@ function WebGLRenderer( parameters ) {
 		_gl.pixelStorei( 37441, dstTexture.premultiplyAlpha );
 		_gl.pixelStorei( 3317, dstTexture.unpackAlignment );
 
-		const unpackRowLen = _gl.getParameter( _gl.UNPACK_ROW_LENGTH );
-		const unpackImageHeight = _gl.getParameter( _gl.UNPACK_IMAGE_HEIGHT );
-		const unpackSkipPixels = _gl.getParameter( _gl.UNPACK_SKIP_PIXELS );
-		const unpackSkipRows = _gl.getParameter( _gl.UNPACK_SKIP_ROWS );
-		const unpackSkipImages = _gl.getParameter( _gl.UNPACK_SKIP_IMAGES );
+		const unpackRowLen = _gl.getParameter( 3314 );
+		const unpackImageHeight = _gl.getParameter( 32878 );
+		const unpackSkipPixels = _gl.getParameter( 3316 );
+		const unpackSkipRows = _gl.getParameter( 3315 );
+		const unpackSkipImages = _gl.getParameter( 32877 );
 
-		_gl.pixelStorei( _gl.UNPACK_ROW_LENGTH, width );
-		_gl.pixelStorei( _gl.UNPACK_IMAGE_HEIGHT, height );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_PIXELS, sourceBox.min.x );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_ROWS, sourceBox.min.y );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_IMAGES, sourceBox.min.z );
+		_gl.pixelStorei( 3314, width );
+		_gl.pixelStorei( 32878, height );
+		_gl.pixelStorei( 3316, sourceBox.min.x );
+		_gl.pixelStorei( 3315, sourceBox.min.y );
+		_gl.pixelStorei( 32877, sourceBox.min.z );
 
 		_gl.texSubImage3D(
 			glTarget,
@@ -25302,11 +25306,11 @@ function WebGLRenderer( parameters ) {
 			data
 		);
 
-		_gl.pixelStorei( _gl.UNPACK_ROW_LENGTH, unpackRowLen );
-		_gl.pixelStorei( _gl.UNPACK_IMAGE_HEIGHT, unpackImageHeight );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_PIXELS, unpackSkipPixels );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_ROWS, unpackSkipRows );
-		_gl.pixelStorei( _gl.UNPACK_SKIP_IMAGES, unpackSkipImages );
+		_gl.pixelStorei( 3314, unpackRowLen );
+		_gl.pixelStorei( 32878, unpackImageHeight );
+		_gl.pixelStorei( 3316, unpackSkipPixels );
+		_gl.pixelStorei( 3315, unpackSkipRows );
+		_gl.pixelStorei( 32877, unpackSkipImages );
 
 		// Generate mipmaps only when copying level 0
 		if ( level === 0 && dstTexture.generateMipmaps ) _gl.generateMipmap( glTarget );

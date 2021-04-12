@@ -1,4 +1,8 @@
-// threejs.org/license
+/**
+ * @license
+ * Copyright 2010-2021 Three.js Authors
+ * SPDX-License-Identifier: MIT
+ */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -15465,7 +15469,7 @@
 			}
 
 			setPolygonOffset(material.polygonOffset, material.polygonOffsetFactor, material.polygonOffsetUnits);
-			material.alphaToCoverage === true ? enable(gl.SAMPLE_ALPHA_TO_COVERAGE) : disable(gl.SAMPLE_ALPHA_TO_COVERAGE);
+			material.alphaToCoverage === true ? enable(32926) : disable(32926);
 		} //
 
 
@@ -15620,7 +15624,7 @@
 			gl.disable(32823);
 			gl.disable(3089);
 			gl.disable(2960);
-			gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);
+			gl.disable(32926);
 			gl.blendEquation(32774);
 			gl.blendFunc(1, 0);
 			gl.blendFuncSeparate(1, 0, 1, 0);
@@ -15631,7 +15635,7 @@
 			gl.clearDepth(1);
 			gl.stencilMask(0xffffffff);
 			gl.stencilFunc(519, 0, 0xffffffff);
-			gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+			gl.stencilOp(7680, 7680, 7680);
 			gl.clearStencil(0);
 			gl.cullFace(1029);
 			gl.frontFace(2305);
@@ -16047,7 +16051,7 @@
 
 			_gl.pixelStorei(3317, texture.unpackAlignment);
 
-			_gl.pixelStorei(_gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, _gl.NONE);
+			_gl.pixelStorei(37443, 0);
 
 			var needsPowerOfTwo = textureNeedsPowerOfTwo(texture) && isPowerOfTwo(texture.image) === false;
 			var image = resizeImage(texture.image, needsPowerOfTwo, false, maxTextureSize);
@@ -16184,7 +16188,7 @@
 
 			_gl.pixelStorei(3317, texture.unpackAlignment);
 
-			_gl.pixelStorei(_gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, _gl.NONE);
+			_gl.pixelStorei(37443, 0);
 
 			var isCompressed = texture && (texture.isCompressedTexture || texture.image[0].isCompressedTexture);
 			var isDataTexture = texture.image[0] && texture.image[0].isDataTexture;
@@ -19182,37 +19186,37 @@
 
 			_gl.pixelStorei(3317, dstTexture.unpackAlignment);
 
-			var unpackRowLen = _gl.getParameter(_gl.UNPACK_ROW_LENGTH);
+			var unpackRowLen = _gl.getParameter(3314);
 
-			var unpackImageHeight = _gl.getParameter(_gl.UNPACK_IMAGE_HEIGHT);
+			var unpackImageHeight = _gl.getParameter(32878);
 
-			var unpackSkipPixels = _gl.getParameter(_gl.UNPACK_SKIP_PIXELS);
+			var unpackSkipPixels = _gl.getParameter(3316);
 
-			var unpackSkipRows = _gl.getParameter(_gl.UNPACK_SKIP_ROWS);
+			var unpackSkipRows = _gl.getParameter(3315);
 
-			var unpackSkipImages = _gl.getParameter(_gl.UNPACK_SKIP_IMAGES);
+			var unpackSkipImages = _gl.getParameter(32877);
 
-			_gl.pixelStorei(_gl.UNPACK_ROW_LENGTH, width);
+			_gl.pixelStorei(3314, width);
 
-			_gl.pixelStorei(_gl.UNPACK_IMAGE_HEIGHT, height);
+			_gl.pixelStorei(32878, height);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_PIXELS, sourceBox.min.x);
+			_gl.pixelStorei(3316, sourceBox.min.x);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_ROWS, sourceBox.min.y);
+			_gl.pixelStorei(3315, sourceBox.min.y);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_IMAGES, sourceBox.min.z);
+			_gl.pixelStorei(32877, sourceBox.min.z);
 
 			_gl.texSubImage3D(glTarget, level, position.x, position.y, position.z, sourceBox.max.x - sourceBox.min.x + 1, sourceBox.max.y - sourceBox.min.y + 1, sourceBox.max.z - sourceBox.min.z + 1, glFormat, glType, data);
 
-			_gl.pixelStorei(_gl.UNPACK_ROW_LENGTH, unpackRowLen);
+			_gl.pixelStorei(3314, unpackRowLen);
 
-			_gl.pixelStorei(_gl.UNPACK_IMAGE_HEIGHT, unpackImageHeight);
+			_gl.pixelStorei(32878, unpackImageHeight);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_PIXELS, unpackSkipPixels);
+			_gl.pixelStorei(3316, unpackSkipPixels);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_ROWS, unpackSkipRows);
+			_gl.pixelStorei(3315, unpackSkipRows);
 
-			_gl.pixelStorei(_gl.UNPACK_SKIP_IMAGES, unpackSkipImages); // Generate mipmaps only when copying level 0
+			_gl.pixelStorei(32877, unpackSkipImages); // Generate mipmaps only when copying level 0
 
 
 			if (level === 0 && dstTexture.generateMipmaps) _gl.generateMipmap(glTarget);
