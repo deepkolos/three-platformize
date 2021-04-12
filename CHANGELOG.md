@@ -1,3 +1,17 @@
+## [1.0.18](https://github.com/deepkolos/three-platformize/compare/v1.0.17...v1.0.18) (2021-04-12)
+
+
+### Bug Fixes
+
+* sync r127 rollup config ([75048b7](https://github.com/deepkolos/three-platformize/commit/75048b7e889562a9407cf3befa3c58fee797644e))
+
+
+### Features
+
+* three updata to r127 ([b7a4e68](https://github.com/deepkolos/three-platformize/commit/b7a4e689bd956038b92cbd68d7c78c8a73f6c992))
+
+
+
 ## [1.0.17](https://github.com/deepkolos/three-platformize/compare/v1.0.16...v1.0.17) (2021-04-02)
 
 
