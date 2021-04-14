@@ -1,3 +1,12 @@
+## [1.0.19](https://github.com/deepkolos/three-platformize/compare/v1.0.18...v1.0.19) (2021-04-14)
+
+
+### Features
+
+* add wechat ios xhr patch ([906d2b5](https://github.com/deepkolos/three-platformize/commit/906d2b5b0df037d4ee38dbf95977f56ea8413a87))
+
+
+
 ## [1.0.18](https://github.com/deepkolos/three-platformize/compare/v1.0.17...v1.0.18) (2021-04-12)
 
 
