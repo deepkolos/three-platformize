@@ -15,6 +15,7 @@ export class WechatPlatform {
   dispose(): void;
 
   injectPolyfill(polyfill: { DOMParser?: any }): void;
+  patchXHR(): WechatPlatform;
 
   enableDeviceOrientation(interval?: 'normal' | 'game' | 'ui'): void;
   disableDeviceOrientation(): void;

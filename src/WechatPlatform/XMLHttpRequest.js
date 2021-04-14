@@ -24,6 +24,8 @@ function _isRelativePath(url) {
   return !/^(http|https|ftp|wxfile):\/\/.*/i.test(url);
 }
 
+const { platform } = wx.getSystemInfoSync()
+
 export default class $XMLHttpRequest extends EventTarget {
   constructor() {
     super();
@@ -109,8 +111,12 @@ export default class $XMLHttpRequest extends EventTarget {
 
       delete this.response;
       this.response = null;
+      let successed = false
 
       const onSuccess = ({ data, statusCode, header }) => {
+        // console.log('onSuccess', url)
+        if (successed) return
+        successed = true;
         statusCode = statusCode === undefined ? 200 : statusCode;
         if (typeof data !== 'string' && !(data instanceof ArrayBuffer)) {
           try {
@@ -177,6 +183,9 @@ export default class $XMLHttpRequest extends EventTarget {
         return;
       }
 
+      // IOS在某些情况下不会触发onSuccess...
+      const usePatch = responseType === 'arraybuffer' && platform === 'ios' && $XMLHttpRequest.useFetchPatch;
+
       wx.request({
         data,
         url: url,
@@ -184,10 +193,27 @@ export default class $XMLHttpRequest extends EventTarget {
         header: header,
         dataType: dataType,
         responseType: responseType,
-        enableCache: true,
+        enableCache: false,
         success: onSuccess,
+        // success: usePatch ? undefined : onSuccess,
         fail: onFail,
       });
+
+      if (usePatch) {
+        setTimeout(function () {
+          wx.request({
+            data,
+            url: url,
+            method: this._method,
+            header: header,
+            dataType: dataType,
+            responseType: responseType,
+            enableCache: true,
+            success: onSuccess,
+            fail: onFail,
+          });
+        }, $XMLHttpRequest.fetchPatchDelay)
+      }
     }
   }
 
@@ -222,3 +248,7 @@ $XMLHttpRequest.OPENED = 1;
 $XMLHttpRequest.HEADERS_RECEIVED = 2;
 $XMLHttpRequest.LOADING = 3;
 $XMLHttpRequest.DONE = 4;
+
+// 某些情况下IOS会不success不触发。。。
+$XMLHttpRequest.useFetchPatch = false;
+$XMLHttpRequest.fetchPatchDelay = 200;

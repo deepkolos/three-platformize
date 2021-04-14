@@ -92,6 +92,12 @@ export class WechatPlatform {
     this.canvas.ownerDocument = this.document;
   }
 
+  // 某些情况下IOS会不success不触发。。。
+  patchXHR() {
+    XMLHttpRequest.useFetchPatch = true;
+    return this;
+  }
+
   getGlobals() {
     return {
       atob: atob,
