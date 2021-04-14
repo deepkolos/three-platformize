@@ -11,14 +11,9 @@
 
 ## DEMO
 
-<div>
-  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
-  <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/>
-</div>
-
-[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)
-
-[淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)
+| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)                                                                           | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
@@ -27,7 +22,7 @@
 #### Loader
 
 0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用)
-1. TextureLoader
+1. TextureLoader) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621)
 2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
 4. OBJLoader
