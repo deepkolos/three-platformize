@@ -11,11 +11,11 @@
 
 ## DEMO
 
+> 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
+
 | [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)                                                                           | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
-
-> 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
 ### 已测试模块
 
@@ -41,7 +41,7 @@
 #### Controls
 
 0. OrbitControls & MapControls
-1. DeviceOrientationControls (微信、淘宝小程序下 onDeviceMotionChange，返回数据质量极其低下，基本不可用，社区 bug 反馈 3 年多了，官方毫无修复意愿)
+1. DeviceOrientationControls (微信、淘宝小程序下 onDeviceMotionChange，安卓下返回数据质量极其低下，基本不可用，社区 bug 反馈 3 年多了，官方无修复意愿)
 
 ### 不支持模块
 
