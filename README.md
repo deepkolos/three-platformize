@@ -66,6 +66,7 @@ THREE.PLATFORM.set(platform);
 THREE.PLATFORM.dispose();
 
 // 正常使用three即可
+// DEMO 代码示例见 https://github.com/deepkolos/three-platformize-demo
 ```
 
 ### 经验
