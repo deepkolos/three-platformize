@@ -13,9 +13,9 @@
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
-| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)                                                                           | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
+| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) <br/>[微信小程序基础版 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>                | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
 
 ### 已测试模块
 
