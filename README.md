@@ -67,6 +67,7 @@ THREE.PLATFORM.dispose();
 
 // 正常使用three即可
 // DEMO 代码示例见 https://github.com/deepkolos/three-platformize-demo
+// 基础的使用DEMO见 https://github.com/deepkolos/three-platformize-demo-wechat-simple
 ```
 
 ### 经验
