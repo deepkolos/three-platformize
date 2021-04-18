@@ -8,6 +8,7 @@
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
 4. 可升级、降级版本或使用自定义 THREE
 5. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
+6. 支持自定义新平台适配，参考WechatPlatform编写适配器即可
 
 ## DEMO
 
