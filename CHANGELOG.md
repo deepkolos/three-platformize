@@ -1,3 +1,12 @@
+## [1.0.20](https://github.com/deepkolos/three-platformize/compare/v1.0.19...v1.0.20) (2021-04-19)
+
+
+### Bug Fixes
+
+* browserPlatform OffscreenCanvas ReferenceError ([a4cc3bb](https://github.com/deepkolos/three-platformize/commit/a4cc3bb1a757e3a30f2c7d398f35afdfe6644d60))
+
+
+
 ## [1.0.19](https://github.com/deepkolos/three-platformize/compare/v1.0.18...v1.0.19) (2021-04-14)
 
 
