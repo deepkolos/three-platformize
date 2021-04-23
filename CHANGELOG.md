@@ -1,3 +1,12 @@
+## [1.0.21](https://github.com/deepkolos/three-platformize/compare/v1.0.20...v1.0.21) (2021-04-23)
+
+
+### Bug Fixes
+
+* wechat useFetchPatch ([2a1f68b](https://github.com/deepkolos/three-platformize/commit/2a1f68bcf6514300d507dfa00c8304f04db240ee))
+
+
+
 ## [1.0.20](https://github.com/deepkolos/three-platformize/compare/v1.0.19...v1.0.20) (2021-04-19)
 
 
