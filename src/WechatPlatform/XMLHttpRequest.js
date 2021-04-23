@@ -111,12 +111,12 @@ export default class $XMLHttpRequest extends EventTarget {
 
       delete this.response;
       this.response = null;
-      let successed = false
+      let resolved = false
 
       const onSuccess = ({ data, statusCode, header }) => {
         // console.log('onSuccess', url)
-        if (successed) return
-        successed = true;
+        if (resolved) return
+        resolved = true;
         statusCode = statusCode === undefined ? 200 : statusCode;
         if (typeof data !== 'string' && !(data instanceof ArrayBuffer)) {
           try {
@@ -152,7 +152,8 @@ export default class $XMLHttpRequest extends EventTarget {
 
       const onFail = ({ errMsg }) => {
         // TODO 规范错误
-
+        if (resolved) return
+        resolved = true;
         if (errMsg.indexOf('abort') !== -1) {
           _triggerEvent.call(this, 'abort');
         } else {
