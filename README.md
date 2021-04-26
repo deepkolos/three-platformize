@@ -8,7 +8,7 @@
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
 4. 可升级、降级版本或使用自定义 THREE
 5. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
-6. 支持自定义新平台适配，参考WechatPlatform编写适配器即可
+6. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
 
 ## DEMO
 
@@ -167,3 +167,10 @@ class CustomPlatform {
 1. 适配头条小程序
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
+
+# 赞助
+
+如果项目对您有帮助或者有适配需求，欢迎打赏
+
+<img src="https://upload-images.jianshu.io/upload_images/252050-d3d6bfdb1bb06ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="赞赏码" style="width: 300px">
+
