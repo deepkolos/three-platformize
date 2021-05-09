@@ -198,7 +198,7 @@ export default class $XMLHttpRequest extends EventTarget {
           const fs = my.getFileSystemManager();
           fs.readFile({
             filePath: apFilePath,
-            encoding: responseType === 'arraybuffer' ? 'base64' : undefined,
+            encoding: responseType === 'arraybuffer' ? 'base64' : 'utf8',
             // encoding: 'arraybuffer', // 不写encoding默认ArrayBuffer
             success: onSuccess,
           });
