@@ -22,7 +22,7 @@
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621)
+0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信8.0后WebAssembly API已无法使用需要使用WXWebAssembly, 且只支持包内wasm)
 1. TextureLoader
 2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 3. SVGLoader
