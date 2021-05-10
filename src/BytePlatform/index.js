@@ -23,7 +23,12 @@ export class BytePlatform {
     this.document = {
       createElementNS(_, type) {
         if (type === 'canvas') return canvas;
-        if (type === 'img') return canvas.createImage();
+        if (type === 'img'){
+          const img = canvas.createImage();
+          img.addEventListener = (name, cb) => (img[`on${name}`] = cb.bind(img));
+          img.removeEventListener = (name, cb) => (img[`on${name}`] = null);
+          return img;
+        }
       },
     };
 
