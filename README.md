@@ -22,22 +22,22 @@
 
 #### Loader
 
-0. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信8.0后WebAssembly API已无法使用需要使用WXWebAssembly, 且只支持包内wasm)
-1. TextureLoader
-2. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
-3. SVGLoader
-4. OBJLoader
-5. EXRLoader (需支持 OES_texture_float_linear 扩展，部分移动端 GPU 不支持)
-6. MTLLoader (小程序使用 JPG 纹理即可)
-7. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端 GPU 不支持)
-8. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
-9. FBXLoader
-10. BVHLoader
-11. ColladaLoader (DOMParser querySelector 未适配)
-12. TTFLoader
-13. STLLoader
-14. PDBLoader
-15. TGALoader (改用 DataTextureLoader PR 已合并，r127 可用)
+1. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信8.0后WebAssembly API已无法使用需要使用WXWebAssembly, 且只支持包内wasm, 已新增meshopt_decoder.wasm.module, 使用需MeshoptDecoder.setWasmPath('/your.wasm'))
+2. TextureLoader
+3. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
+4. SVGLoader
+5. OBJLoader
+6. EXRLoader (需支持 OES_texture_float_linear 扩展，部分移动端 GPU 不支持)
+7. MTLLoader (小程序使用 JPG 纹理即可)
+8. DDSLoader (需支持 WEBGL_compressed_texture_s3tc 扩展，移动端 GPU 不支持)
+9. LWOLoader (需支持 EXT_blend_minmax 扩展，小程序一半效果绘制出错)
+10. FBXLoader
+11. BVHLoader
+12. ColladaLoader (DOMParser querySelector 未适配)
+13. TTFLoader
+14. STLLoader
+15. PDBLoader
+16. TGALoader (改用 DataTextureLoader PR 已合并，r127 可用)
 
 #### Controls
 
