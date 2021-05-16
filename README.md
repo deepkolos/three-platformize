@@ -2,7 +2,7 @@
 
 一个让 THREE 平台化的项目
 
-0. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器, 真机目前比较多问题)
+0. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器+真机｛较多问题｝)，字节小程序（只能真机调试）
 1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 2. VSCode types 正常，能正常访问各个类的定义
 3. 适配 examples/jsm/\*\*/\*.js，types 正常
@@ -30,6 +30,11 @@
           >淘宝小程序 DEMO</a
         >
       </th>
+      <th>
+        <a href="https://github.com/deepkolos/three-platformize-demo-byte"
+          >字节小程序 DEMO</a
+        >
+      </th>
     </tr>
     <tr>
       <td>
@@ -49,6 +54,13 @@
       <td>
         <img
           src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif"
+          width="250"
+          alt=""
+        />
+      </td>
+      <td>
+        <img
+          src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-byte/master/demo.gif"
           width="250"
           alt=""
         />
