@@ -2,13 +2,13 @@
 
 一个让 THREE 平台化的项目
 
-0. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器+真机｛较多问题｝)，字节小程序（只能真机预览）
-1. 支持 tree shaking（需用 webpack，rollup 等构建工具）
-2. VSCode types 正常，能正常访问各个类的定义
-3. 适配 examples/jsm/\*\*/\*.js，types 正常
-4. 可升级、降级版本或使用自定义 THREE
-5. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
-6. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
+1. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器+真机)，字节小程序（真机）
+2. 支持 tree shaking（需用 webpack，rollup 等构建工具）
+3. VSCode types 正常，能正常访问各个类的定义
+4. 适配 examples/jsm/\*\*/\*.js，types 正常
+5. 可升级、降级版本或使用自定义 THREE
+6. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
+7. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
 
 ## DEMO
 
