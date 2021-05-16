@@ -14,10 +14,48 @@
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
-| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) <br/>[微信小程序基础版 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao) |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-
-| <div><img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt=""/> <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/qrcode.jpg" width="150" alt=""/></div> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt=""/> |
+<table>
+  <tbody>
+    <tr>
+      <th>
+        <a href="https://github.com/deepkolos/three-platformize-demo-wechat"
+          >微信小程序 DEMO</a
+        ><br /><a
+          href="https://github.com/deepkolos/three-platformize-demo-wechat-simple"
+          >微信小程序基础版 DEMO</a
+        >
+      </th>
+      <th>
+        <a href="https://github.com/deepkolos/three-platformize-demo-taobao"
+          >淘宝小程序 DEMO</a
+        >
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <img
+          src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif"
+          width="250"
+          alt=""
+        />
+        <div>
+          <img
+            src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/qrcode.jpg"
+            width="150"
+            alt=""
+          />
+        </div>
+      </td>
+      <td>
+        <img
+          src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif"
+          width="250"
+          alt=""
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### 已测试模块
 
