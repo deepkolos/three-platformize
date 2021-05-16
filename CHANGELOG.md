@@ -1,3 +1,19 @@
+## [1.0.22](https://github.com/deepkolos/three-platformize/compare/v1.0.21...v1.0.22) (2021-05-16)
+
+
+### Bug Fixes
+
+* BytePlatform img addEventListener ([b64a8a1](https://github.com/deepkolos/three-platformize/commit/b64a8a197288a879bbb7b9d7ddb71d92281e3b86))
+* TaobaoPlatform readFile encoding ([d612dbb](https://github.com/deepkolos/three-platformize/commit/d612dbbf2f6e2305107d665da9bc45a43f5d686c))
+
+
+### Features
+
+* add BytePlatform(dev) & doc update ([b2368f2](https://github.com/deepkolos/three-platformize/commit/b2368f25858589fd6e678d2fca78187a5f26aab3))
+* add MeshoptDecoder WXWebAssembly ([d311781](https://github.com/deepkolos/three-platformize/commit/d311781e75c3d2b46431b6c59390ddeca1131feb))
+
+
+
 ## [1.0.21](https://github.com/deepkolos/three-platformize/compare/v1.0.20...v1.0.21) (2021-04-23)
 
 
