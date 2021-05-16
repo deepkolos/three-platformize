@@ -14,15 +14,17 @@
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
-| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) <br/>[微信小程序基础版 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao)                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/>                | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
+| [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) <br/>[微信小程序基础版 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao) |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+
+| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/><img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/qrcode.jpg" width="150" alt="" style="display:inline-block;"/>
+| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
 
 ### 已测试模块
 
 #### Loader
 
-1. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信8.0后WebAssembly API已无法使用需要使用WXWebAssembly, 且只支持包内wasm, 已新增meshopt_decoder.wasm.module, [使用见](https://github.com/deepkolos/three-platformize-demo/blob/main/src/MeshOpt.ts#L8))
+1. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信 8.0 后 WebAssembly API 已无法使用需要使用 WXWebAssembly, 且只支持包内 wasm, 已新增 meshopt_decoder.wasm.module, [使用见](https://github.com/deepkolos/three-platformize-demo/blob/main/src/MeshOpt.ts#L8))
 2. TextureLoader
 3. RGBELoader & PMREMGenerator (小程序部分机型可能偶现[生成 envMap 错误](https://juejin.cn/post/6922829073920032775)，可用[HDRPrefilter](https://github.com/deepkolos/hdr-prefilter-texture)避免 )
 4. SVGLoader
@@ -78,7 +80,7 @@ THREE.PLATFORM.dispose();
 2. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)
 3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
 4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
-5. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐GLB
+5. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐 GLB
 
 ## 实现
 
@@ -174,4 +176,3 @@ class CustomPlatform {
 如果项目对您有帮助或者有适配需求，欢迎打赏
 
 <img src="https://upload-images.jianshu.io/upload_images/252050-d3d6bfdb1bb06ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="赞赏码" width="300">
-
