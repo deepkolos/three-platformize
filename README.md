@@ -216,7 +216,7 @@ class CustomPlatform {
 ## TODO
 
 0. 更彻底 dispose，减少内存泄漏，Web 测试用例已增加，微信小程序已增加，IOS 仍有内存问题，多次切页面仍会崩溃，3mb 模型 iphone7 打开 30 次
-1. 适配头条小程序
+1. 适配头条小程序 done
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
 
