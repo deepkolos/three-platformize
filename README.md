@@ -17,7 +17,7 @@
 | [微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) <br/>[微信小程序基础版 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat) | [淘宝小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-taobao) |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 
-| <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt="" style="display:inline-block;"/><img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/qrcode.jpg" width="150" alt="" style="display:inline-block;"/> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt="" style="display:inline-block;"/> |
+| <div><img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/demo.gif" width="250" alt=""/> <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-wechat/master/qrcode.jpg" width="150" alt=""/></div> | <img src="https://raw.githubusercontent.com/deepkolos/three-platformize-demo-taobao/master/demo.gif" width="250" alt=""/> |
 
 ### 已测试模块
 
