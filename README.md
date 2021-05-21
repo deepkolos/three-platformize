@@ -9,6 +9,7 @@
 5. 可升级、降级版本或使用自定义 THREE
 6. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
 7. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
+8. [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat) 支持微信插件跨插件复用
 
 ## DEMO
 
@@ -217,7 +218,7 @@ class CustomPlatform {
 
 0. 更彻底 dispose，减少内存泄漏，Web 测试用例已增加，微信小程序已增加，IOS 仍有内存问题，多次切页面仍会崩溃，3mb 模型 iphone7 打开 30 次
 1. 适配头条小程序 done
-2. 生成微信插件，通过插件实现three的代码跨小程序、跨小程序插件复用
+2. 生成微信插件，通过插件实现 three 的代码跨小程序、跨小程序插件复用 done [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat)
 
 ## 讨论
 
