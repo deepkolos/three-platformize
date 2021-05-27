@@ -2,7 +2,7 @@
 
 一个让 THREE 平台化的项目
 
-1. 目前已适配微信小程序(真机+模拟器)，淘宝小程序(模拟器+真机)，字节小程序（真机）
+1. 目前已适配微信，淘宝，字节小程序
 2. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 3. VSCode types 正常，能正常访问各个类的定义
 4. 适配 examples/jsm/\*\*/\*.js，types 正常
@@ -10,6 +10,15 @@
 6. 微信小程序 IOS 内存优化，更少切页面导致的崩溃
 7. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
 8. [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat) 支持微信插件跨插件复用
+
+#### 适配情况
+
+|              | 微信 | 淘宝 | 字节 |
+| ------------ | ---- | ---- | ---- |
+| 小程序真机   | ✔️   | ✔️   | ✔️   |
+| 小程序模拟器 | ✔️   | ✔️   |      |
+| 小游戏真机   | ✔️   |      |      |
+| 小游戏模拟器 | ✔️   |      |      |
 
 ## DEMO
 
@@ -125,7 +134,7 @@ THREE.PLATFORM.dispose();
 
 ### 经验
 
-0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)，原因可能是服务端对图片大图片优化，把图片压缩导致格式改变RGB变RGBA
+0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)，原因可能是服务端对图片大图片优化，把图片压缩导致格式改变 RGB 变 RGBA
 1. r126 不能设置全 pixelRatio，可以设置为一半，或者 2，不能是 3
 2. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)，但wasm对字符串处理性能不如js，用AssemblyScript编译的wasm测试
 3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
