@@ -232,6 +232,7 @@ class CustomPlatform {
 1. 适配头条小程序 done
 2. 生成微信插件，通过插件实现 three 的代码跨小程序、跨小程序插件复用 done [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat)
 3. 适配微信小游戏
+4. 适配ReactNative
 
 ## 讨论
 
