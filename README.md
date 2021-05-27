@@ -35,7 +35,7 @@
           >微信小程序基础版 DEMO</a
         ><br /><a
           href="https://github.com/deepkolos/three-platformize-demo-wechat-game"
-          >微信小小游戏 DEMO</a
+          >微信小游戏 DEMO</a
         >
       </th>
       <th>
