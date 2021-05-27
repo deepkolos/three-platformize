@@ -34,8 +34,8 @@ export class WechatGamePlatform {
 
       URL: new URL(),
       AudioContext: function () {},
-      requestAnimationFrame: window.requestAnimationFrame,
-      cancelAnimationFrame: window.cancelAnimationFrame,
+      requestAnimationFrame: requestAnimationFrame,
+      cancelAnimationFrame: cancelAnimationFrame,
       DeviceOrientationEvent: {
         requestPermission() {
           return Promise.resolve('granted');
@@ -45,7 +45,7 @@ export class WechatGamePlatform {
       TextDecoder,
     };
 
-    [this.document, this.window].forEach(i => {
+    [this.canvas, this.document, this.window].forEach(i => {
       const old = i.__proto__;
       i.__proto__ = {};
       i.__proto__.__proto__ = old;
@@ -63,6 +63,11 @@ export class WechatGamePlatform {
       }
       this.window.dispatchEvent(e);
     };
+
+    const dispatchEvent = e => this.dispatchTouchEvent(e);
+    wx.onTouchMove(dispatchEvent);
+    wx.onTouchStart(dispatchEvent);
+    wx.onTouchEnd(dispatchEvent);
   }
 
   patchCanvas() {
@@ -146,7 +151,9 @@ export class WechatGamePlatform {
     const event = {
       changedTouches: e.changedTouches.map(touch => new Touch(touch)),
       touches: e.touches.map(touch => new Touch(touch)),
-      targetTouches: Array.prototype.slice.call(e.touches.map(touch => new Touch(touch))),
+      targetTouches: Array.prototype.slice.call(
+        e.touches.map(touch => new Touch(touch)),
+      ),
       timeStamp: e.timeStamp,
       target: target,
       currentTarget: target,
