@@ -1,3 +1,22 @@
+## [1.0.23](https://github.com/deepkolos/three-platformize/compare/1.0.22...v1.0.23) (2021-05-27)
+
+
+### Bug Fixes
+
+* byte canvas dispose ([e4a1add](https://github.com/deepkolos/three-platformize/commit/e4a1add4bd29e9b608066b15d2a42b480aa1b9fe))
+* wechat game touchevent ([e6b6cef](https://github.com/deepkolos/three-platformize/commit/e6b6cef4b56ad257a9edc94c63f2383ff310752a))
+
+
+### Features
+
+* add wechat minigame platform ([1d33e29](https://github.com/deepkolos/three-platformize/commit/1d33e29dc6e79c9f09fa243512d66f1836163eed))
+
+
+
+## [1.0.22](https://github.com/deepkolos/three-platformize/compare/v1.0.22...1.0.22) (2021-05-16)
+
+
+
 ## [1.0.22](https://github.com/deepkolos/three-platformize/compare/v1.0.21...v1.0.22) (2021-05-16)
 
 
