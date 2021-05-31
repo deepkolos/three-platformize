@@ -143,6 +143,7 @@ THREE.PLATFORM.dispose();
 3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
 4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
 5. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐 GLB
+6. URL的polyfill可以使用fileSystemManager来获取临时文件的方式避免arraybuffer转base64, 但是需要手动管理临时文件
 
 ## 实现
 
