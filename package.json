@@ -27,6 +27,7 @@
   "author": "DeepKolos <deepkolos@qq.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@rollup/plugin-babel": "^5.2.2",

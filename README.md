@@ -143,7 +143,7 @@ THREE.PLATFORM.dispose();
 3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
 4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
 5. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐 GLB
-6. URL的polyfill可以使用fileSystemManager来获取临时文件的方式避免arraybuffer转base64, 但是需要手动管理临时文件
+6. URL 的 polyfill 可以使用 fileSystemManager 来获取临时文件的方式避免 arraybuffer 转 base64, 但是需要手动管理临时文件
 
 ## 实现
 
@@ -164,6 +164,7 @@ THREE.PLATFORM.dispose();
 > npm i -S three@latest
 # 或者指定three版本
 > npm i -S three@0.122.0
+# 需要把目标three的构建`utils/build/rollup.config.js`同步到本项目的构建`config/rollup.config.three-origin.js`
 
 # 建立软链接
 > npm run link
@@ -233,7 +234,7 @@ class CustomPlatform {
 1. 适配头条小程序 done
 2. 生成微信插件，通过插件实现 three 的代码跨小程序、跨小程序插件复用 done [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat)
 3. 适配微信小游戏
-4. 适配ReactNative
+4. 适配 ReactNative
 
 ## 讨论
 
