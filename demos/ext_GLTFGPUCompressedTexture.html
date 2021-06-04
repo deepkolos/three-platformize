@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GLTFGPUCompressedTexture Demo</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from '../build/three.module.js';
+      import { BrowserPlatform } from '../src/BrowserPlatform/index.js';
+      import { GLTFLoader } from '../examples/jsm/loaders/GLTFLoader.js';
+      import { GLTFGPUCompressedTexture } from '../extensions/GLTFGPUCompressedTexture.js';
+      import { OrbitControls } from '../examples/jsm/controls/OrbitControls.js';
+
+      THREE.PLATFORM.set(new BrowserPlatform());
+
+      const renderer = new THREE.WebGL1Renderer();
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        innerWidth / innerHeight,
+        0.1,
+        100,
+      );
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.register(parser => {
+        return new GLTFGPUCompressedTexture(parser).detectSupport(renderer);
+      });
+      gltfLoader.loadAsync('http://127.0.0.1:8082/scene.gltf').then(gltf => {
+        gltf.parser = null;
+        scene.add(gltf.scene);
+      });
+
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.setPixelRatio(devicePixelRatio);
+      renderer.setSize(innerWidth, innerHeight);
+      camera.position.z = 1;
+
+      const render = () => {
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+      };
+
+      document.body.appendChild(renderer.domElement);
+      render();
+    </script>
+  </body>
+</html>
