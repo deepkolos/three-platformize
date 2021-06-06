@@ -14,7 +14,7 @@ import {
   RGBA_S3TC_DXT5_Format,
   RGBA_PVRTC_4BPPV1_Format,
   sRGBEncoding,
-  LinearEncoding
+  LinearEncoding,
 } from '../build/three.module.js';
 
 const typeFormatMap = {
@@ -44,9 +44,10 @@ export class GLTFGPUCompressedTexture {
   /**
    * @param {GLTFParser} parser
    */
-  constructor(parser) {
+  constructor(parser, renderer) {
     this.name = 'EXT_GPU_COMPRESSED_TEXTURE';
     this.parser = parser;
+    this.detectSupport(renderer);
   }
 
   detectSupport(renderer) {
@@ -60,7 +61,6 @@ export class GLTFGPUCompressedTexture {
         renderer.extensions.has('WEBGL_compressed_texture_pvrtc') ||
         renderer.extensions.has('WEBKIT_WEBGL_compressed_texture_pvrtc'),
     };
-    return this;
   }
 
   loadTexture(textureIndex) {
@@ -85,16 +85,31 @@ export class GLTFGPUCompressedTexture {
         return parser
           .getDependency('buffer', extensionDef[name])
           .then(buffer => {
-            // TODO: 支持带mipmap的压缩纹理
+            // TODO: 支持带mipmap的压缩纹理 done
             // TODO: zstd压缩
+            const header = new Uint16Array(buffer, 0, 4);
+            const [width, height, levels] = header;
+            console.log(header);
+            const offsets = new Uint32Array(buffer, header.byteLength, levels);
+            const mipmaps = [];
+            let offsetPre = header.byteLength + offsets.byteLength;
+            for (let i = 0; i < levels; i++) {
+              console.log(offsetPre, offsets[i], offsets[i] - offsetPre);
+              mipmaps.push({
+                data: new Uint8Array(buffer, offsetPre, offsets[i] - offsetPre),
+                width: ~~(width / 2 ** i),
+                height: ~~(height / 2 ** i),
+              });
+              offsetPre = offsets[i];
+            }
 
-            const mipmaps = [
-              {
-                data: new Uint8Array(buffer),
-                width,
-                height,
-              },
-            ];
+            // const mipmaps = [
+            //   {
+            //     data: new Uint8Array(buffer),
+            //     width,
+            //     height,
+            //   },
+            // ];
 
             console.log('gpu texture type', name);
             console.log('buffer loaded', buffer);
@@ -112,11 +127,10 @@ export class GLTFGPUCompressedTexture {
             texture.minFilter =
               mipmaps.length === 1 ? LinearFilter : LinearMipmapLinearFilter;
             texture.magFilter = LinearFilter;
-            texture.generateMipmaps = false;
+            // basisTextureLoader的demo是手动翻转了使用了纹理的mesh的UV, 所以转basis之前需要翻转图片
+            // https://github.com/mrdoob/three.js/blob/dev/examples/webgl_loader_texture_basis.html#L92
+            // 但是WebGPU就不需要翻转了，所以要想兼容WebGPU还得生成两份，翻转和不翻转的? 不过不确定压缩纹理
             texture.needsUpdate = true;
-            // 压缩纹理不支持flipY, 所以fallback的纹理也需要是flipY为false,这个如何fallback呢
-            // texture.flipY = false;
-            // texture.encoding = LinearEncoding;
             return texture;
           });
       }

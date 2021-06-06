@@ -35,17 +35,28 @@
 
       const gltfLoader = new GLTFLoader();
       gltfLoader.register(parser => {
-        return new GLTFGPUCompressedTexture(parser).detectSupport(renderer);
+        return new GLTFGPUCompressedTexture(parser, renderer);
       });
-      gltfLoader.loadAsync('http://127.0.0.1:8082/scene.gltf').then(gltf => {
-        gltf.parser = null;
-        scene.add(gltf.scene);
-      });
+      gltfLoader
+        .loadAsync('./gltf/GLTFGPUCompressedTexture/no_mipmap/scene.gltf')
+        .then(gltf => {
+          gltf.parser = null;
+          gltf.scene.position.x = 0.5;
+          scene.add(gltf.scene);
+        });
 
+      gltfLoader
+        .loadAsync('./gltf/GLTFGPUCompressedTexture/with_mipmap/scene.gltf')
+        .then(gltf => {
+          gltf.parser = null;
+          gltf.scene.position.x = -0.5;
+          scene.add(gltf.scene);
+        });
       renderer.outputEncoding = THREE.sRGBEncoding;
       renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(innerWidth, innerHeight);
-      camera.position.z = 1;
+      camera.position.z = 2;
+      scene.background = new THREE.Color(0xffffff);
 
       const render = () => {
         controls.update();
