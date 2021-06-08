@@ -11,6 +11,10 @@
         margin: 0;
       }
     </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.3.4/vconsole.min.js"></script>
+    <script>
+      location.search.indexOf('?d=true') !== -1 && new VConsole();
+    </script>
   </head>
   <body>
     <script type="module">
@@ -37,35 +41,100 @@
       gltfLoader.register(parser => {
         return new GLTFGPUCompressedTexture(parser, renderer);
       });
-      gltfLoader
-        .loadAsync('./gltf/GLTFGPUCompressedTexture/no_mipmap/scene.gltf')
-        .then(gltf => {
-          gltf.parser = null;
-          gltf.scene.position.x = 0.5;
-          scene.add(gltf.scene);
-        });
+      // gltfLoader
+      //   .loadAsync('./gltf/GLTFGPUCompressedTexture/no_mipmap/scene.gltf')
+      //   .then(gltf => {
+      //     gltf.parser = null;
+      //     gltf.scene.position.x = 0.5;
+      //     scene.add(gltf.scene);
+      //   });
 
-      gltfLoader
-        .loadAsync('./gltf/GLTFGPUCompressedTexture/with_mipmap/scene.gltf')
-        .then(gltf => {
+      // gltfLoader
+      //   .loadAsync('./gltf/GLTFGPUCompressedTexture/with_mipmap/scene.gltf')
+      //   .then(gltf => {
+      //     gltf.parser = null;
+      //     gltf.scene.position.x = -0.5;
+      //     scene.add(gltf.scene);
+      //   });
+
+      const load = async () => {
+        {
+          const gltf = await gltfLoader.loadAsync(
+            'http://127.0.0.1:8080/glb/Fendi_banzi_blue.glb',
+          );
           gltf.parser = null;
-          gltf.scene.position.x = -0.5;
+          gltf.scene.position.y = 0.72;
+          gltf.scene.position.x = -0.75;
+          gltf.scene.scale.set(2, 2, 2);
           scene.add(gltf.scene);
-        });
+          render('glb');
+        }
+        await sleep(500);
+        {
+          const gltf = await gltfLoader.loadAsync(
+            'http://127.0.0.1:8080/gltf/Fendi_banzi_blue.gltf',
+          );
+          gltf.parser = null;
+          gltf.scene.position.y = 0.72;
+          gltf.scene.position.x = -0.25;
+          gltf.scene.scale.set(2, 2, 2);
+          scene.add(gltf.scene);
+          render('gltf');
+        }
+        await sleep(500);
+        {
+          const gltf = await gltfLoader.loadAsync(
+            'http://127.0.0.1:8080/no-zstd/Fendi_banzi_blue.gltf',
+          );
+          gltf.parser = null;
+          gltf.scene.position.y = 0.72;
+          gltf.scene.position.x = 0.25;
+          gltf.scene.scale.set(2, 2, 2);
+          scene.add(gltf.scene);
+
+          render('gltf-tc no zstd');
+        }
+        await sleep(500);
+        {
+          const gltf = await gltfLoader.loadAsync(
+            'http://127.0.0.1:8080/zstd/Fendi_banzi_blue.gltf',
+          );
+          gltf.parser = null;
+          gltf.scene.position.y = 0.72;
+          gltf.scene.position.x = 0.75;
+          gltf.scene.scale.set(2, 2, 2);
+          scene.add(gltf.scene);
+
+          render('gltf-tc zstd');
+        }
+      };
+
+      load();
+
       renderer.outputEncoding = THREE.sRGBEncoding;
       renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(innerWidth, innerHeight);
       camera.position.z = 2;
       scene.background = new THREE.Color(0xffffff);
+      scene.add(new THREE.AmbientLight(0xffffff, 1));
+      scene.add(new THREE.DirectionalLight(0xffffff, 1));
 
-      const render = () => {
+      const render = (name = '') => {
+        const t1 = performance.now();
         controls.update();
         renderer.render(scene, camera);
-        requestAnimationFrame(render);
+        const cost = performance.now() - t1;
+        console.log(name, 'render cost', cost);
+        // requestAnimationFrame(render);
       };
 
       document.body.appendChild(renderer.domElement);
-      render();
+      render('init');
+
+      function sleep(t) {
+        console.log('======================')
+        return new Promise(r => setTimeout(r, t));
+      }
     </script>
   </body>
 </html>

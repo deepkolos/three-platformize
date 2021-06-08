@@ -142,7 +142,7 @@
           "width": 768,
           "height": 512,
           "hasAlpha": 0,
-          "zstd": 0
+          "compress": 0
         }
       }
     }
