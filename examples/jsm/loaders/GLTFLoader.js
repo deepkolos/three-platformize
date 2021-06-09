@@ -107,9 +107,8 @@ var GLTFLoader = ( function () {
 			loader.load( url, function ( data ) {
 
 				try {
-					const t = performance.now()
+
 					scope.parse( data, resourcePath, function ( gltf ) {
-						console.log('GLTFLoader parse cost', performance.now() - t)
 
 						onLoad( gltf );
 

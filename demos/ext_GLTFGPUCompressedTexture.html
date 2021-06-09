@@ -23,17 +23,14 @@
       import { GLTFLoader } from '../examples/jsm/loaders/GLTFLoader.js';
       import { GLTFGPUCompressedTexture } from '../extensions/GLTFGPUCompressedTexture.js';
       import { OrbitControls } from '../examples/jsm/controls/OrbitControls.js';
+      // import { ZSTDDecoder } from '../examples/jsm/libs/zstddec.module.js';
 
       THREE.PLATFORM.set(new BrowserPlatform());
 
+      const aspectRatio = innerWidth / innerHeight;
       const renderer = new THREE.WebGL1Renderer();
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        innerWidth / innerHeight,
-        0.1,
-        100,
-      );
+      const camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 100);
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
 
@@ -41,71 +38,65 @@
       gltfLoader.register(parser => {
         return new GLTFGPUCompressedTexture(parser, renderer);
       });
-      // gltfLoader
-      //   .loadAsync('./gltf/GLTFGPUCompressedTexture/no_mipmap/scene.gltf')
-      //   .then(gltf => {
-      //     gltf.parser = null;
-      //     gltf.scene.position.x = 0.5;
-      //     scene.add(gltf.scene);
-      //   });
+      const useImageBitmapLoader =
+        typeof createImageBitmap !== 'undefined' &&
+        /Firefox/.test(navigator.userAgent) === false;
 
-      // gltfLoader
-      //   .loadAsync('./gltf/GLTFGPUCompressedTexture/with_mipmap/scene.gltf')
-      //   .then(gltf => {
-      //     gltf.parser = null;
-      //     gltf.scene.position.x = -0.5;
-      //     scene.add(gltf.scene);
-      //   });
+      console.log(
+        `use ${useImageBitmapLoader ? 'ImageBitmapLoader' : 'TextureLoader'}`,
+      );
+
+      // const baseUrl = 'http://127.0.0.1:8080';
+      const baseUrl = 'http://192.168.10.140:8080';
+      const cases = [
+        {
+          uri: baseUrl + '/glb/Fendi_banzi_green.glb',
+          name: 'first',
+        },
+        {
+          uri: baseUrl + '/no-mipmap/Fendi_banzi_blue.gltf',
+          name: 'gltf-tc zstd',
+        },
+        {
+          uri: baseUrl + '/no-zstd/Fendi_banzi_blue.gltf',
+          name: 'gltf-tc mipmap',
+        },
+        {
+          uri: baseUrl + '/zstd/Fendi_banzi_blue.gltf',
+          name: 'gltf-tc zstd mipmap',
+        },
+        {
+          uri: baseUrl + '/glb/Fendi_banzi_blue.glb',
+          name: 'glb',
+        },
+        {
+          uri: baseUrl + '/gltf/Fendi_banzi_blue.gltf',
+          name: 'gltf',
+        },
+      ];
 
       const load = async () => {
-        {
-          const gltf = await gltfLoader.loadAsync(
-            'http://127.0.0.1:8080/glb/Fendi_banzi_blue.glb',
+        for (let i = 0; i < cases.length; i++) {
+          // if (i !== 5) continue
+          await trackGroup(
+            cases[i].name,
+            async () => {
+              const gltf = await track('load', () =>
+                gltfLoader.loadAsync(cases[i].uri),
+              );
+              gltf.parser = null;
+              gltf.scene.position.y = 1 - i * 0.3;
+              // gltf.scene.position.x = 0.25;
+              gltf.scene.scale.set(2, 2, 2);
+              scene.add(gltf.scene);
+              track('renderer.compile', () => {
+                renderer.compile(gltf.scene, camera);
+              });
+              track('render', render);
+              await sleep(500);
+            },
+            sumGroup,
           );
-          gltf.parser = null;
-          gltf.scene.position.y = 0.72;
-          gltf.scene.position.x = -0.75;
-          gltf.scene.scale.set(2, 2, 2);
-          scene.add(gltf.scene);
-          render('glb');
-        }
-        await sleep(500);
-        {
-          const gltf = await gltfLoader.loadAsync(
-            'http://127.0.0.1:8080/gltf/Fendi_banzi_blue.gltf',
-          );
-          gltf.parser = null;
-          gltf.scene.position.y = 0.72;
-          gltf.scene.position.x = -0.25;
-          gltf.scene.scale.set(2, 2, 2);
-          scene.add(gltf.scene);
-          render('gltf');
-        }
-        await sleep(500);
-        {
-          const gltf = await gltfLoader.loadAsync(
-            'http://127.0.0.1:8080/no-zstd/Fendi_banzi_blue.gltf',
-          );
-          gltf.parser = null;
-          gltf.scene.position.y = 0.72;
-          gltf.scene.position.x = 0.25;
-          gltf.scene.scale.set(2, 2, 2);
-          scene.add(gltf.scene);
-
-          render('gltf-tc no zstd');
-        }
-        await sleep(500);
-        {
-          const gltf = await gltfLoader.loadAsync(
-            'http://127.0.0.1:8080/zstd/Fendi_banzi_blue.gltf',
-          );
-          gltf.parser = null;
-          gltf.scene.position.y = 0.72;
-          gltf.scene.position.x = 0.75;
-          gltf.scene.scale.set(2, 2, 2);
-          scene.add(gltf.scene);
-
-          render('gltf-tc zstd');
         }
       };
 
@@ -120,11 +111,8 @@
       scene.add(new THREE.DirectionalLight(0xffffff, 1));
 
       const render = (name = '') => {
-        const t1 = performance.now();
         controls.update();
         renderer.render(scene, camera);
-        const cost = performance.now() - t1;
-        console.log(name, 'render cost', cost);
         // requestAnimationFrame(render);
       };
 
@@ -132,8 +120,28 @@
       render('init');
 
       function sleep(t) {
-        console.log('======================')
         return new Promise(r => setTimeout(r, t));
+      }
+
+      var currTrackInfo = {};
+      async function track(name, fn) {
+        const t = performance.now();
+        const res = await fn();
+        const cost = performance.now() - t;
+        // console.log(name, cost);
+        currTrackInfo[name] = cost;
+        return res;
+      }
+      async function trackGroup(name, fn, sumFn) {
+        console.log(`===========${name}===========`);
+        currTrackInfo = {};
+        await fn();
+        sumFn(currTrackInfo);
+        console.table(currTrackInfo);
+      }
+      function sumGroup(trackInfo) {
+        trackInfo.loadRender = trackInfo.load + trackInfo.render;
+        console.log('sum', trackInfo.loadRender);
       }
     </script>
   </body>

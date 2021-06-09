@@ -2344,7 +2344,7 @@ EXRLoader.prototype = Object.assign( Object.create( DataTextureLoader.prototype 
 
 		}
 
-		const format = ( this.type === UnsignedByteType ) ? RGBEFormat :  RGBAFormat ;
+		const format = ( this.type === UnsignedByteType ) ? RGBEFormat : RGBAFormat ;
 
 		return {
 			header: EXRHeader,

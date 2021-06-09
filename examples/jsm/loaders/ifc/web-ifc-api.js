@@ -1130,7 +1130,7 @@ var require_web_ifc = __commonJS((exports, module) => {
         if (mmapFlags & 2) {
           return 0;
         }
-        var bytesWritten = MEMFS.stream_ops.write(stream, buffer2, 0, length, offset, false);
+        MEMFS.stream_ops.write(stream, buffer2, 0, length, offset, false);
         return 0;
       }}};
       var FS = {root: null, mounts: [], devices: {}, streams: [], nextInode: 1, nameTable: null, currentPath: "/", initialized: false, ignorePermissions: true, trackingDelegate: {}, tracking: {openFlags: {READ: 1, WRITE: 2}}, ErrnoError: null, genericErrors: {}, filesystems: null, syncFSRequests: 0, lookupPath: function(path, opts) {
@@ -2097,9 +2097,9 @@ var require_web_ifc = __commonJS((exports, module) => {
         } else {
           FS.symlink("/dev/tty1", "/dev/stderr");
         }
-        var stdin = FS.open("/dev/stdin", 0);
-        var stdout = FS.open("/dev/stdout", 1);
-        var stderr = FS.open("/dev/stderr", 1);
+        FS.open("/dev/stdin", 0);
+        FS.open("/dev/stdout", 1);
+        FS.open("/dev/stderr", 1);
       }, ensureErrnoError: function() {
         if (FS.ErrnoError)
           return;
@@ -4534,18 +4534,18 @@ var require_web_ifc = __commonJS((exports, module) => {
         ___wasm_call_ctors();
       }});
       var asmLibraryArg = {t: ___assert_fail, E: ___sys_ioctl, F: ___sys_open, u: __embind_finalize_value_array, j: __embind_finalize_value_object, H: __embind_register_bool, m: __embind_register_class, l: __embind_register_class_constructor, d: __embind_register_class_function, G: __embind_register_emval, q: __embind_register_float, i: __embind_register_function, f: __embind_register_integer, e: __embind_register_memory_view, r: __embind_register_std_string, n: __embind_register_std_wstring, v: __embind_register_value_array, c: __embind_register_value_array_element, k: __embind_register_value_object, g: __embind_register_value_object_field, I: __embind_register_void, J: __emval_decref, K: __emval_incref, s: __emval_take_value, b: _abort, C: _clock_gettime, y: _emscripten_memcpy_big, h: _emscripten_resize_heap, A: _environ_get, B: _environ_sizes_get, p: _fd_close, D: _fd_read, w: _fd_seek, o: _fd_write, a: wasmMemory, x: _setTempRet0, z: _strftime_l};
-      var asm = createWasm();
+      createWasm();
       var ___wasm_call_ctors = Module["___wasm_call_ctors"] = function() {
         return (___wasm_call_ctors = Module["___wasm_call_ctors"] = Module["asm"]["M"]).apply(null, arguments);
       };
-      var _main = Module["_main"] = function() {
-        return (_main = Module["_main"] = Module["asm"]["N"]).apply(null, arguments);
+      Module["_main"] = function() {
+        return (Module["_main"] = Module["asm"]["N"]).apply(null, arguments);
       };
       var ___getTypeName = Module["___getTypeName"] = function() {
         return (___getTypeName = Module["___getTypeName"] = Module["asm"]["O"]).apply(null, arguments);
       };
-      var ___embind_register_native_and_builtin_types = Module["___embind_register_native_and_builtin_types"] = function() {
-        return (___embind_register_native_and_builtin_types = Module["___embind_register_native_and_builtin_types"] = Module["asm"]["P"]).apply(null, arguments);
+      Module["___embind_register_native_and_builtin_types"] = function() {
+        return (Module["___embind_register_native_and_builtin_types"] = Module["asm"]["P"]).apply(null, arguments);
       };
       var ___errno_location = Module["___errno_location"] = function() {
         return (___errno_location = Module["___errno_location"] = Module["asm"]["Q"]).apply(null, arguments);
@@ -4556,20 +4556,20 @@ var require_web_ifc = __commonJS((exports, module) => {
       var _malloc = Module["_malloc"] = function() {
         return (_malloc = Module["_malloc"] = Module["asm"]["S"]).apply(null, arguments);
       };
-      var dynCall_jiji = Module["dynCall_jiji"] = function() {
-        return (dynCall_jiji = Module["dynCall_jiji"] = Module["asm"]["T"]).apply(null, arguments);
+      Module["dynCall_jiji"] = function() {
+        return (Module["dynCall_jiji"] = Module["asm"]["T"]).apply(null, arguments);
       };
-      var dynCall_viijii = Module["dynCall_viijii"] = function() {
-        return (dynCall_viijii = Module["dynCall_viijii"] = Module["asm"]["U"]).apply(null, arguments);
+      Module["dynCall_viijii"] = function() {
+        return (Module["dynCall_viijii"] = Module["asm"]["U"]).apply(null, arguments);
       };
-      var dynCall_iiiiiijj = Module["dynCall_iiiiiijj"] = function() {
-        return (dynCall_iiiiiijj = Module["dynCall_iiiiiijj"] = Module["asm"]["V"]).apply(null, arguments);
+      Module["dynCall_iiiiiijj"] = function() {
+        return (Module["dynCall_iiiiiijj"] = Module["asm"]["V"]).apply(null, arguments);
       };
-      var dynCall_iiiiij = Module["dynCall_iiiiij"] = function() {
-        return (dynCall_iiiiij = Module["dynCall_iiiiij"] = Module["asm"]["W"]).apply(null, arguments);
+      Module["dynCall_iiiiij"] = function() {
+        return (Module["dynCall_iiiiij"] = Module["asm"]["W"]).apply(null, arguments);
       };
-      var dynCall_iiiiijj = Module["dynCall_iiiiijj"] = function() {
-        return (dynCall_iiiiijj = Module["dynCall_iiiiijj"] = Module["asm"]["X"]).apply(null, arguments);
+      Module["dynCall_iiiiijj"] = function() {
+        return (Module["dynCall_iiiiijj"] = Module["asm"]["X"]).apply(null, arguments);
       };
       Module["addRunDependency"] = addRunDependency;
       Module["removeRunDependency"] = removeRunDependency;

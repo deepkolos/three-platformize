@@ -49,6 +49,7 @@ export class GLTFGPUCompressedTexture {
     this.name = 'EXT_GPU_COMPRESSED_TEXTURE';
     this.parser = parser;
     this.detectSupport(renderer);
+    // TODO: decode in web worker
     this.zstd = new ZSTDDecoder();
   }
 
