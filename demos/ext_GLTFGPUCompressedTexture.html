@@ -35,9 +35,9 @@
       controls.enableDamping = true;
 
       const gltfLoader = new GLTFLoader();
-      gltfLoader.register(parser => {
-        return new GLTFGPUCompressedTexture(parser, renderer);
-      });
+      gltfLoader.register(
+        parser => new GLTFGPUCompressedTexture(parser, renderer, true),
+      );
       const useImageBitmapLoader =
         typeof createImageBitmap !== 'undefined' &&
         /Firefox/.test(navigator.userAgent) === false;
@@ -46,58 +46,106 @@
         `use ${useImageBitmapLoader ? 'ImageBitmapLoader' : 'TextureLoader'}`,
       );
 
-      // const baseUrl = 'http://127.0.0.1:8080';
-      const baseUrl = 'http://192.168.10.140:8080';
-      const cases = [
+      const baseUrl = 'http://127.0.0.1:8080';
+      // const baseUrl = 'http://192.168.10.140:8080';
+      const bagCases = [
         {
-          uri: baseUrl + '/glb/Fendi_banzi_green.glb',
+          uri: '/glb/Fendi_banzi_green.glb',
           name: 'first',
         },
         {
-          uri: baseUrl + '/no-mipmap/Fendi_banzi_blue.gltf',
+          uri: '/no-mipmap/Fendi_banzi_blue.gltf',
           name: 'gltf-tc zstd',
         },
         {
-          uri: baseUrl + '/no-zstd/Fendi_banzi_blue.gltf',
+          uri: '/no-zstd/Fendi_banzi_blue.gltf',
           name: 'gltf-tc mipmap',
         },
         {
-          uri: baseUrl + '/zstd/Fendi_banzi_blue.gltf',
+          uri: '/zstd/Fendi_banzi_blue.gltf',
           name: 'gltf-tc zstd mipmap',
         },
         {
-          uri: baseUrl + '/glb/Fendi_banzi_blue.glb',
+          uri: '/glb/Fendi_banzi_blue.glb',
           name: 'glb',
         },
         {
-          uri: baseUrl + '/gltf/Fendi_banzi_blue.gltf',
+          uri: '/gltf/Fendi_banzi_blue.gltf',
           name: 'gltf',
         },
       ];
+      const BoomBoxCases = [
+        {
+          uri: '/zstd/BoomBox.gltf',
+          name: 'gltf-tc BoomBox',
+        },
+        {
+          uri: '/zstd/BoomBox.gltf',
+          name: 'gltf-tc BoomBox no zstd decoder worker',
+          noWorker: true,
+        },
+        {
+          uri: '/glb/BoomBox.glb',
+          name: 'glb BoomBox',
+        },
+        {
+          uri: '/gltf/BoomBox.gltf',
+          name: 'gltf BoomBox',
+        },
+      ];
+      const cases = [
+        {
+          scale: 16,
+          items: BoomBoxCases,
+          offsetX: 0.5,
+          offsetY: 0.4,
+        },
+        {
+          scale: 2,
+          items: bagCases,
+          offsetX: 0.5,
+          offsetY: 0.3,
+        },
+      ];
+
+      let lastMap;
 
       const load = async () => {
         for (let i = 0; i < cases.length; i++) {
-          // if (i !== 5) continue
-          await trackGroup(
-            cases[i].name,
-            async () => {
-              const gltf = await track('load', () =>
-                gltfLoader.loadAsync(cases[i].uri),
-              );
-              gltf.parser = null;
-              gltf.scene.position.y = 1 - i * 0.3;
-              // gltf.scene.position.x = 0.25;
-              gltf.scene.scale.set(2, 2, 2);
-              scene.add(gltf.scene);
-              track('renderer.compile', () => {
-                renderer.compile(gltf.scene, camera);
-              });
-              track('render', render);
-              await sleep(500);
-            },
-            sumGroup,
-          );
+          for (let j = 0; j < cases[i].items.length; j++) {
+            const { scale, offsetX, offsetY } = cases[i];
+            const { name, noWorker, uri } = cases[i].items[j];
+
+            await trackGroup(
+              name,
+              async () => {
+                GLTFGPUCompressedTexture.useWorker = !noWorker;
+                const gltf = await track('load', () =>
+                  gltfLoader.loadAsync(baseUrl + uri),
+                );
+                gltf.parser = null;
+                gltf.scene.position.y = 1.2 - j * offsetY;
+                gltf.scene.position.x = -0.5 + i * offsetX;
+                gltf.scene.scale.set(scale, scale, scale);
+                scene.add(gltf.scene);
+                // gltf.scene.traverse(node => {
+                //   if (node.isMesh) {
+                //     console.log(node);
+                //   }
+                // });
+                track('renderer.compile', () => {
+                  renderer.compile(scene, camera);
+                });
+                track('render', render);
+                // track('render2', render);
+                await sleep(200);
+              },
+              sumGroup,
+            );
+          }
         }
+
+        render(true);
       };
 
       load();
@@ -110,14 +158,14 @@
       scene.add(new THREE.AmbientLight(0xffffff, 1));
       scene.add(new THREE.DirectionalLight(0xffffff, 1));
 
-      const render = (name = '') => {
+      const render = rfa => {
         controls.update();
         renderer.render(scene, camera);
-        // requestAnimationFrame(render);
+        rfa && requestAnimationFrame(render);
       };
 
       document.body.appendChild(renderer.domElement);
-      render('init');
+      render();
 
       function sleep(t) {
         return new Promise(r => setTimeout(r, t));
@@ -140,9 +188,33 @@
         console.table(currTrackInfo);
       }
       function sumGroup(trackInfo) {
-        trackInfo.loadRender = trackInfo.load + trackInfo.render;
-        console.log('sum', trackInfo.loadRender);
+        // trackInfo.loadRender = trackInfo.load + trackInfo.render;
+        console.log('sum', trackInfo.load + trackInfo.render);
       }
+
+      //       const iframe = document.createElement('iframe');
+      //       const html = `
+      // <script>
+      //   window.addEventListener('message', (e) => {
+      //     console.log('iframe e', e)
+      //   });
+
+      //   let i = 0;
+      //   setInterval(() => {
+      //     window.postMessage(i++);
+      //   }, 100)
+      //   // while(1) {
+      //   //   console.log('x')
+      //   // }
+
+      // <\/script>`;
+      //       const blob = new Blob([html], { type: 'text/html' });
+      //       iframe.src = URL.createObjectURL(blob);
+      //       iframe.addEventListener('message', e => {
+      //         console.log('main e', e);
+      //       });
+      //       document.body.append(iframe);
+      //       iframe.contentWindow.postMessage('hello');
     </script>
   </body>
 </html>

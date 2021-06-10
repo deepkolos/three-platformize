@@ -15,8 +15,17 @@ import {
   RGBA_PVRTC_4BPPV1_Format,
   sRGBEncoding,
   LinearEncoding,
+  RepeatWrapping,
+  RGBFormat,
+  NearestFilter,
+  NearestMipmapNearestFilter,
+  LinearMipmapNearestFilter,
+  NearestMipmapLinearFilter,
+  ClampToEdgeWrapping,
+  MirroredRepeatWrapping,
 } from '../build/three.module.js';
 import { ZSTDDecoder } from '../examples/jsm/libs/zstddec.module.js';
+import { ZSTDDecoderWorker } from '../tools/ZSTDDecoderWorker.js';
 
 const typeFormatMap = {
   astc: {
@@ -41,6 +50,21 @@ const typeFormatMap = {
   },
 };
 
+const WEBGL_FILTERS = {
+  9728: NearestFilter,
+  9729: LinearFilter,
+  9984: NearestMipmapNearestFilter,
+  9985: LinearMipmapNearestFilter,
+  9986: NearestMipmapLinearFilter,
+  9987: LinearMipmapLinearFilter,
+};
+
+const WEBGL_WRAPPINGS = {
+  33071: ClampToEdgeWrapping,
+  33648: MirroredRepeatWrapping,
+  10497: RepeatWrapping,
+};
+
 export class GLTFGPUCompressedTexture {
   /**
    * @param {GLTFParser} parser
@@ -51,7 +75,10 @@ export class GLTFGPUCompressedTexture {
     this.detectSupport(renderer);
     // TODO: decode in web worker
     this.zstd = new ZSTDDecoder();
+    this.zstdWorker = new ZSTDDecoderWorker();
   }
+
+  static useWorker = true;
 
   detectSupport(renderer) {
     this.supportInfo = {
@@ -71,9 +98,7 @@ export class GLTFGPUCompressedTexture {
     const json = parser.json;
     const textureDef = json.textures[textureIndex];
 
-    if (!textureDef.extensions || !textureDef.extensions[name]) {
-      return null;
-    }
+    if (!textureDef.extensions || !textureDef.extensions[name]) return null;
 
     if (!this.supportInfo)
       throw new Error(
@@ -88,96 +113,107 @@ export class GLTFGPUCompressedTexture {
         return Promise.all([
           parser.getDependency('buffer', extensionDef[name]),
           compress === 1 ? this.zstd.init() : null,
+          compress === 1 ? this.zstdWorker.init() : null,
         ]).then(([buffer]) => {
           // TODO: 支持带mipmap的压缩纹理 done
-          // TODO: zstd压缩
+          // TODO: zstd压缩 done
           const header = new Uint32Array(buffer, 0, 4);
           const [width, height, levels, dataLen] = header;
-          const offsets = new Uint32Array(buffer, header.byteLength, levels);
-          let offsetPre = header.byteLength + offsets.byteLength;
-          let bufferData = new Uint8Array(buffer);
-          // FIXME: 这里的decode代码极其的混乱
 
-          // console.log(header);
-          // console.log(offsets);
-          // console.log(offsetPre);
+          const offsets = new Uint32Array(buffer, header.byteLength, levels);
+          const dataOffset = header.byteLength + offsets.byteLength;
+          const totalLen = dataOffset + dataLen;
+
+          let bufferData = new Uint8Array(buffer);
 
           if (compress === 1) {
-            const t = Date.now();
-            // console.log(offsetPre, bufferData);
-            const input = new Uint8Array(buffer, offsetPre);
-            const output = this.zstd.decode(input, dataLen);
-            bufferData = new Uint8Array(offsetPre + output.byteLength);
-            bufferData.set(output, offsetPre);
-            // console.log(output, input);
-            console.log('zstd decode time', Date.now() - t);
+            const t = performance.now();
+            // const input = new Uint8Array(buffer, dataOffset); // zstdWorker会出错，需要复制一份
+            const input = Uint8Array.from(new Uint8Array(buffer, dataOffset));
+            // 可能worker需要十分多贴图的纹理才有优势
+            if (!GLTFGPUCompressedTexture.useWorker) {
+              const output = this.zstd.decode(input, dataLen);
+              bufferData = new Uint8Array(totalLen);
+              bufferData.set(output, dataOffset);
+              // console.log(
+              //   'zstd decode time on ui thread',
+              //   performance.now() - t,
+              // );
+            } else {
+              // console.log(performance.now(), Date.now())
+              bufferData = this.zstdWorker
+                .decode(input, dataLen)
+                .then(workerOutput => {
+                  const data = new Uint8Array(totalLen);
+                  data.set(workerOutput, dataOffset);
+                  // console.log(
+                  //   'zstd decode time on worker thread',
+                  //   performance.now() - t,
+                  // );
+                  return data;
+                });
+            }
+
+            // bufferData = new Uint8Array(offsetPre + output.byteLength);
+            // bufferData.set(output, offsetPre);
+            // console.log('zstd decode time', Date.now() - t);
           }
 
-          const mipmaps = [];
-          for (let i = 0; i < levels; i++) {
-            // console.log(offsetPre, offsets[i], offsets[i] - offsetPre);
-            mipmaps.push({
-              data: new Uint8Array(
-                bufferData.buffer,
-                offsetPre,
-                offsets[i] - offsetPre,
-              ),
-              width: ~~(width / 2 ** i),
-              height: ~~(height / 2 ** i),
+          return Promise.resolve(bufferData).then(bufferData => {
+            const mipmaps = [];
+            let offsetPre = dataOffset;
+            for (let i = 0; i < levels; i++) {
+              mipmaps.push({
+                data: new Uint8Array(
+                  bufferData.buffer,
+                  offsetPre,
+                  offsets[i] - offsetPre,
+                ),
+                width: ~~(width / 2 ** i),
+                height: ~~(height / 2 ** i),
+              });
+              offsetPre = offsets[i];
+            }
+
+            const texture = new CompressedTexture(
+              mipmaps,
+              width,
+              height,
+              typeFormatMap[name][hasAlpha],
+              UnsignedByteType,
+            );
+            texture.minFilter =
+              mipmaps.length === 1 ? LinearFilter : LinearMipmapLinearFilter;
+            texture.magFilter = LinearFilter;
+
+            // basisTextureLoader的demo是手动翻转了使用了纹理的mesh的UV, 所以转basis之前需要翻转图片
+            // https://github.com/mrdoob/three.js/blob/dev/examples/webgl_loader_texture_basis.html#L92
+            // 但是WebGPU就不需要翻转了，所以要想兼容WebGPU还得生成两份，翻转和不翻转的? 不过不确定压缩纹理
+            // 后面发现，直接把glb转gltf的图片处理成basis即可，从three编辑器导出的图片已经是被翻转过的了
+
+            // if (textureDef.name) texture.name = textureDef.name; // When there is definitely no alpha channel in the texture, set THREE.RGBFormat to save space.
+
+            // if (!hasAlpha) texture.format = RGBFormat;
+            const samplers = json.samplers || {};
+            const sampler = samplers[textureDef.sampler] || {};
+            // texture.magFilter =
+            //   WEBGL_FILTERS[sampler.magFilter] || LinearFilter;
+            // texture.minFilter =
+            //   WEBGL_FILTERS[sampler.minFilter] || LinearMipmapLinearFilter;
+            texture.wrapS = WEBGL_WRAPPINGS[sampler.wrapS] || RepeatWrapping;
+            texture.wrapT = WEBGL_WRAPPINGS[sampler.wrapT] || RepeatWrapping;
+            parser.associations.set(texture, {
+              type: 'textures',
+              index: textureIndex,
             });
-            offsetPre = offsets[i];
-          }
-
-          // const mipmaps = [
-          //   {
-          //     data: new Uint8Array(buffer),
-          //     width,
-          //     height,
-          //   },
-          // ];
-
-          // console.log('gpu texture type', name);
-          // console.log('buffer loaded', buffer);
-          // console.log('format', typeFormatMap[name][hasAlpha]);
-          // console.log(mipmaps);
-
-          // 目前的buffer是直接可以传递到GPU的buffer
-          const texture = new CompressedTexture(
-            mipmaps,
-            width,
-            height,
-            typeFormatMap[name][hasAlpha],
-            UnsignedByteType,
-          );
-          texture.minFilter =
-            mipmaps.length === 1 ? LinearFilter : LinearMipmapLinearFilter;
-          texture.magFilter = LinearFilter;
-          // basisTextureLoader的demo是手动翻转了使用了纹理的mesh的UV, 所以转basis之前需要翻转图片
-          // https://github.com/mrdoob/three.js/blob/dev/examples/webgl_loader_texture_basis.html#L92
-          // 但是WebGPU就不需要翻转了，所以要想兼容WebGPU还得生成两份，翻转和不翻转的? 不过不确定压缩纹理
-          // 后面发现，直接把glb转gltf的图片处理成basis即可，从three编辑器导出的图片已经是被翻转过的了
-          texture.needsUpdate = true;
-          return texture;
+            texture.needsUpdate = true;
+            return texture;
+          });
         });
       }
     }
 
-    // Fall back to PNG or JPEG.
+    // 降级为 PNG/JPEG.
     return parser.loadTexture(textureIndex);
-
-    // if (source.uri) {
-    //   const handler = parser.options.manager.getHandler(source.uri);
-    //   if (handler !== null) loader = handler;
-    // }
-
-    // // return parser.loadTextureImage(textureIndex, source, loader);
-
-    // if (json.extensionsRequired && json.extensionsRequired.indexOf(name) >= 0) {
-    //   throw new Error(
-    //     'THREE.GLTFLoader: WebP required by asset but unsupported.',
-    //   );
-    // } // Fall back to PNG or JPEG.
-
-    // return parser.loadTexture(textureIndex);
   }
 }

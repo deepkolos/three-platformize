@@ -8,12 +8,21 @@ export class WorkerPool {
     // 一般pool数量不会超过32个
   }
 
-  initWorkers(creater) {
+  initWorkers(creator) {
     for (let i = 0; i < this.pool; i++) {
-      const worker = creater();
+      const worker = creator();
       worker.addEventListener('message', this.onMessage.bind(this, i));
       this.workers.push(worker);
     }
+  }
+
+  createWorkerSourceUrl(fn) {
+    const fnStr = fn.toString();
+    return URL.createObjectURL(
+      new Blob([
+        fnStr.substring(fnStr.indexOf('{') + 1, fnStr.lastIndexOf('}')),
+      ]),
+    );
   }
 
   getIdleWorker() {
@@ -30,7 +39,7 @@ export class WorkerPool {
     if (this.quene.length) {
       const { resolve, msg, transfer } = this.quene.shift();
       this.workersResolve[workerId] = resolve;
-      this.workers[workerId].postMessage(msg, [transfer]);
+      this.workers[workerId].postMessage(msg, transfer);
     } else {
       this.workerStatus ^= 1 << workerId;
     }
@@ -43,7 +52,8 @@ export class WorkerPool {
       if (workerId !== -1) {
         this.workerStatus |= 1 << workerId;
         this.workersResolve[workerId] = resolve;
-        this.workers[workerId].postMessage(msg, [transfer]);
+        this.workers[workerId].postMessage(msg, transfer);
+        // console.log('using workerId', workerId);
       } else {
         this.quene.push({ resolve, msg, transfer });
       }
