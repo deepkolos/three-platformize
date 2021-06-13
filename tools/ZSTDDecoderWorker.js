@@ -103,4 +103,9 @@ export class ZSTDDecoderWorker {
       .postMessage({ type: 'decode', array, uncompressedSize }, [array.buffer])
       .then(e => e.data.dec);
   }
+
+  dispose() {
+    URL.revokeObjectURL(this.workerSourceUrl);
+    this.workerPool.dispose();
+  }
 }

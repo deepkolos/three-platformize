@@ -58,4 +58,12 @@ export class WorkerPool {
       }
     });
   }
+
+  dispose() {
+    this.workers.forEach(worker => worker.terminate());
+    this.workersResolve.length = 0;
+    this.workers.length = 0;
+    this.quene.length = 0;
+    this.workerStatus = 0;
+  }
 }
