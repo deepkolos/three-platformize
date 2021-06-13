@@ -1,0 +1,284 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v1.5.17",
+    "version": "2.0"
+  },
+  "extensionsUsed": ["KHR_materials_unlit"],
+  "scene": 0,
+  "scenes": [{ "name": "Scene", "nodes": [0] }],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "FENDI_PAIZI",
+      "translation": [0, 0, 0],
+      "rotation": [0, 0, 0, 1],
+      "scale": [1, 1, 1]
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        { "sampler": 0, "target": { "node": 0, "path": "rotation" } },
+        { "sampler": 1, "target": { "node": 0, "path": "translation" } }
+      ],
+      "name": "an1",
+      "samplers": [
+        { "input": 10, "interpolation": "LINEAR", "output": 11 },
+        { "input": 10, "interpolation": "LINEAR", "output": 12 }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "BLEND",
+      "name": "FINDI_TOUMING",
+      "normalTexture": { "index": 0, "texCoord": 0 },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": { "index": 1, "texCoord": 0 },
+        "metallicFactor": 0.24590164422988892,
+        "roughnessFactor": 0.2185792326927185,
+        "baseColorFactor": [1, 1, 1, 1]
+      },
+      "emissiveFactor": [0, 0, 0],
+      "doubleSided": false
+    },
+    {
+      "extensions": { "KHR_materials_unlit": {} },
+      "name": "ban_Unlit",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": { "index": 2, "texCoord": 0 },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorFactor": [1, 1, 1, 1]
+      },
+      "emissiveFactor": [0, 0, 0],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "name": "FENDI_PAIZI",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        },
+        {
+          "attributes": {
+            "POSITION": 5,
+            "NORMAL": 6,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "textures": [
+    { "sampler": 0, "source": 0 },
+    { "sampler": 0, "source": 1 },
+    { "sampler": 0, "source": 2 }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "FINDI_TOUMING01_nomarl1",
+      "uri": "FINDI_TOUMING01_nomarl1-c2e88e.jpg"
+    },
+    {
+      "mimeType": "image/png",
+      "name": "FINDI_TOUMING01_Basecoler",
+      "uri": "FINDI_TOUMING01_Basecoler-255632.png"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "lvse_banzi-1",
+      "uri": "lvse_banzi-1-1686da.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 10,
+      "max": [0.02296818420290947, 0.023241642862558365, 0.008665970526635647],
+      "min": [-0.02296818420290947, -0.09447882324457169, 0.006555579602718353],
+      "type": "VEC3",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 10,
+      "type": "VEC3",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 10,
+      "type": "VEC4",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 10,
+      "type": "VEC2",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 12,
+      "type": "SCALAR",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 1590,
+      "max": [0.10123427957296371, 0.03127918019890785, 0.008733176626265049],
+      "min": [
+        -0.10123410820960999, -0.10365482419729233, 0.0041909185238182545
+      ],
+      "type": "VEC3",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 1590,
+      "type": "VEC3",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 1590,
+      "type": "VEC4",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 1590,
+      "type": "VEC2",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5123,
+      "count": 4992,
+      "type": "SCALAR",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 69,
+      "max": [2.2666666666666666],
+      "min": [0],
+      "type": "SCALAR",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5126,
+      "count": 69,
+      "type": "VEC4",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5126,
+      "count": 69,
+      "type": "VEC3",
+      "byteOffset": 0
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 120,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 120,
+      "byteOffset": 120,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 160,
+      "byteOffset": 240,
+      "byteStride": 16,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 80,
+      "byteOffset": 400,
+      "byteStride": 8,
+      "target": 34962
+    },
+    { "buffer": 0, "byteLength": 24, "byteOffset": 480, "target": 34963 },
+    {
+      "buffer": 0,
+      "byteLength": 19080,
+      "byteOffset": 504,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 19080,
+      "byteOffset": 19584,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 25440,
+      "byteOffset": 38664,
+      "byteStride": 16,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 12720,
+      "byteOffset": 64104,
+      "byteStride": 8,
+      "target": 34962
+    },
+    { "buffer": 0, "byteLength": 9984, "byteOffset": 76824, "target": 34963 },
+    { "buffer": 0, "byteLength": 276, "byteOffset": 86808 },
+    { "buffer": 0, "byteLength": 1104, "byteOffset": 87084 },
+    { "buffer": 0, "byteLength": 828, "byteOffset": 88188 }
+  ],
+  "samplers": [
+    { "magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497 }
+  ],
+  "buffers": [
+    {
+      "name": "Fendi_banzi",
+      "byteLength": 89016,
+      "uri": "Fendi_banzi-004667.bin"
+    }
+  ]
+}

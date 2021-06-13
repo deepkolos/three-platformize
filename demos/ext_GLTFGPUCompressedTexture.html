@@ -45,66 +45,68 @@
         `use ${useImageBitmapLoader ? 'ImageBitmapLoader' : 'TextureLoader'}`,
       );
 
-      // const baseUrl = '.';
-      const baseUrl = 'http://127.0.0.1:8080';
+      const baseUrl = './models';
+      // const baseUrl = 'http://127.0.0.1:8080';
       // const baseUrl = 'http://192.168.10.140:8080';
       const bagCases = [
         {
           uri: '/glb/Fendi_banzi_green.glb',
-          name: 'first',
+          name: 'Fendi_banzi_green用于初始化渲染',
+          first: true,
         },
         {
           uri: '/no-mipmap/Fendi_banzi_blue.gltf',
-          name: 'gltf-tc zstd',
+          name: 'Fendi_banzi_blue gltf-tc zstd: true  mipmap: false',
         },
         {
           uri: '/no-zstd/Fendi_banzi_blue.gltf',
-          name: 'gltf-tc mipmap',
+          name: 'Fendi_banzi_blue gltf-tc zstd: false mipmap: true',
         },
         {
           uri: '/zstd/Fendi_banzi_blue.gltf',
-          name: 'gltf-tc zstd mipmap',
+          name: 'Fendi_banzi_blue gltf-tc zstd: true  mipmap: true',
         },
         {
           uri: '/glb/Fendi_banzi_blue.glb',
-          name: 'glb',
+          name: 'Fendi_banzi_blue glb',
         },
         {
           uri: '/gltf/Fendi_banzi_blue.gltf',
-          name: 'gltf',
+          name: 'Fendi_banzi_blue gltf',
         },
       ];
       const BoomBoxCases = [
         {
           uri: '/zstd/BoomBox.gltf',
-          name: 'gltf-tc BoomBox',
+          name: 'BoomBox gltf-tc zstd: true  mipmap: true worker_decode: true',
         },
         {
           uri: '/zstd/BoomBox.gltf',
-          name: 'gltf-tc BoomBox no zstd decoder worker',
+          name: 'BoomBox gltf-tc zstd: true  mipmap: true worker_decode: false',
           noWorker: true,
         },
         {
           uri: '/glb/BoomBox.glb',
-          name: 'glb BoomBox',
+          name: 'BoomBox glb',
         },
         {
           uri: '/gltf/BoomBox.gltf',
-          name: 'gltf BoomBox',
+          name: 'BoomBox gltf',
         },
       ];
       const cases = [
-        {
-          scale: 16,
-          items: BoomBoxCases,
-          offsetX: 0.5,
-          offsetY: 0.4,
-        },
         {
           scale: 2,
           items: bagCases,
           offsetX: 0.5,
           offsetY: 0.3,
+        },
+        {
+          scale: 16,
+          items: BoomBoxCases,
+          offsetX: 0.5,
+          offsetY: 0.4,
+          scaleDir: [-1, 1, -1],
         },
       ];
 
@@ -113,8 +115,8 @@
       const load = async () => {
         for (let i = 0; i < cases.length; i++) {
           for (let j = 0; j < cases[i].items.length; j++) {
-            const { scale, offsetX, offsetY } = cases[i];
-            const { name, noWorker, uri } = cases[i].items[j];
+            const { scale, offsetX, offsetY, scaleDir = [1, 1, 1] } = cases[i];
+            const { name, noWorker, uri, first } = cases[i].items[j];
 
             await trackGroup(
               name,
@@ -126,21 +128,21 @@
                 gltf.parser = null;
                 gltf.scene.position.y = 1.2 - j * offsetY;
                 gltf.scene.position.x = -0.5 + i * offsetX;
-                gltf.scene.scale.set(scale, scale, scale);
+                gltf.scene.scale.set(...scaleDir.map(i => i * scale));
                 scene.add(gltf.scene);
                 // gltf.scene.traverse(node => {
                 //   if (node.isMesh) {
                 //     console.log(node);
                 //   }
                 // });
-                track('renderer.compile', () => {
+                first && track('renderer.compile', () => {
                   renderer.compile(scene, camera);
                 });
                 track('render', render);
                 // track('render2', render);
                 await sleep(120);
               },
-              sumGroup,
+              printGroup,
             );
           }
         }
@@ -180,41 +182,28 @@
         currTrackInfo[name] = cost;
         return res;
       }
-      async function trackGroup(name, fn, sumFn) {
-        console.log(`===========${name}===========`);
+      async function trackGroup(name, fn, printFn) {
+        console.log(`%c${name}`, 'color: white; background-color: #123456;');
         currTrackInfo = {};
         await fn();
-        sumFn(currTrackInfo);
-        console.table(currTrackInfo);
+        printFn(currTrackInfo);
       }
-      function sumGroup(trackInfo) {
-        // trackInfo.loadRender = trackInfo.load + trackInfo.render;
-        console.log('sum', trackInfo.load + trackInfo.render);
+      function printGroup(trackInfo) {
+        trackInfo['load + render'] = trackInfo.load + trackInfo.render;
+        let maxKeyLen = 0;
+
+        Object.keys(trackInfo).forEach(
+          key => (maxKeyLen = Math.max(key.length, maxKeyLen)),
+        );
+
+        const summaryStr = Object.keys(trackInfo)
+          .map(
+            key =>
+              `  ${key.padEnd(maxKeyLen, ' ')}: ${trackInfo[key].toFixed(2)}ms`,
+          )
+          .join('\n');
+        console.log(summaryStr);
       }
-
-      //       const iframe = document.createElement('iframe');
-      //       const html = `
-      // <script>
-      //   window.addEventListener('message', (e) => {
-      //     console.log('iframe e', e)
-      //   });
-
-      //   let i = 0;
-      //   setInterval(() => {
-      //     window.postMessage(i++);
-      //   }, 100)
-      //   // while(1) {
-      //   //   console.log('x')
-      //   // }
-
-      // <\/script>`;
-      //       const blob = new Blob([html], { type: 'text/html' });
-      //       iframe.src = URL.createObjectURL(blob);
-      //       iframe.addEventListener('message', e => {
-      //         console.log('main e', e);
-      //       });
-      //       document.body.append(iframe);
-      //       iframe.contentWindow.postMessage('hello');
     </script>
   </body>
 </html>
