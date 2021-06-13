@@ -23,7 +23,6 @@
       import { GLTFLoader } from '../examples/jsm/loaders/GLTFLoader.js';
       import { GLTFGPUCompressedTexture } from '../extensions/GLTFGPUCompressedTexture.js';
       import { OrbitControls } from '../examples/jsm/controls/OrbitControls.js';
-      // import { ZSTDDecoder } from '../examples/jsm/libs/zstddec.module.js';
 
       THREE.PLATFORM.set(new BrowserPlatform());
 
@@ -46,6 +45,7 @@
         `use ${useImageBitmapLoader ? 'ImageBitmapLoader' : 'TextureLoader'}`,
       );
 
+      // const baseUrl = '.';
       const baseUrl = 'http://127.0.0.1:8080';
       // const baseUrl = 'http://192.168.10.140:8080';
       const bagCases = [
@@ -138,7 +138,7 @@
                 });
                 track('render', render);
                 // track('render2', render);
-                await sleep(200);
+                await sleep(120);
               },
               sumGroup,
             );

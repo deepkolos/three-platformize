@@ -53,7 +53,6 @@ export class WorkerPool {
         this.workerStatus |= 1 << workerId;
         this.workersResolve[workerId] = resolve;
         this.workers[workerId].postMessage(msg, transfer);
-        // console.log('using workerId', workerId);
       } else {
         this.quene.push({ resolve, msg, transfer });
       }

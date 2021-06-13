@@ -1836,7 +1836,7 @@ var GLTFLoader = ( function () {
 
 		// Use an ImageBitmapLoader if imageBitmaps are supported. Moves much of the
 		// expensive work of uploading a texture to the GPU off the main thread.
-		if ( false && typeof $createImageBitmap !== 'undefined' && /Firefox/.test( navigator.userAgent ) === false ) {
+		if ( typeof $createImageBitmap !== 'undefined' && /Firefox/.test( navigator.userAgent ) === false ) {
 
 			this.textureLoader = new ImageBitmapLoader( this.options.manager );
 
@@ -2464,7 +2464,6 @@ var GLTFLoader = ( function () {
 			}
 
 			texture.flipY = false;
-			// texture.flipY = true;
 
 			if ( textureDef.name ) texture.name = textureDef.name;
 
