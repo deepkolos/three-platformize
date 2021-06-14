@@ -35,7 +35,7 @@
 
       const gltfLoader = new GLTFLoader();
       gltfLoader.register(
-        parser => new GLTFGPUCompressedTexture(parser, renderer, true),
+        parser => new GLTFGPUCompressedTexture(parser, renderer),
       );
       const useImageBitmapLoader =
         typeof createImageBitmap !== 'undefined' &&
@@ -110,8 +110,6 @@
         },
       ];
 
-      let lastMap;
-
       const load = async () => {
         for (let i = 0; i < cases.length; i++) {
           for (let j = 0; j < cases[i].items.length; j++) {
@@ -135,9 +133,10 @@
                 //     console.log(node);
                 //   }
                 // });
-                first && track('renderer.compile', () => {
-                  renderer.compile(scene, camera);
-                });
+                first &&
+                  track('renderer.compile', () => {
+                    renderer.compile(scene, camera);
+                  });
                 track('render', render);
                 // track('render2', render);
                 await sleep(120);
