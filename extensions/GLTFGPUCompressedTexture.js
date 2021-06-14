@@ -18,7 +18,7 @@ import {
   MirroredRepeatWrapping,
 } from '../build/three.module.js';
 import { ZSTDDecoder, wasm } from '../examples/jsm/libs/zstddec.module.js';
-import { ZSTDDecoderWorker } from '../tools/ZSTDDecoderWorker.js';
+import { ZSTDDecoderWorker } from '../tools/zstddec.worker.module.js';
 
 const typeFormatMap = {
   astc: RGBA_ASTC_4x4_Format,
@@ -189,5 +189,9 @@ export class GLTFGPUCompressedTexture {
 
     // 降级为 PNG/JPEG.
     return parser.loadTexture(textureIndex);
+  }
+
+  dispose() {
+    this.zstdWorker.dispose();
   }
 }

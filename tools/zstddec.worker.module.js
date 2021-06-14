@@ -1,4 +1,4 @@
-import { WorkerPool } from './WorkerPool.js';
+import { WorkerPool } from './worker-pool.module.js';
 
 export class ZSTDDecoderWorker {
   static Worker() {
