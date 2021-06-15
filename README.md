@@ -137,13 +137,14 @@ THREE.PLATFORM.dispose();
 
 ### 经验
 
-0. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)，原因可能是服务端对图片大图片优化，把图片压缩导致格式改变 RGB 变 RGBA
-1. r126 不能设置全 pixelRatio，可以设置为一半，或者 2，不能是 3
-2. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)，但wasm对字符串处理性能不如js，用AssemblyScript编译的wasm测试
-3. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
-4. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
-5. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐 GLB
-6. URL 的 polyfill 可以使用 fileSystemManager 来获取临时文件的方式避免 arraybuffer 转 base64, 但是需要手动管理临时文件
+0. 微信小程序不支持 2048 以上的纹理图片
+1. 淘宝小程序显示 RGB 格式纹理 (JPG) 有问题，通过 TextureLoader 加载纹理后，把 texture.format 设置为 RGBAFromat 即可(淘宝版本 9.20.0)，原因可能是服务端对图片大图片优化，把图片压缩导致格式改变 RGB 变 RGBA
+2. r126 不能设置全 pixelRatio，可以设置为一半，或者 2，不能是 3
+3. 虽然支持加载 GLB，但图片是使用 js 版的 ArrayBuffer 转 base64，耗时且占用内存，虽可用 wasm 的 encoder 缓解 (https://github.com/marcosc90/encoding-wasm)，但wasm对字符串处理性能不如js，用AssemblyScript编译的wasm测试
+4. IOS 前后进入退出页面崩可以降低 pixelRatio 缓解
+5. IOS 微信 readPixels 不支持抗锯齿，如果直接 canvas 的 buffer 需要关闭抗锯齿（antialias: false）, 另一种方式是 WebglRenderTarget，同时也可以开启抗锯齿，但是纹理大小受限（小米 8 下纹理宽/高不能超过 4096，需要注意先 setSize，再 setPixelRatio）（截图 Demo 见[微信小程序 DEMO](https://github.com/deepkolos/three-platformize-demo-wechat)）
+6. 淘宝小程序有严格的域名验证，可使用云存储放模型，但是如果模型和纹理分开则需要手动关联，推荐 GLB
+7. URL 的 polyfill 可以使用 fileSystemManager 来获取临时文件的方式避免 arraybuffer 转 base64, 但是需要手动管理临时文件
 
 ## 实现
 
