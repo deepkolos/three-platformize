@@ -1,3 +1,26 @@
+# [1.129.0](https://github.com/deepkolos/three-platformize/compare/v1.0.23...v1.129.0) (2021-06-22)
+
+
+### Bug Fixes
+
+* buffer.slice ([7b7ea0a](https://github.com/deepkolos/three-platformize/commit/7b7ea0a44ec62f10663c12f9673a1d5b850ca2a4))
+* sync PR filename & dispose ([80e8736](https://github.com/deepkolos/three-platformize/commit/80e8736fa20b7aeff25ed98fb44ebae40bb18c90))
+
+
+### Features
+
+* add GLTFGPUCompressedTexture(doing) ([22cbda5](https://github.com/deepkolos/three-platformize/commit/22cbda53f36595a0d075888feda838895bf24568))
+* add worker pool & zstd decoder dispose function ([57c9041](https://github.com/deepkolos/three-platformize/commit/57c90413a32406ad1ed7a423d0d8bfb0a58703e5))
+* add WorkerPool & ZSTDDecoderWorker ([8735504](https://github.com/deepkolos/three-platformize/commit/8735504419344146ad266e0e548c85a7e52beea7))
+* build confg update ([892832a](https://github.com/deepkolos/three-platformize/commit/892832a57c7fc885564480cd29c8191f90e264dc))
+* GLTFGPUCompressedTexture add zstd support ([a306d38](https://github.com/deepkolos/three-platformize/commit/a306d38e1eb80c7a7fb497b123305a531b4c2fff))
+* GLTFGPUCompressedTexture support load mipmap ([d67cd84](https://github.com/deepkolos/three-platformize/commit/d67cd84380bf93fbfa1169185f0ab418a4a407da))
+* improve GLTFGPUCompressedTexture test case ([1aac31b](https://github.com/deepkolos/three-platformize/commit/1aac31bd10057b9ab716651dcbeae174594d0bc0))
+* shade zstd wasm data between zstddec and zstddec worker ([e4c89cc](https://github.com/deepkolos/three-platformize/commit/e4c89cc70d3753bca29e277a4ae1a080baa6f711))
+* update to r129 ([0cabace](https://github.com/deepkolos/three-platformize/commit/0cabace53f899e12b22e4014af3c7f2ac631faeb))
+
+
+
 ## [1.0.23](https://github.com/deepkolos/three-platformize/compare/1.0.22...v1.0.23) (2021-05-27)
 
 
