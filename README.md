@@ -114,9 +114,21 @@
 
 0. ImageBitmapLoader(微信小程序未开放 ImageBitmap)
 
-### 有支持可能，但需要单独适配
+#### Tools
 
-0. BasisTextureLoader(微信小程序的 Worker 不好转发，经测试安卓可在 worker 内使用 WASM)
+0. dispose-three（销毁节点
+1. flip（截屏需要flipY
+2. screenshot
+3. worker-pool.module（暂未适配微信小程序
+4. zstddec.worker.module（暂未适配微信小程序
+5. zstddec.module（暂未适配微信小程序
+6. toEnvMap（用于hdr prefilter
+7. meshopt_decoder.asm.module（微信小程序可用
+8. meshopt_decoder.wasm.module（微信小程序可用
+
+#### Extensions
+
+0. GLTFGPUCompressedTexture(BasisTextureLoader的代替方案) 生成工具通过[gltf-gpu-compressed-texture](https://github.com/deepkolos/gltf-gpu-compressed-texture)获取（暂未适配微信小程序
 
 ## 使用
 
