@@ -2,9 +2,10 @@ import path from 'path';
 import copy from 'rollup-plugin-copy';
 import * as fastGlob from 'fast-glob';
 import {
-  platformVariables,
   platformize,
+  platformVariables,
   useRealOpentypeModule,
+  importFromPlatfromizedThree,
 } from './platfromize';
 
 const ThreeOrigin = path.resolve(__dirname, '../three/build/three.module.js');
@@ -18,6 +19,7 @@ export default fastGlob.sync('three/examples/jsm/**/*.js').map(input => {
     },
     external: () => true,
     plugins: [
+      importFromPlatfromizedThree(),
       platformize(platformVariables, ThreeOrigin),
       useRealOpentypeModule(),
       copy({

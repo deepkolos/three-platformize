@@ -1,6 +1,6 @@
 import { Matrix4, Vector3, Box3, DirectionalLight, MathUtils, ShaderChunk, Vector2 } from '../../../build/three.module.js';
-import Frustum from './Frustum.js';
-import Shader from './Shader.js';
+import { Frustum } from './Frustum.js';
+import { CSMShader } from './CSMShader.js';
 
 const _cameraToLightMatrix = new Matrix4();
 const _lightSpaceFrustum = new Frustum();
@@ -231,8 +231,8 @@ class CSM {
 
 	injectInclude() {
 
-		ShaderChunk.lights_fragment_begin = Shader.lights_fragment_begin;
-		ShaderChunk.lights_pars_begin = Shader.lights_pars_begin;
+		ShaderChunk.lights_fragment_begin = CSMShader.lights_fragment_begin;
+		ShaderChunk.lights_pars_begin = CSMShader.lights_pars_begin;
 
 	}
 

@@ -4,23 +4,25 @@ specifiers:
   '@babel/core': ^7.14.3
   '@babel/plugin-proposal-class-properties': ^7.12.1
   '@babel/preset-env': ^7.12.11
+  '@rollup/plugin-alias': ^3.1.2
   '@rollup/plugin-babel': ^5.2.2
   '@rollup/plugin-inject': ^4.0.2
-  '@types/three': ^0.127.0
+  '@types/three': ^0.129.1
   rollup: ^2.36.2
   rollup-plugin-copy: ^3.3.0
   rollup-plugin-multi-input: ^1.2.0
   rollup-plugin-terser: ^7.0.2
   symlink-dir: ^4.1.0
-  three: ^0.127.0
+  three: ^0.129.0
 
 dependencies:
-  '@types/three': 0.127.1
+  '@types/three': registry.nlark.com/@types/three/0.129.1
 
 devDependencies:
   '@babel/core': 7.14.3
   '@babel/plugin-proposal-class-properties': 7.13.0_@babel+core@7.14.3
   '@babel/preset-env': 7.13.10_@babel+core@7.14.3
+  '@rollup/plugin-alias': registry.nlark.com/@rollup/plugin-alias/3.1.2_rollup@2.41.2
   '@rollup/plugin-babel': 5.3.0_@babel+core@7.14.3+rollup@2.41.2
   '@rollup/plugin-inject': 4.0.2_rollup@2.41.2
   rollup: 2.41.2
@@ -28,7 +30,7 @@ devDependencies:
   rollup-plugin-multi-input: 1.2.0
   rollup-plugin-terser: 7.0.2_rollup@2.41.2
   symlink-dir: 4.1.0
-  three: 0.127.0
+  three: registry.nlark.com/three/0.129.0
 
 packages:
 
@@ -1189,10 +1191,6 @@ packages:
     resolution: {integrity: sha1-B5NRlPwEkGmhxWwMJ0Jlq+3fiNo=, tarball: '@types/node/download/@types/node-14.14.34.tgz'}
     dev: true
 
-  /@types/three/0.127.1:
-    resolution: {integrity: sha512-e90iYq3zde3axANg7BPZY0fKrez1AzveamIIFk23PMh9WtCx91geokDy+yEAIymdIldgUpvezAP6+zCV3oekXw==}
-    dev: false
-
   /ansi-styles/3.2.1:
     resolution: {integrity: sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=, tarball: ansi-styles/download/ansi-styles-3.2.1.tgz}
     engines: {node: '>=4'}
@@ -1937,10 +1935,6 @@ packages:
       source-map-support: 0.5.19
     dev: true
 
-  /three/0.127.0:
-    resolution: {integrity: sha512-wtgrn+mhYUbobxT7QN3GPdu3SRpSBQvwY6uOzLChWS7QE//f7paDU/+wlzbg+ngeIvBBqjBHSRuywTh8A99Jng==}
-    dev: true
-
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
@@ -1983,4 +1977,36 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=, tarball: wrappy/download/wrappy-1.0.2.tgz}
+    dev: true
+
+  registry.nlark.com/@rollup/plugin-alias/3.1.2_rollup@2.41.2:
+    resolution: {integrity: sha1-xYWwW+SneC0mnGnRPe9W9E5Bd3I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@rollup/plugin-alias/download/@rollup/plugin-alias-3.1.2.tgz?cache=0&sync_timestamp=1624351999102&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40rollup%2Fplugin-alias%2Fdownload%2F%40rollup%2Fplugin-alias-3.1.2.tgz}
+    id: registry.nlark.com/@rollup/plugin-alias/3.1.2
+    name: '@rollup/plugin-alias'
+    version: 3.1.2
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      rollup: 2.41.2
+      slash: registry.nlark.com/slash/3.0.0
+    dev: true
+
+  registry.nlark.com/@types/three/0.129.1:
+    resolution: {integrity: sha1-5IjmhhMiVt/WHP/U2X6mzxdqSo0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/three/download/@types/three-0.129.1.tgz}
+    name: '@types/three'
+    version: 0.129.1
+    dev: false
+
+  registry.nlark.com/slash/3.0.0:
+    resolution: {integrity: sha1-ZTm+hwwWWtvVJAIg2+Nh8bxNRjQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/slash/download/slash-3.0.0.tgz}
+    name: slash
+    version: 3.0.0
+    engines: {node: '>=8'}
+    dev: true
+
+  registry.nlark.com/three/0.129.0:
+    resolution: {integrity: sha1-9eUwu8lurF1bR0nLXaiG7w1C9VQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/three/download/three-0.129.0.tgz}
+    name: three
+    version: 0.129.0
     dev: true

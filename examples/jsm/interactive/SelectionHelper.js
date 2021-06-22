@@ -1,9 +1,9 @@
 import { $document } from '../../../build/three.module.js';
 import { Vector2 } from '../../../build/three.module.js';
 
-var SelectionHelper = ( function () {
+class SelectionHelper {
 
-	function SelectionHelper( selectionBox, renderer, cssClassName ) {
+	constructor( selectionBox, renderer, cssClassName ) {
 
 		this.element = $document.createElement( 'div' );
 		this.element.classList.add( cssClassName );
@@ -43,7 +43,7 @@ var SelectionHelper = ( function () {
 
 	}
 
-	SelectionHelper.prototype.onSelectStart = function ( event ) {
+	onSelectStart( event ) {
 
 		this.renderer.domElement.parentElement.appendChild( this.element );
 
@@ -55,9 +55,9 @@ var SelectionHelper = ( function () {
 		this.startPoint.x = event.clientX;
 		this.startPoint.y = event.clientY;
 
-	};
+	}
 
-	SelectionHelper.prototype.onSelectMove = function ( event ) {
+	onSelectMove( event ) {
 
 		this.pointBottomRight.x = Math.max( this.startPoint.x, event.clientX );
 		this.pointBottomRight.y = Math.max( this.startPoint.y, event.clientY );
@@ -69,16 +69,14 @@ var SelectionHelper = ( function () {
 		this.element.style.width = ( this.pointBottomRight.x - this.pointTopLeft.x ) + 'px';
 		this.element.style.height = ( this.pointBottomRight.y - this.pointTopLeft.y ) + 'px';
 
-	};
+	}
 
-	SelectionHelper.prototype.onSelectOver = function () {
+	onSelectOver() {
 
 		this.element.parentElement.removeChild( this.element );
 
-	};
+	}
 
-	return SelectionHelper;
-
-} )();
+}
 
 export { SelectionHelper };

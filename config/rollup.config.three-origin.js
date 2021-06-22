@@ -1,7 +1,8 @@
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import babelrc from './.babelrc.json';
 
-function glconstants() {
+export function glconstants() {
 
 	var constants = {
 		POINTS: 0, ZERO: 0, NONE: 0,
@@ -38,7 +39,9 @@ function glconstants() {
 		CULL_FACE: 2884,
 		DEPTH_TEST: 2929,
 		STENCIL_TEST: 2960,
+		VIEWPORT: 2978,
 		BLEND: 3042,
+		SCISSOR_BOX: 3088,
 		SCISSOR_TEST: 3089,
 		UNPACK_ALIGNMENT: 3317,
 		MAX_TEXTURE_SIZE: 3379,
@@ -199,7 +202,7 @@ function addons() {
 
 }
 
-function glsl() {
+export function glsl() {
 
 	return {
 
@@ -270,20 +273,6 @@ ${ code }`;
 	};
 
 }
-
-const babelrc = {
-	presets: [
-		[
-			'@babel/preset-env',
-			{
-				modules: false,
-				targets: '>1%',
-				loose: true,
-				bugfixes: true,
-			}
-		]
-	]
-};
 
 export default [
 	{

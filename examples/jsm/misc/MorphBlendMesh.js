@@ -1,36 +1,34 @@
 import { Mesh, MathUtils } from '../../../build/three.module.js';
 
-var MorphBlendMesh = function ( geometry, material ) {
+class MorphBlendMesh extends Mesh {
 
-	Mesh.call( this, geometry, material );
+	constructor( geometry, material ) {
 
-	this.animationsMap = {};
-	this.animationsList = [];
+		super( geometry, material );
 
-	// prepare default animation
-	// (all frames played together in 1 second)
+		this.animationsMap = {};
+		this.animationsList = [];
 
-	var numFrames = Object.keys( this.morphTargetDictionary ).length;
+		// prepare default animation
+		// (all frames played together in 1 second)
 
-	var name = '__default';
+		const numFrames = Object.keys( this.morphTargetDictionary ).length;
 
-	var startFrame = 0;
-	var endFrame = numFrames - 1;
+		const name = '__default';
 
-	var fps = numFrames / 1;
+		const startFrame = 0;
+		const endFrame = numFrames - 1;
 
-	this.createAnimation( name, startFrame, endFrame, fps );
-	this.setAnimationWeight( name, 1 );
+		const fps = numFrames / 1;
 
-};
+		this.createAnimation( name, startFrame, endFrame, fps );
+		this.setAnimationWeight( name, 1 );
 
-MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
+	}
 
-	constructor: MorphBlendMesh,
+	createAnimation( name, start, end, fps ) {
 
-	createAnimation: function ( name, start, end, fps ) {
-
-		var animation = {
+		const animation = {
 
 			start: start,
 			end: end,
@@ -57,27 +55,29 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 		this.animationsMap[ name ] = animation;
 		this.animationsList.push( animation );
 
-	},
+	}
 
-	autoCreateAnimations: function ( fps ) {
+	autoCreateAnimations( fps ) {
 
-		var pattern = /([a-z]+)_?(\d+)/i;
+		const pattern = /([a-z]+)_?(\d+)/i;
 
-		var firstAnimation, frameRanges = {};
+		let firstAnimation;
 
-		var i = 0;
+		const frameRanges = {};
 
-		for ( var key in this.morphTargetDictionary ) {
+		let i = 0;
 
-			var chunks = key.match( pattern );
+		for ( const key in this.morphTargetDictionary ) {
+
+			const chunks = key.match( pattern );
 
 			if ( chunks && chunks.length > 1 ) {
 
-				var name = chunks[ 1 ];
+				const name = chunks[ 1 ];
 
 				if ( ! frameRanges[ name ] ) frameRanges[ name ] = { start: Infinity, end: - Infinity };
 
-				var range = frameRanges[ name ];
+				const range = frameRanges[ name ];
 
 				if ( i < range.start ) range.start = i;
 				if ( i > range.end ) range.end = i;
@@ -90,20 +90,20 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-		for ( var name in frameRanges ) {
+		for ( const name in frameRanges ) {
 
-			var range = frameRanges[ name ];
+			const range = frameRanges[ name ];
 			this.createAnimation( name, range.start, range.end, fps );
 
 		}
 
 		this.firstAnimation = firstAnimation;
 
-	},
+	}
 
-	setAnimationDirectionForward: function ( name ) {
+	setAnimationDirectionForward( name ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -112,11 +112,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	setAnimationDirectionBackward: function ( name ) {
+	setAnimationDirectionBackward( name ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -125,11 +125,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	setAnimationFPS: function ( name, fps ) {
+	setAnimationFPS( name, fps ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -138,11 +138,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	setAnimationDuration: function ( name, duration ) {
+	setAnimationDuration( name, duration ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -151,11 +151,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	setAnimationWeight: function ( name, weight ) {
+	setAnimationWeight( name, weight ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -163,11 +163,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	setAnimationTime: function ( name, time ) {
+	setAnimationTime( name, time ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -175,13 +175,13 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	getAnimationTime: function ( name ) {
+	getAnimationTime( name ) {
 
-		var time = 0;
+		let time = 0;
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -191,13 +191,13 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		return time;
 
-	},
+	}
 
-	getAnimationDuration: function ( name ) {
+	getAnimationDuration( name ) {
 
-		var duration = - 1;
+		let duration = - 1;
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -207,11 +207,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		return duration;
 
-	},
+	}
 
-	playAnimation: function ( name ) {
+	playAnimation( name ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -224,11 +224,11 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	stopAnimation: function ( name ) {
+	stopAnimation( name ) {
 
-		var animation = this.animationsMap[ name ];
+		const animation = this.animationsMap[ name ];
 
 		if ( animation ) {
 
@@ -236,17 +236,17 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 		}
 
-	},
+	}
 
-	update: function ( delta ) {
+	update( delta ) {
 
-		for ( var i = 0, il = this.animationsList.length; i < il; i ++ ) {
+		for ( let i = 0, il = this.animationsList.length; i < il; i ++ ) {
 
-			var animation = this.animationsList[ i ];
+			const animation = this.animationsList[ i ];
 
 			if ( ! animation.active ) continue;
 
-			var frameTime = animation.duration / animation.length;
+			const frameTime = animation.duration / animation.length;
 
 			animation.time += animation.direction * delta;
 
@@ -280,8 +280,8 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 			}
 
-			var keyframe = animation.start + MathUtils.clamp( Math.floor( animation.time / frameTime ), 0, animation.length - 1 );
-			var weight = animation.weight;
+			const keyframe = animation.start + MathUtils.clamp( Math.floor( animation.time / frameTime ), 0, animation.length - 1 );
+			const weight = animation.weight;
 
 			if ( keyframe !== animation.currentFrame ) {
 
@@ -295,7 +295,7 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 			}
 
-			var mix = ( animation.time % frameTime ) / frameTime;
+			let mix = ( animation.time % frameTime ) / frameTime;
 
 			if ( animation.directionBackwards ) mix = 1 - mix;
 
@@ -314,6 +314,6 @@ MorphBlendMesh.prototype = Object.assign( Object.create( Mesh.prototype ), {
 
 	}
 
-} );
+}
 
 export { MorphBlendMesh };

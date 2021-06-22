@@ -1,6 +1,6 @@
 import { Vector2, Matrix4 } from '../../../build/three.module.js';
 
-var SSRrShader = {
+const SSRrShader = {
 
 	defines: {
 		MAX_STEP: 0,
@@ -12,21 +12,21 @@ var SSRrShader = {
 
 	uniforms: {
 
-		"tDiffuse": { value: null },
-		"tSpecular": { value: null },
-		"tNormalSelects": { value: null },
-		"tRefractive": { value: null },
-		"tDepth": { value: null },
-		"tDepthSelects": { value: null },
-		"cameraNear": { value: null },
-		"cameraFar": { value: null },
-		"resolution": { value: new Vector2() },
-		"cameraProjectionMatrix": { value: new Matrix4() },
-		"cameraInverseProjectionMatrix": { value: new Matrix4() },
-		"ior": { value: 1.03 },
-		"cameraRange": { value: 0 },
-		"maxDistance": { value: 180 },
-		"surfDist": { value: .007 },
+		'tDiffuse': { value: null },
+		'tSpecular': { value: null },
+		'tNormalSelects': { value: null },
+		'tRefractive': { value: null },
+		'tDepth': { value: null },
+		'tDepthSelects': { value: null },
+		'cameraNear': { value: null },
+		'cameraFar': { value: null },
+		'resolution': { value: new Vector2() },
+		'cameraProjectionMatrix': { value: new Matrix4() },
+		'cameraInverseProjectionMatrix': { value: new Matrix4() },
+		'ior': { value: 1.03 },
+		'cameraRange': { value: 0 },
+		'maxDistance': { value: 180 },
+		'surfDist': { value: .007 },
 
 	},
 
@@ -237,14 +237,14 @@ var SSRrShader = {
 var SSRrDepthShader = {
 
 	defines: {
-		"PERSPECTIVE_CAMERA": 1
+		'PERSPECTIVE_CAMERA': 1
 	},
 
 	uniforms: {
 
-		"tDepth": { value: null },
-		"cameraNear": { value: null },
-		"cameraFar": { value: null },
+		'tDepth': { value: null },
+		'cameraNear': { value: null },
+		'cameraFar': { value: null },
 
 	},
 

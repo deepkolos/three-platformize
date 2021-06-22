@@ -39,11 +39,11 @@ class SessionLightProbe {
 
 			this.xrWebGLBinding = new XRWebGLBinding( session, gl );
 
-			this.lightProbe.addEventListener('reflectionchange', () => {
+			this.lightProbe.addEventListener( 'reflectionchange', () => {
 
 				this.updateReflection();
 
-			});
+			} );
 
 		}
 

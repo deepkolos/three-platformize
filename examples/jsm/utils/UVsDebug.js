@@ -9,29 +9,29 @@ import { Vector2 } from '../../../build/three.module.js';
  *
  */
 
-var UVsDebug = function ( geometry, size ) {
+function UVsDebug( geometry, size = 1024 ) {
 
 	// handles wrapping of uv.x > 1 only
 
-	var abc = 'abc';
-	var a = new Vector2();
-	var b = new Vector2();
+	const abc = 'abc';
+	const a = new Vector2();
+	const b = new Vector2();
 
-	var uvs = [
+	const uvs = [
 		new Vector2(),
 		new Vector2(),
 		new Vector2()
 	];
 
-	var face = [];
+	const face = [];
 
-	var canvas = $document.createElement( 'canvas' );
-	var width = size || 1024; // power of 2 required for wrapping
-	var height = size || 1024;
+	const canvas = $document.createElement( 'canvas' );
+	const width = size; // power of 2 required for wrapping
+	const height = size;
 	canvas.width = width;
 	canvas.height = height;
 
-	var ctx = canvas.getContext( '2d' );
+	const ctx = canvas.getContext( '2d' );
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = 'rgb( 63, 63, 63 )';
 	ctx.textAlign = 'center';
@@ -48,14 +48,14 @@ var UVsDebug = function ( geometry, size ) {
 
 	} else {
 
-		var index = geometry.index;
-		var uvAttribute = geometry.attributes.uv;
+		const index = geometry.index;
+		const uvAttribute = geometry.attributes.uv;
 
 		if ( index ) {
 
 			// indexed geometry
 
-			for ( var i = 0, il = index.count; i < il; i += 3 ) {
+			for ( let i = 0, il = index.count; i < il; i += 3 ) {
 
 				face[ 0 ] = index.getX( i );
 				face[ 1 ] = index.getX( i + 1 );
@@ -73,7 +73,7 @@ var UVsDebug = function ( geometry, size ) {
 
 			// non-indexed geometry
 
-			for ( var i = 0, il = uvAttribute.count; i < il; i += 3 ) {
+			for ( let i = 0, il = uvAttribute.count; i < il; i += 3 ) {
 
 				face[ 0 ] = i;
 				face[ 1 ] = i + 1;
@@ -101,9 +101,9 @@ var UVsDebug = function ( geometry, size ) {
 
 		a.set( 0, 0 );
 
-		for ( var j = 0, jl = uvs.length; j < jl; j ++ ) {
+		for ( let j = 0, jl = uvs.length; j < jl; j ++ ) {
 
-			var uv = uvs[ j ];
+			const uv = uvs[ j ];
 
 			a.x += uv.x;
 			a.y += uv.y;
@@ -148,12 +148,12 @@ var UVsDebug = function ( geometry, size ) {
 
 		// label uv edge orders
 
-		for ( j = 0, jl = uvs.length; j < jl; j ++ ) {
+		for ( let j = 0, jl = uvs.length; j < jl; j ++ ) {
 
-			var uv = uvs[ j ];
+			const uv = uvs[ j ];
 			b.addVectors( a, uv ).divideScalar( 2 );
 
-			var vnum = face[ j ];
+			const vnum = face[ j ];
 			ctx.fillText( abc[ j ] + vnum, b.x * width, ( 1 - b.y ) * height );
 
 			if ( b.x > 0.95 ) {
@@ -168,6 +168,6 @@ var UVsDebug = function ( geometry, size ) {
 
 	}
 
-};
+}
 
 export { UVsDebug };

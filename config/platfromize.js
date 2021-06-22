@@ -1,5 +1,6 @@
 import path from 'path';
 import inject from '@rollup/plugin-inject';
+import { REVISION } from '../three/src/constants.js';
 
 export const platformVariables = [
   'URL',
@@ -41,8 +42,13 @@ export function injectPlatformCode() {
       }
 
       if (filePath.endsWith('WebGLExtensions.js')) {
-        code = `import { $defaultWebGLExtensions } from "../../../../src/Platform.js"\n` + code;
-        code = code.replace('const extensions = {};', `const extensions = $defaultWebGLExtensions || {};`)
+        code =
+          `import { $defaultWebGLExtensions } from "../../../../src/Platform.js"\n` +
+          code;
+        code = code.replace(
+          'const extensions = {};',
+          `const extensions = $defaultWebGLExtensions || {};`,
+        );
       }
 
       return {
@@ -56,12 +62,25 @@ export function injectPlatformCode() {
 export function importFromPlatfromizedThree() {
   return {
     transform(code, filePath) {
-      code = code.replaceAll(
-        /from.*('|").*three.module.js('|")/g,
-        `from '${path
-          .resolve(__dirname, '../build/three.module.js')
-          .replaceAll('\\', '\\\\')}'`,
-      );
+      // code = code.replaceAll(
+      //   /from.*('|").*three.module.js('|")/g,
+      //   `from '${path
+      //     .resolve(__dirname, '../build/three.module.js')
+      //     .replaceAll('\\', '\\\\')}'`,
+      // );
+      if (REVISION >= 129) {
+        code = code.replaceAll(
+          `from 'three'`,
+          `from '${path
+            .relative(
+              path
+                .dirname(filePath)
+                .replace(path.sep + 'three' + path.sep, path.sep),
+              path.resolve(__dirname, '../build/three.module.js'),
+            )
+            .replaceAll(path.sep, '/')}'`,
+        );
+      }
 
       return {
         code: code,

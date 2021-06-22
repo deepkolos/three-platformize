@@ -1,6 +1,6 @@
 import { $HTMLCanvasElement, $createImageBitmap } from '../../../../build/three.module.js';
 import { GPUTextureFormat, GPUAddressMode, GPUFilterMode, GPUTextureDimension } from './constants.js';
-import { Texture, NearestFilter, CubeTexture, RepeatWrapping, MirroredRepeatWrapping, NearestMipmapNearestFilter, NearestMipmapLinearFilter, RGFormat, FloatType, HalfFloatType, UnsignedByteType, RedFormat, RGBAFormat, sRGBEncoding, RGBFormat, RGBA_S3TC_DXT5_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT1_Format, LinearFilter } from 'three';
+import { Texture, NearestFilter, CubeTexture, RepeatWrapping, MirroredRepeatWrapping, NearestMipmapNearestFilter, NearestMipmapLinearFilter, RGFormat, FloatType, HalfFloatType, UnsignedByteType, RedFormat, RGBAFormat, sRGBEncoding, RGBFormat, RGBA_S3TC_DXT5_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT1_Format, LinearFilter } from '../../../../build/three.module.js';
 import WebGPUTextureUtils from './WebGPUTextureUtils.js';
 
 class WebGPUTextures {

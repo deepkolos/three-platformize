@@ -8,47 +8,44 @@ import { Mesh, PlaneGeometry, OrthographicCamera, MathUtils, WebGLRenderTarget, 
  * enlarged to match the dimensions of the normal map.
  */
 
-var _mipmapMaterial = _getMipmapMaterial();
+const _mipmapMaterial = _getMipmapMaterial();
 
-var _mesh = new Mesh( new PlaneGeometry( 2, 2 ), _mipmapMaterial );
+const _mesh = new Mesh( new PlaneGeometry( 2, 2 ), _mipmapMaterial );
 
-var _flatCamera = new OrthographicCamera( 0, 1, 0, 1, 0, 1 );
+const _flatCamera = new OrthographicCamera( 0, 1, 0, 1, 0, 1 );
 
-var _tempTarget = null;
+let _tempTarget = null;
 
-var _renderer = null;
+let _renderer = null;
 
-function RoughnessMipmapper( renderer ) {
+class RoughnessMipmapper {
 
-	_renderer = renderer;
+	constructor( renderer ) {
 
-	_renderer.compile( _mesh, _flatCamera );
+		_renderer = renderer;
 
-}
+		_renderer.compile( _mesh, _flatCamera );
 
-RoughnessMipmapper.prototype = {
+	}
 
-	constructor: RoughnessMipmapper,
-
-	generateMipmaps: function ( material ) {
+	generateMipmaps( material ) {
 
 		if ( 'roughnessMap' in material === false ) return;
 
-		var { roughnessMap, normalMap } = material;
+		const { roughnessMap, normalMap } = material;
 
 		if ( roughnessMap === null || normalMap === null || ! roughnessMap.generateMipmaps || material.userData.roughnessUpdated ) return;
 
 		material.userData.roughnessUpdated = true;
 
-		var width = Math.max( roughnessMap.image.width, normalMap.image.width );
-
-		var height = Math.max( roughnessMap.image.height, normalMap.image.height );
+		let width = Math.max( roughnessMap.image.width, normalMap.image.width );
+		let height = Math.max( roughnessMap.image.height, normalMap.image.height );
 
 		if ( ! MathUtils.isPowerOfTwo( width ) || ! MathUtils.isPowerOfTwo( height ) ) return;
 
-		var oldTarget = _renderer.getRenderTarget();
+		const oldTarget = _renderer.getRenderTarget();
 
-		var autoClear = _renderer.autoClear;
+		const autoClear = _renderer.autoClear;
 
 		_renderer.autoClear = false;
 
@@ -64,7 +61,7 @@ RoughnessMipmapper.prototype = {
 
 		if ( width !== roughnessMap.image.width || height !== roughnessMap.image.height ) {
 
-			var params = {
+			const params = {
 				wrapS: roughnessMap.wrapS,
 				wrapT: roughnessMap.wrapT,
 				magFilter: roughnessMap.magFilter,
@@ -72,7 +69,7 @@ RoughnessMipmapper.prototype = {
 				depthBuffer: false
 			};
 
-			var newRoughnessTarget = new WebGLRenderTarget( width, height, params );
+			const newRoughnessTarget = new WebGLRenderTarget( width, height, params );
 
 			newRoughnessTarget.texture.generateMipmaps = true;
 
@@ -102,11 +99,11 @@ RoughnessMipmapper.prototype = {
 
 		_mipmapMaterial.uniforms.normalMap.value = normalMap;
 
-		var position = new Vector2( 0, 0 );
+		const position = new Vector2( 0, 0 );
 
-		var texelSize = _mipmapMaterial.uniforms.texelSize.value;
+		const texelSize = _mipmapMaterial.uniforms.texelSize.value;
 
-		for ( var mip = 0; width >= 1 && height >= 1; ++ mip, width /= 2, height /= 2 ) {
+		for ( let mip = 0; width >= 1 && height >= 1; ++ mip, width /= 2, height /= 2 ) {
 
 			// Rendering to a mip level is not allowed in webGL1. Instead we must set
 			// up a secondary texture to write the result to, then copy it back to the
@@ -136,9 +133,9 @@ RoughnessMipmapper.prototype = {
 
 		_renderer.autoClear = autoClear;
 
-	},
+	}
 
-	dispose: function () {
+	dispose() {
 
 		_mipmapMaterial.dispose();
 
@@ -148,11 +145,11 @@ RoughnessMipmapper.prototype = {
 
 	}
 
-};
+}
 
 function _getMipmapMaterial() {
 
-	var shaderMaterial = new RawShaderMaterial( {
+	const shaderMaterial = new RawShaderMaterial( {
 
 		uniforms: {
 			roughnessMap: { value: null },

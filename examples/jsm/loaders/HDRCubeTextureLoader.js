@@ -1,20 +1,18 @@
 import { Loader, UnsignedByteType, CubeTexture, HalfFloatType, LinearEncoding, RGBFormat, LinearFilter, FloatType, RGBEEncoding, RGBAFormat, NearestFilter, FileLoader, DataTexture } from '../../../build/three.module.js';
 import { RGBELoader } from './RGBELoader.js';
 
-var HDRCubeTextureLoader = function ( manager ) {
+class HDRCubeTextureLoader extends Loader {
 
-	Loader.call( this, manager );
+	constructor( manager ) {
 
-	this.hdrLoader = new RGBELoader();
-	this.type = UnsignedByteType;
+		super( manager );
 
-};
+		this.hdrLoader = new RGBELoader();
+		this.type = UnsignedByteType;
 
-HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
+	}
 
-	constructor: HDRCubeTextureLoader,
-
-	load: function ( urls, onLoad, onProgress, onError ) {
+	load( urls, onLoad, onProgress, onError ) {
 
 		if ( ! Array.isArray( urls ) ) {
 
@@ -29,7 +27,7 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 		}
 
-		var texture = new CubeTexture();
+		const texture = new CubeTexture();
 
 		texture.type = this.type;
 
@@ -64,9 +62,9 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 		}
 
-		var scope = this;
+		const scope = this;
 
-		var loaded = 0;
+		let loaded = 0;
 
 		function loadHDRData( i, onLoad, onProgress, onError ) {
 
@@ -78,13 +76,13 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 					loaded ++;
 
-					var texData = scope.hdrLoader.parse( buffer );
+					const texData = scope.hdrLoader.parse( buffer );
 
 					if ( ! texData ) return;
 
 					if ( texData.data !== undefined ) {
 
-						var dataTexture = new DataTexture( texData.data, texData.width, texData.height );
+						const dataTexture = new DataTexture( texData.data, texData.width, texData.height );
 
 						dataTexture.type = texture.type;
 						dataTexture.encoding = texture.encoding;
@@ -108,7 +106,7 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 		}
 
-		for ( var i = 0; i < urls.length; i ++ ) {
+		for ( let i = 0; i < urls.length; i ++ ) {
 
 			loadHDRData( i, onLoad, onProgress, onError );
 
@@ -116,9 +114,9 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 		return texture;
 
-	},
+	}
 
-	setDataType: function ( value ) {
+	setDataType( value ) {
 
 		this.type = value;
 		this.hdrLoader.setDataType( value );
@@ -127,6 +125,6 @@ HDRCubeTextureLoader.prototype = Object.assign( Object.create( Loader.prototype 
 
 	}
 
-} );
+}
 
 export { HDRCubeTextureLoader };
