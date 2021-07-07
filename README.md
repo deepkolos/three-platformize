@@ -117,18 +117,18 @@
 #### Tools
 
 0. dispose-three（销毁节点
-1. flip（截屏需要flipY
+1. flip（截屏需要 flipY
 2. screenshot
 3. worker-pool.module（暂未适配微信小程序
 4. zstddec.worker.module（暂未适配微信小程序
 5. zstddec.module（暂未适配微信小程序
-6. toEnvMap（用于hdr prefilter
+6. toEnvMap（用于 hdr prefilter
 7. meshopt_decoder.asm.module（微信小程序可用
 8. meshopt_decoder.wasm.module（微信小程序可用
 
 #### Extensions
 
-0. GLTFGPUCompressedTexture(BasisTextureLoader的代替方案) 生成工具通过[gltf-gpu-compressed-texture](https://github.com/deepkolos/gltf-gpu-compressed-texture)获取（暂未适配微信小程序
+0. GLTFGPUCompressedTexture(BasisTextureLoader 的代替方案) 生成工具通过[gltf-gpu-compressed-texture](https://github.com/deepkolos/gltf-gpu-compressed-texture)获取（暂未适配微信小程序
 
 ## 使用
 
@@ -248,7 +248,7 @@ class CustomPlatform {
 0. 更彻底 dispose，减少内存泄漏，Web 测试用例已增加，微信小程序已增加，IOS 仍有内存问题，多次切页面仍会崩溃，3mb 模型 iphone7 打开 30 次
 1. 适配头条小程序 done
 2. 生成微信插件，通过插件实现 three 的代码跨小程序、跨小程序插件复用 done [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat)
-3. 适配微信小游戏
+3. 适配微信小游戏 done
 4. 适配 ReactNative
 
 ## 讨论
@@ -264,3 +264,14 @@ class CustomPlatform {
 如果项目对您有帮助或者有适配需求，欢迎打赏
 
 <img src="https://upload-images.jianshu.io/upload_images/252050-d3d6bfdb1bb06ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="赞赏码" width="300">
+
+感谢各位支持~~
+
+| 时间       | 大佬                                       | 赞助    |
+| ---------- | ------------------------------------------ | ------- |
+| 2021/07/07 | [云图 CAD-刘鑫](https://www.yuntucad.com/) | 2000 块 |
+| 2021/06/23 | Fong                                       | 66 块   |
+| 2021/06/23 | 刘子弃                                     | 6 块    |
+| 2021/06/23 | Joson                                      | 1 块    |
+| 2021/06/03 | 仿生伏尔泰                                 | 1 块    |
+| 2021/04/28 | Noth1ng                                    | 6 块    |
