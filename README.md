@@ -11,7 +11,22 @@
 7. 支持自定义新平台适配，参考 WechatPlatform 编写适配器即可
 8. [three-platformize-plugin-wechat](https://github.com/deepkolos/three-platformize-plugin-wechat) 支持微信插件跨插件复用
 
-#### 适配情况
+<h3 align="center">Special Sponsors</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://www.yuntucad.com" target="_blank" align="center">
+          <img width="177px" alt="云图三维-在线三维CAD设计软件" src="https://upload-images.jianshu.io/upload_images/252050-3b45b9102c4b7a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br>
+          云图三维-在线三维CAD设计软件
+        </a>
+      </td>
+    </tr><tr></tr>
+  </tbody>
+</table>
+
+### 适配情况
 
 |              | 微信 | 淘宝 | 字节 |
 | ------------ | ---- | ---- | ---- |
@@ -19,6 +34,9 @@
 | 小程序模拟器 | ✔️   | ✔️   |      |
 | 小游戏真机   | ✔️   |      |      |
 | 小游戏模拟器 | ✔️   |      |      |
+
+
+<br>
 
 > [奥本未来](https://www.oppentech.com/)招聘前端、WebGL、图形学算法，欢迎投简历
 
@@ -255,7 +273,7 @@ class CustomPlatform {
 
 可通过群里 DeepKolos 联系我
 
-<img width="250" src="https://raw.githubusercontent.com/deepkolos/three-platformize/master/qq-group.jpg" />
+<img width="250" src="https://raw.githubusercontent.com/deepkolos/three-platformize/master/docs/qq-group.jpg" />
 
 ### [CHANGELOG](https://github.com/deepkolos/three-platformize/blob/master/CHANGELOG.md)
 
