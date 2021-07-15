@@ -43,6 +43,8 @@
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
+> 具体Loader使用方法的Demo在这个仓库下[three-platformize-demo](https://github.com/deepkolos/three-platformize-demo)
+
 <table>
   <tbody>
     <tr>
