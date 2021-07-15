@@ -223,6 +223,9 @@ THREE.PLATFORM.dispose();
 # 不使用软链接直接复制或者git submodule也可以
 > cp yourthree ./three
 
+# 复制对应版本three构建配置替换到rollup.config.three-origin.js
+> cp yourthree/utils/build/rollup.config.js ./config/rollup.config.three-origin.js
+
 # 构建
 > npm run build
 ```
