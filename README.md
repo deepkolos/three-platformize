@@ -43,7 +43,7 @@
 
 > 注：运行 DEMO 时记得开启调试模式，取消域名验证，使用**最新版本**微信开发工具打开
 
-> 具体Loader使用方法的Demo在这个仓库下[three-platformize-demo](https://github.com/deepkolos/three-platformize-demo)
+> 具体 Loader 使用方法的 Demo 在这个仓库下[three-platformize-demo](https://github.com/deepkolos/three-platformize-demo)
 
 <table>
   <tbody>
@@ -292,6 +292,7 @@ class CustomPlatform {
 <!--
 | 时间       | 大佬                                       | 赞助    |
 | ---------- | ------------------------------------------ | ------- |
+| 2021/07/28 | Noth1ng                                    | 18 块   |
 | 2021/07/07 | [云图 CAD-刘鑫](https://www.yuntucad.com/) | 2000 块 |
 | 2021/06/23 | Fong                                       | 66 块   |
 | 2021/06/23 | 刘子弃                                     | 6 块    |
@@ -301,6 +302,7 @@ class CustomPlatform {
 
 | 时间       | 大佬                                       |
 | ---------- | ------------------------------------------ |
+| 2021/07/28 | Noth1ng                                    |
 | 2021/07/09 | 匿名                                       |
 | 2021/07/07 | [云图 CAD-刘鑫](https://www.yuntucad.com/) |
 | 2021/06/23 | Fong                                       |
