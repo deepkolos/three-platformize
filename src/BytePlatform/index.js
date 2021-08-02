@@ -23,9 +23,10 @@ export class BytePlatform {
     this.document = {
       createElementNS(_, type) {
         if (type === 'canvas') return canvas;
-        if (type === 'img'){
+        if (type === 'img') {
           const img = canvas.createImage();
-          img.addEventListener = (name, cb) => (img[`on${name}`] = cb.bind(img));
+          img.addEventListener = (name, cb) =>
+            (img[`on${name}`] = cb.bind(img));
           img.removeEventListener = (name, cb) => (img[`on${name}`] = null);
           return img;
         }
@@ -145,7 +146,9 @@ export class BytePlatform {
     const event = {
       changedTouches: e.changedTouches.map(touch => new Touch(touch)),
       touches: e.touches.map(touch => new Touch(touch)),
-      targetTouches: Array.prototype.slice.call(e.touches.map(touch => new Touch(touch))),
+      targetTouches: Array.prototype.slice.call(
+        e.touches.map(touch => new Touch(touch)),
+      ),
       timeStamp: e.timeStamp,
       target: target,
       currentTarget: target,
@@ -155,11 +158,28 @@ export class BytePlatform {
     };
 
     this.canvas.dispatchEvent(event);
+
+    if (changedTouches.length) {
+      const touch = changedTouches[0];
+      const pointerEvent = {
+        pageX: touch.pageX,
+        pageY: touch.pageY,
+        pointerId: touch.identifier,
+        type: {
+          touchstart: 'pointerdown',
+          touchmove: 'pointermove',
+          touchend: 'pointerup',
+        }[e.type],
+        pointerType: 'touch',
+      };
+
+      this.canvas.dispatchEvent(pointerEvent);
+    }
   }
 
   dispose() {
     // this.disableDeviceOrientation();
-    this.canvas.dispose()
+    this.canvas.dispose();
     this.canvas.width = 0;
     this.canvas.height = 0;
     if (this.canvas) this.canvas.ownerDocument = null;

@@ -163,6 +163,23 @@ export class WechatGamePlatform {
     };
 
     this.canvas.dispatchEvent(event);
+
+    if (changedTouches.length) {
+      const touch = changedTouches[0];
+      const pointerEvent = {
+        pageX: touch.pageX,
+        pageY: touch.pageY,
+        pointerId: touch.identifier,
+        type: {
+          touchstart: 'pointerdown',
+          touchmove: 'pointermove',
+          touchend: 'pointerup',
+        }[e.type],
+        pointerType: 'touch',
+      };
+
+      this.canvas.dispatchEvent(pointerEvent);
+    }
   }
 
   dispose() {

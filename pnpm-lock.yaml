@@ -7,16 +7,16 @@ specifiers:
   '@rollup/plugin-alias': ^3.1.2
   '@rollup/plugin-babel': ^5.2.2
   '@rollup/plugin-inject': ^4.0.2
-  '@types/three': ^0.129.1
+  '@types/three': ^0.130.1
   rollup: ^2.36.2
   rollup-plugin-copy: ^3.3.0
   rollup-plugin-multi-input: ^1.2.0
   rollup-plugin-terser: ^7.0.2
   symlink-dir: ^4.1.0
-  three: ^0.129.0
+  three: 0.131.1
 
 dependencies:
-  '@types/three': registry.nlark.com/@types/three/0.129.1
+  '@types/three': 0.130.1
 
 devDependencies:
   '@babel/core': 7.14.3
@@ -30,7 +30,7 @@ devDependencies:
   rollup-plugin-multi-input: 1.2.0
   rollup-plugin-terser: 7.0.2_rollup@2.41.2
   symlink-dir: 4.1.0
-  three: registry.nlark.com/three/0.129.0
+  three: 0.131.1
 
 packages:
 
@@ -1191,6 +1191,10 @@ packages:
     resolution: {integrity: sha1-B5NRlPwEkGmhxWwMJ0Jlq+3fiNo=, tarball: '@types/node/download/@types/node-14.14.34.tgz'}
     dev: true
 
+  /@types/three/0.130.1:
+    resolution: {integrity: sha512-FlCR3CxQHxCmjI0ZCG59O/E15bV+bx7XRO+nJ7RY8KBg2pEF/52frmV/uh9SrLd+ORx+7Zc7NxnJm5Kj4xS9Sg==}
+    dev: false
+
   /ansi-styles/3.2.1:
     resolution: {integrity: sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=, tarball: ansi-styles/download/ansi-styles-3.2.1.tgz}
     engines: {node: '>=4'}
@@ -1935,6 +1939,10 @@ packages:
       source-map-support: 0.5.19
     dev: true
 
+  /three/0.131.1:
+    resolution: {integrity: sha512-1vojiLBfH7e2GZDEzFBfmzU0b/5uraxdg630PcVCRdzgGOttGe6HmG+n71lLCZZnPOxU9f7UVPiSkKPMsyiB/A==}
+    dev: true
+
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
@@ -1992,21 +2000,9 @@ packages:
       slash: registry.nlark.com/slash/3.0.0
     dev: true
 
-  registry.nlark.com/@types/three/0.129.1:
-    resolution: {integrity: sha1-5IjmhhMiVt/WHP/U2X6mzxdqSo0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/three/download/@types/three-0.129.1.tgz}
-    name: '@types/three'
-    version: 0.129.1
-    dev: false
-
   registry.nlark.com/slash/3.0.0:
     resolution: {integrity: sha1-ZTm+hwwWWtvVJAIg2+Nh8bxNRjQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/slash/download/slash-3.0.0.tgz}
     name: slash
     version: 3.0.0
     engines: {node: '>=8'}
-    dev: true
-
-  registry.nlark.com/three/0.129.0:
-    resolution: {integrity: sha1-9eUwu8lurF1bR0nLXaiG7w1C9VQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/three/download/three-0.129.0.tgz}
-    name: three
-    version: 0.129.0
     dev: true

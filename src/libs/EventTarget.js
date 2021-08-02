@@ -82,4 +82,7 @@ export default class EventTarget {
       }
     }
   }
+
+  releasePointerCapture() {}
+  setPointerCapture() {}
 }

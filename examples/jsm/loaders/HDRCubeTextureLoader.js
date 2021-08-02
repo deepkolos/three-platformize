@@ -1,4 +1,4 @@
-import { Loader, UnsignedByteType, CubeTexture, HalfFloatType, LinearEncoding, RGBFormat, LinearFilter, FloatType, RGBEEncoding, RGBAFormat, NearestFilter, FileLoader, DataTexture } from '../../../build/three.module.js';
+import { Loader, FloatType, CubeTexture, HalfFloatType, LinearEncoding, RGBFormat, LinearFilter, UnsignedByteType, RGBEEncoding, RGBAFormat, NearestFilter, FileLoader, DataTexture } from '../../../build/three.module.js';
 import { RGBELoader } from './RGBELoader.js';
 
 class HDRCubeTextureLoader extends Loader {
@@ -8,7 +8,7 @@ class HDRCubeTextureLoader extends Loader {
 		super( manager );
 
 		this.hdrLoader = new RGBELoader();
-		this.type = UnsignedByteType;
+		this.type = FloatType;
 
 	}
 

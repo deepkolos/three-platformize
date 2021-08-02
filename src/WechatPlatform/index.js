@@ -142,11 +142,14 @@ export class WechatPlatform {
 
   dispatchTouchEvent(e = {}) {
     const target = { ...this };
+    const changedTouches = e.changedTouches.map(touch => new Touch(touch));
 
     const event = {
-      changedTouches: e.changedTouches.map(touch => new Touch(touch)),
+      changedTouches: changedTouches,
       touches: e.touches.map(touch => new Touch(touch)),
-      targetTouches: Array.prototype.slice.call(e.touches.map(touch => new Touch(touch))),
+      targetTouches: Array.prototype.slice.call(
+        e.touches.map(touch => new Touch(touch)),
+      ),
       timeStamp: e.timeStamp,
       target: target,
       currentTarget: target,
@@ -156,6 +159,23 @@ export class WechatPlatform {
     };
 
     this.canvas.dispatchEvent(event);
+
+    if (changedTouches.length) {
+      const touch = changedTouches[0];
+      const pointerEvent = {
+        pageX: touch.pageX,
+        pageY: touch.pageY,
+        pointerId: touch.identifier,
+        type: {
+          touchstart: 'pointerdown',
+          touchmove: 'pointermove',
+          touchend: 'pointerup',
+        }[e.type],
+        pointerType: 'touch',
+      };
+
+      this.canvas.dispatchEvent(pointerEvent);
+    }
   }
 
   dispose() {

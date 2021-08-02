@@ -3,16 +3,21 @@ import { Color } from '../../../build/three.module.js';
 
 class Lut {
 
- 	constructor( colormap, numberofcolors ) {
+ 	constructor( colormap, count = 32 ) {
 
 		this.lut = [];
-		this.setColorMap( colormap, numberofcolors );
+		this.map = [];
+		this.n = 0;
+		this.minV = 0;
+		this.maxV = 1;
+
+		this.setColorMap( colormap, count );
 
 	}
 
 	set( value ) {
 
-		if ( value instanceof Lut ) {
+		if ( value.isLut === true ) {
 
 			this.copy( value );
 
@@ -38,10 +43,10 @@ class Lut {
 
 	}
 
-	setColorMap( colormap, numberofcolors = 32 ) {
+	setColorMap( colormap, count = 32 ) {
 
 		this.map = ColorMapKeywords[ colormap ] || ColorMapKeywords.rainbow;
-		this.n = numberofcolors;
+		this.n = count;
 
 		const step = 1.0 / this.n;
 
@@ -106,9 +111,11 @@ class Lut {
 
 	}
 
-	addColorMap( colormapName, arrayOfColors ) {
+	addColorMap( name, arrayOfColors ) {
 
-		ColorMapKeywords[ colormapName ] = arrayOfColors;
+		ColorMapKeywords[ name ] = arrayOfColors;
+
+		return this;
 
 	}
 
@@ -171,11 +178,7 @@ class Lut {
 
 }
 
-Lut.prototype.lut = [];
-Lut.prototype.map = [];
-Lut.prototype.n = 256;
-Lut.prototype.minV = 0;
-Lut.prototype.maxV = 1;
+Lut.prototype.isLut = true;
 
 const ColorMapKeywords = {
 

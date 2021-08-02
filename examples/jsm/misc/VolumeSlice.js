@@ -9,7 +9,7 @@ import { Texture, LinearFilter, ClampToEdgeWrapping, MeshBasicMaterial, DoubleSi
  * @param   {string}       [axis='z']      For now only 'x', 'y' or 'z' but later it will change to a normal vector
  * @see Volume
  */
-var VolumeSlice = function ( volume, index, axis ) {
+function VolumeSlice( volume, index, axis ) {
 
 	var slice = this;
 	/**
@@ -88,7 +88,7 @@ var VolumeSlice = function ( volume, index, axis ) {
 	 */
 
 
-};
+}
 
 VolumeSlice.prototype = {
 

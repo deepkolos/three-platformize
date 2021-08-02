@@ -33,8 +33,7 @@ ShaderLib[ 'line' ] = {
 		UniformsLib.line
 	] ),
 
-	vertexShader:
-		`
+	vertexShader: /* glsl */`
 		#include <common>
 		#include <color_pars_vertex>
 		#include <fog_pars_vertex>
@@ -177,11 +176,9 @@ ShaderLib[ 'line' ] = {
 			#include <clipping_planes_vertex>
 			#include <fog_vertex>
 
-		}
-		`,
+		}`,
 
-	fragmentShader:
-		`
+	fragmentShader: /* glsl */`
 		uniform vec3 diffuse;
 		uniform float opacity;
 
@@ -215,7 +212,7 @@ ShaderLib[ 'line' ] = {
 
 			#endif
 
-			float alpha = opacity;
+			float alpha = 1.0;
 
 			#ifdef ALPHA_TO_COVERAGE
 
@@ -245,20 +242,20 @@ ShaderLib[ 'line' ] = {
 
 			#endif
 
-			vec4 diffuseColor = vec4( diffuse, alpha );
+			vec4 diffuseColor = vec4( diffuse, opacity * alpha );
 
 			#include <logdepthbuf_fragment>
 			#include <color_fragment>
 
-			gl_FragColor = vec4( diffuseColor.rgb, alpha );
+			gl_FragColor = diffuseColor;
 
 			#include <tonemapping_fragment>
 			#include <encodings_fragment>
 			#include <fog_fragment>
 			#include <premultiplied_alpha_fragment>
 
-		}
-		`
+		}`
+
 };
 
 class LineMaterial extends ShaderMaterial {

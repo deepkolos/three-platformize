@@ -88,8 +88,6 @@ class FirstPersonControls {
 
 			}
 
-			event.preventDefault();
-
 			if ( this.activeLook ) {
 
 				switch ( event.button ) {
@@ -106,8 +104,6 @@ class FirstPersonControls {
 		};
 
 		this.onMouseUp = function ( event ) {
-
-			event.preventDefault();
 
 			if ( this.activeLook ) {
 
@@ -141,8 +137,6 @@ class FirstPersonControls {
 		};
 
 		this.onKeyDown = function ( event ) {
-
-			//event.preventDefault();
 
 			switch ( event.code ) {
 

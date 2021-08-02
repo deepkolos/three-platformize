@@ -5,7 +5,7 @@ import { CopyShader } from '../shaders/CopyShader.js';
 
 class SSRPass extends Pass {
 
-	constructor( { renderer, scene, camera, width, height, selects, encoding, bouncing = false, morphTargets = false, groundReflector } ) {
+	constructor( { renderer, scene, camera, width, height, selects, encoding, bouncing = false, groundReflector } ) {
 
 		super();
 
@@ -222,7 +222,7 @@ class SSRPass extends Pass {
 
 		// normal material
 
-		this.normalMaterial = new MeshNormalMaterial( { morphTargets } );
+		this.normalMaterial = new MeshNormalMaterial();
 		this.normalMaterial.blending = NoBlending;
 
 		// metalnessOn material
