@@ -18,8 +18,14 @@
     <tr>
       <td align="center" valign="middle">
         <a href="https://www.yuntucad.com" target="_blank" align="center">
-          <img width="177px" alt="云图三维-在线三维CAD设计软件" src="https://upload-images.jianshu.io/upload_images/252050-3b45b9102c4b7a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br>
+          <img height="45px" alt="云图三维-在线三维CAD设计软件" src="https://upload-images.jianshu.io/upload_images/252050-3b45b9102c4b7a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br>
           云图三维-在线三维CAD设计软件
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://www.oppentech.com/" target="_blank" align="center">
+          <img height="45px" alt="奥本未来-AR/VR领域先行者" src="https://s3.cn-northwest-1.amazonaws.com.cn/oppenhome/logo_black.png"><br>
+          奥本未来-AR/VR领域先行者
         </a>
       </td>
     </tr><tr></tr>
@@ -292,6 +298,7 @@ class CustomPlatform {
 <!--
 | 时间       | 大佬                                       | 赞助    |
 | ---------- | ------------------------------------------ | ------- |
+| 2021/08/10 | 奥本未来                                   | 1000 快 |
 | 2021/07/28 | Noth1ng                                    | 18 块   |
 | 2021/07/07 | [云图 CAD-刘鑫](https://www.yuntucad.com/) | 2000 块 |
 | 2021/06/23 | Fong                                       | 66 块   |
@@ -302,6 +309,7 @@ class CustomPlatform {
 
 | 时间       | 大佬                                       |
 | ---------- | ------------------------------------------ |
+| 2021/08/10 | 奥本未来                                   |
 | 2021/07/28 | Noth1ng                                    |
 | 2021/07/09 | 匿名                                       |
 | 2021/07/07 | [云图 CAD-刘鑫](https://www.yuntucad.com/) |
