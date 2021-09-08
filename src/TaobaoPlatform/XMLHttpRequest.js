@@ -88,7 +88,7 @@ export default class $XMLHttpRequest extends EventTarget {
 
   overrideMimeType() {}
 
-  send(data = '') {
+  async send(data = '') {
     if (this.readyState !== $XMLHttpRequest.OPENED) {
       throw new Error(
         "Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED.",
@@ -190,6 +190,8 @@ export default class $XMLHttpRequest extends EventTarget {
         fs.readFile(options);
         return;
       }
+
+      if ($global && $global.getFromCloud) url = await $global.getFromCloud(url);
 
       my.downloadFile({
         url,
