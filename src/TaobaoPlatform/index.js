@@ -146,8 +146,8 @@ export class TaobaoPlatform {
     if (changedTouches.length) {
       const touch = changedTouches[0];
       const pointerEvent = {
-        pageX: touch.pageX,
-        pageY: touch.pageY,
+        pageX: touch.x,
+        pageY: touch.y,
         pointerId: touch.identifier,
         type: {
           touchstart: 'pointerdown',
