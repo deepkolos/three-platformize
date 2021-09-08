@@ -13,7 +13,7 @@ specifiers:
   rollup-plugin-multi-input: ^1.2.0
   rollup-plugin-terser: ^7.0.2
   symlink-dir: ^4.1.0
-  three: 0.131.1
+  three: 0.132.2
 
 dependencies:
   '@types/three': 0.130.1
@@ -30,7 +30,7 @@ devDependencies:
   rollup-plugin-multi-input: 1.2.0
   rollup-plugin-terser: 7.0.2_rollup@2.41.2
   symlink-dir: 4.1.0
-  three: 0.131.1
+  three: 0.132.2
 
 packages:
 
@@ -1458,7 +1458,7 @@ packages:
     dev: true
 
   /fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, tarball: fsevents/download/fsevents-2.3.2.tgz}
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     dev: true
@@ -1939,8 +1939,8 @@ packages:
       source-map-support: 0.5.19
     dev: true
 
-  /three/0.131.1:
-    resolution: {integrity: sha512-1vojiLBfH7e2GZDEzFBfmzU0b/5uraxdg630PcVCRdzgGOttGe6HmG+n71lLCZZnPOxU9f7UVPiSkKPMsyiB/A==}
+  /three/0.132.2:
+    resolution: {integrity: sha512-0wcR7LxxkXMn6Gi58gEs3QvY8WpTVXA31L2VOvpjm4ZPYFRHCZC13UqynheFoS5OXDYgtBneN0dhbaNBE8iLhQ==}
     dev: true
 
   /to-fast-properties/2.0.0:

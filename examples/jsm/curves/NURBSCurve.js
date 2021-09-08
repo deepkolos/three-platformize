@@ -1,5 +1,5 @@
 import { Curve, Vector4, Vector3 } from '../../../build/three.module.js';
-import { NURBSUtils } from './NURBSUtils.js';
+import { calcBSplinePoint, calcNURBSDerivatives } from './NURBSUtils.js';
 
 /**
  * NURBS curve object
@@ -46,7 +46,7 @@ class NURBSCurve extends Curve {
 		const u = this.knots[ this.startKnot ] + t * ( this.knots[ this.endKnot ] - this.knots[ this.startKnot ] ); // linear mapping t->u
 
 		// following results in (wx, wy, wz, w) homogeneous point
-		const hpoint = NURBSUtils.calcBSplinePoint( this.degree, this.knots, this.controlPoints, u );
+		const hpoint = calcBSplinePoint( this.degree, this.knots, this.controlPoints, u );
 
 		if ( hpoint.w !== 1.0 ) {
 
@@ -64,7 +64,7 @@ class NURBSCurve extends Curve {
 		const tangent = optionalTarget;
 
 		const u = this.knots[ 0 ] + t * ( this.knots[ this.knots.length - 1 ] - this.knots[ 0 ] );
-		const ders = NURBSUtils.calcNURBSDerivatives( this.degree, this.knots, this.controlPoints, u, 1 );
+		const ders = calcNURBSDerivatives( this.degree, this.knots, this.controlPoints, u, 1 );
 		tangent.copy( ders[ 1 ] ).normalize();
 
 		return tangent;

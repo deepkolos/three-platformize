@@ -1,5 +1,6 @@
 import { Vector3, BufferGeometry, Float32BufferAttribute } from '../../../build/three.module.js';
-import { BufferGeometryUtils } from '../utils/BufferGeometryUtils.js';
+import * as BufferGeometryUtils from '../utils/BufferGeometryUtils.js';
+import { mergeVertices } from '../utils/BufferGeometryUtils.js';
 
 /**
  *	Simplification Geometry Modifier
@@ -43,7 +44,7 @@ class SimplifyModifier {
 
 		}
 
-		geometry = BufferGeometryUtils.mergeVertices( geometry );
+		geometry = mergeVertices( geometry );
 
 		//
 		// put data of original geometry in different data structures
@@ -496,8 +497,8 @@ class Vertex {
 	constructor( v ) {
 
 		this.position = v;
-			
-		this.id = -1; // external use position in vertices list (for e.g. face generation)
+
+		this.id = - 1; // external use position in vertices list (for e.g. face generation)
 
 		this.faces = []; // faces vertex is connected
 		this.neighbors = []; // neighbouring vertices aka "adjacentVertices"

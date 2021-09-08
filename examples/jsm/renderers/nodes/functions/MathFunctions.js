@@ -7,14 +7,14 @@ const saturateMacro = new CodeNode( '#define saturate(a) clamp( a, 0.0, 1.0 )' )
 const whiteComplementMacro = new CodeNode( '#define whiteComplement(a) ( 1.0 - saturate( a ) )' );
 
 const transformDirection = new FunctionNode( `
-vec3 transformDirection( in vec3 dir, in mat4 matrix ) {
+vec3 ( in vec3 dir, in mat4 matrix ) {
 
 	return normalize( ( matrix * vec4( dir, 0.0 ) ).xyz );
 
 }` );
 
 const inverseTransformDirection = new FunctionNode( `
-vec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {
+vec3 ( in vec3 dir, in mat4 matrix ) {
 
 	// dir can be either a direction vector or a normal vector
 	// upper-left 3x3 of matrix is assumed to be orthogonal

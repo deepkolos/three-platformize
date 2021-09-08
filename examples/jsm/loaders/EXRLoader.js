@@ -1,5 +1,5 @@
 import { $TextDecoder } from '../../../build/three.module.js';
-import { DataTextureLoader, FloatType, HalfFloatType, UnsignedByteType, RGBEFormat, RGBAFormat, LinearEncoding, LinearFilter, RGBEEncoding, NearestFilter, DataUtils } from '../../../build/three.module.js';
+import { DataTextureLoader, HalfFloatType, FloatType, UnsignedByteType, RGBEFormat, RGBAFormat, LinearEncoding, LinearFilter, RGBEEncoding, NearestFilter, DataUtils } from '../../../build/three.module.js';
 import * as fflate from '../libs/fflate.module.js';
 import { unzlibSync } from '../libs/fflate.module.js';
 
@@ -82,7 +82,7 @@ class EXRLoader extends DataTextureLoader {
 
 		super( manager );
 
-		this.type = FloatType;
+		this.type = HalfFloatType;
 
 	}
 

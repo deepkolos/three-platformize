@@ -584,6 +584,7 @@ class FBXTreeParser {
 						parameters.map.encoding = sRGBEncoding;
 
 					}
+
 					break;
 
 				case 'DisplacementColor':
@@ -597,6 +598,7 @@ class FBXTreeParser {
 						parameters.emissiveMap.encoding = sRGBEncoding;
 
 					}
+
 					break;
 
 				case 'NormalMap':
@@ -612,6 +614,7 @@ class FBXTreeParser {
 						parameters.envMap.encoding = sRGBEncoding;
 
 					}
+
 					break;
 
 				case 'SpecularColor':
@@ -621,6 +624,7 @@ class FBXTreeParser {
 						parameters.specularMap.encoding = sRGBEncoding;
 
 					}
+
 					break;
 
 				case 'TransparentColor':
@@ -656,17 +660,7 @@ class FBXTreeParser {
 
 		}
 
-		const texture = textureMap.get( id );
-
-		if ( texture.image !== undefined ) {
-
-			return texture;
-
-		} else {
-
-			return undefined;
-
-		}
+		return textureMap.get( id );
 
 	}
 

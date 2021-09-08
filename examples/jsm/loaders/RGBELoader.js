@@ -1,4 +1,4 @@
-import { DataTextureLoader, FloatType, HalfFloatType, UnsignedByteType, DataUtils, RGBFormat, RGBEFormat, LinearEncoding, LinearFilter, RGBEEncoding, NearestFilter } from '../../../build/three.module.js';
+import { DataTextureLoader, HalfFloatType, FloatType, UnsignedByteType, DataUtils, RGBFormat, RGBEFormat, LinearEncoding, LinearFilter, RGBEEncoding, NearestFilter } from '../../../build/three.module.js';
 
 // https://github.com/mrdoob/three.js/issues/5552
 // http://en.wikipedia.org/wiki/RGBE_image_format
@@ -9,7 +9,7 @@ class RGBELoader extends DataTextureLoader {
 
 		super( manager );
 
-		this.type = FloatType;
+		this.type = HalfFloatType;
 
 	}
 
@@ -374,8 +374,8 @@ class RGBELoader extends DataTextureLoader {
 
 					case FloatType:
 
-						numElements = ( image_rgba_data.length / 4 ) * 3;
-						const floatArray = new Float32Array( numElements );
+						numElements = image_rgba_data.length / 4;
+						const floatArray = new Float32Array( numElements * 3 );
 
 						for ( let j = 0; j < numElements; j ++ ) {
 
@@ -390,8 +390,8 @@ class RGBELoader extends DataTextureLoader {
 
 					case HalfFloatType:
 
-						numElements = ( image_rgba_data.length / 4 ) * 3;
-						const halfArray = new Uint16Array( numElements );
+						numElements = image_rgba_data.length / 4;
+						const halfArray = new Uint16Array( numElements * 3 );
 
 						for ( let j = 0; j < numElements; j ++ ) {
 

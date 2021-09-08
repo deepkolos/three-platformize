@@ -1,5 +1,5 @@
 import { Vector4 } from '../../../build/three.module.js';
-import { NURBSUtils } from './NURBSUtils.js';
+import { calcSurfacePoint } from './NURBSUtils.js';
 
 /**
  * NURBS surface object
@@ -41,7 +41,7 @@ class NURBSSurface {
 		const u = this.knots1[ 0 ] + t1 * ( this.knots1[ this.knots1.length - 1 ] - this.knots1[ 0 ] ); // linear mapping t1->u
 		const v = this.knots2[ 0 ] + t2 * ( this.knots2[ this.knots2.length - 1 ] - this.knots2[ 0 ] ); // linear mapping t2->u
 
-		NURBSUtils.calcSurfacePoint( this.degree1, this.degree2, this.knots1, this.knots2, this.controlPoints, u, v, target );
+		calcSurfacePoint( this.degree1, this.degree2, this.knots1, this.knots2, this.controlPoints, u, v, target );
 
 	}
 

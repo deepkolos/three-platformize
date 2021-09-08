@@ -785,7 +785,6 @@ class OrbitControls extends EventDispatcher {
 		//
 
 		function onPointerDown( event ) {
-			console.log('onPointerDown', event)
 
 			if ( scope.enabled === false ) return;
 
