@@ -191,7 +191,7 @@ export default class $XMLHttpRequest extends EventTarget {
         return;
       }
 
-      if ($global && $global.getFromCloud) url = await $global.getFromCloud(url);
+      if ($XMLHttpRequest.URLModifier) url = await $XMLHttpRequest.URLModifier(url);
 
       my.downloadFile({
         url,

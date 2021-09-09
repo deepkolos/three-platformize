@@ -161,6 +161,10 @@ export class TaobaoPlatform {
     }
   }
 
+  setURLModifier(fn) {
+    $XMLHttpRequest.URLModifier = fn;
+  }
+
   dispose() {
     this.disableDeviceOrientation();
     this.onDeviceMotionChange = null;
