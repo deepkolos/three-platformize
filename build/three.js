@@ -12457,7 +12457,7 @@
 	}
 
 	function WebGLExtensions(gl) {
-		const extensions = exports.$defaultWebGLExtensions || {};
+		const extensions = Object.assign({}, exports.$defaultWebGLExtensions || {});
 
 		function getExtension(name) {
 			if (extensions[name] !== undefined) {
@@ -12514,6 +12514,7 @@
 			},
 			get: function (name) {
 				const extension = getExtension(name);
+				extension = extension || null;
 
 				if (extension === null) {
 					console.warn('THREE.WebGLRenderer: ' + name + ' extension not supported.');

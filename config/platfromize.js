@@ -47,7 +47,18 @@ export function injectPlatformCode() {
           code;
         code = code.replace(
           'const extensions = {};',
-          `const extensions = $defaultWebGLExtensions || {};`,
+          `const extensions = Object.assign( {}, $defaultWebGLExtensions || {});`,
+        );
+        code = code.replace(
+          'var extensions = {};',
+          `var extensions = Object.assign( {}, $defaultWebGLExtensions || {});`,
+        );
+        // 淘宝小程序ios下对于不支持的扩展返回undefined
+        code = code.replace(
+          `if ( extension === null ) {`,
+          `
+          extension = extension || null;
+          if ( extension === null ) {`,
         );
       }
 

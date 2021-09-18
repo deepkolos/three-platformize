@@ -16094,7 +16094,7 @@ function WebGLCubeUVMaps( renderer ) {
 
 function WebGLExtensions( gl ) {
 
-	const extensions = $defaultWebGLExtensions || {};
+	const extensions = Object.assign( {}, $defaultWebGLExtensions || {});
 
 	function getExtension( name ) {
 
@@ -16171,7 +16171,9 @@ function WebGLExtensions( gl ) {
 
 			const extension = getExtension( name );
 
-			if ( extension === null ) {
+			
+          extension = extension || null;
+          if ( extension === null ) {
 
 				console.warn( 'THREE.WebGLRenderer: ' + name + ' extension not supported.' );
 
