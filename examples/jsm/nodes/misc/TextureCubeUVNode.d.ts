@@ -5,16 +5,14 @@ import { FunctionNode } from '../core/FunctionNode';
 import { Node } from '../core/Node';
 
 export class TextureCubeUVNode extends TempNode {
+    constructor(uv: Node, textureSize: FloatNode);
 
-	constructor( uv: Node, textureSize: FloatNode );
+    uv: Node;
+    textureSize: FloatNode;
+    nodeType: string;
 
-	uv: Node;
-	textureSize: FloatNode;
-	nodeType: string;
-
-	static Nodes: {
-		TextureCubeUVData: StructNode;
-		textureCubeUV: FunctionNode;
-	}
-
+    static Nodes: {
+        TextureCubeUVData: StructNode;
+        textureCubeUV: FunctionNode;
+    };
 }

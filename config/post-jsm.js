@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const fastGlob = require('fast-glob');
 
 const p = s => path.resolve(__dirname, s);
 const constants = fs.readFileSync(p('../three/src/constants.js'), {
@@ -11,7 +12,6 @@ fs.copyFileSync(
   p('../tools/opentype.module.js'),
   p('../examples/jsm/libs/opentype.module.js'),
 );
-
 
 if (REVISION <= 127) {
   fs.copyFileSync(
@@ -25,3 +25,13 @@ fs.copyFileSync(
   p('../tools/zstddec.module.js'),
   p('../examples/jsm/libs/zstddec.module.js'),
 );
+
+// 把的examples.d.ts复制到examples目录下
+fastGlob
+  .sync('./node_modules/@types/three/examples/jsm/**/*.d.ts')
+  .forEach(file => {
+    fs.copyFileSync(
+      p('.' + file),
+      p(file.replace('./node_modules/@types/three/', '../')),
+    );
+  });

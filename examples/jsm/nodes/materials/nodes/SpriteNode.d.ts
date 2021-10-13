@@ -2,14 +2,12 @@ import { NodeBuilder } from '../../core/NodeBuilder';
 import { Node } from '../../core/Node';
 
 export class SpriteNode extends Node {
+    constructor();
 
-	constructor();
+    color: Node;
+    spherical: true;
+    nodeType: string;
 
-	color: Node;
-	spherical: true;
-	nodeType: string;
-
-	build( builder: NodeBuilder ): string;
-	copy( source: SpriteNode ): this;
-
+    build(builder: NodeBuilder): string;
+    copy(source: SpriteNode): this;
 }

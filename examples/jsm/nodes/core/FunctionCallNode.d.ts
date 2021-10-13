@@ -3,17 +3,15 @@ import { FunctionNode } from './FunctionNode';
 import { TempNode } from './TempNode';
 
 export class FunctionCallNode extends TempNode {
+    constructor(func: FunctionNode, inputs?: Node[]);
 
-	constructor( func: FunctionNode, inputs?: Node[] );
+    nodeType: string;
 
-	nodeType: string;
+    value: FunctionNode;
+    inputs: Node[];
 
-	value: FunctionNode;
-	inputs: Node[];
-
-	setFunction( func: FunctionNode, inputs?: Node[] ): void;
-	getFunction(): FunctionNode;
-	getType(): string;
-	copy( source: FunctionCallNode ): this;
-
+    setFunction(func: FunctionNode, inputs?: Node[]): void;
+    getFunction(): FunctionNode;
+    getType(): string;
+    copy(source: FunctionCallNode): this;
 }

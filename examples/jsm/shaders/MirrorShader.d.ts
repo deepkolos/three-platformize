@@ -1,12 +1,10 @@
-import {
-	Uniform
-} from '../../../src/Three';
+import { Uniform } from '../../../src/Three';
 
 export const MirrorShader: {
-	uniforms: {
-		tDiffuse: Uniform;
-		side: Uniform;
-	};
-	vertexShader: string;
-	fragmentShader: string;
+    uniforms: {
+        tDiffuse: Uniform;
+        side: Uniform;
+    };
+    vertexShader: string;
+    fragmentShader: string;
 };

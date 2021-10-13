@@ -1,27 +1,19 @@
-import {
-	Group,
-	Object3D,
-	Texture
-} from '../../../src/Three';
+import { Group, Object3D, Texture } from '../../../src/Three';
 
 import { GLTFLoader } from '../loaders/GLTFLoader';
 
 export class XRControllerModel extends Object3D {
+    constructor();
 
-	constructor();
+    motionController: any;
 
-	motionController: any;
-
-	setEnvironmentMap( envMap: Texture ): XRControllerModel;
-
+    setEnvironmentMap(envMap: Texture): XRControllerModel;
 }
 
 export class XRControllerModelFactory {
+    constructor(gltfLoader?: GLTFLoader);
+    gltfLoader: GLTFLoader | null;
+    path: string;
 
-	constructor( gltfLoader?: GLTFLoader );
-	gltfLoader: GLTFLoader | null;
-	path: string;
-
-	createControllerModel( controller: Group ): XRControllerModel;
-
+    createControllerModel(controller: Group): XRControllerModel;
 }

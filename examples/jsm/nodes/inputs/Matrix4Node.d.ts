@@ -4,14 +4,19 @@ import { InputNode } from '../core/InputNode';
 import { NodeBuilder } from '../core/NodeBuilder';
 
 export class Matrix4Node extends InputNode {
+    constructor(matrix?: Matrix4);
 
-	constructor( matrix?: Matrix4 );
+    value: Matrix4;
+    nodeType: string;
+    elements: number[];
 
-	value: Matrix4;
-	nodeType: string;
-	elements: number[];
-
-	generateReadonly( builder: NodeBuilder, output: string, uuid?: string, type?: string, ns?: string, needsUpdate?: boolean ): string;
-	copy( source: Matrix4Node ): this;
-
+    generateReadonly(
+        builder: NodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: Matrix4Node): this;
 }

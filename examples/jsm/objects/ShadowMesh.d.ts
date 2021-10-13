@@ -1,13 +1,7 @@
-import {
-	Mesh,
-	Plane,
-	Vector4
-} from '../../../src/Three';
+import { Mesh, Plane, Vector4 } from '../../../src/Three';
 
 export class ShadowMesh extends Mesh {
+    constructor();
 
-	constructor();
-
-	update( plane: Plane, lightPosition4D: Vector4 ): void;
-
+    update(plane: Plane, lightPosition4D: Vector4): void;
 }

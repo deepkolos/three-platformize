@@ -5,19 +5,17 @@ import { FloatNode } from '../inputs/FloatNode';
 import { TextureCubeUVNode } from './TextureCubeUVNode';
 
 export class TextureCubeNode extends TempNode {
+    constructor(value: TextureNode, textureSize?: FloatNode);
 
-	constructor( value: TextureNode, textureSize?: FloatNode );
+    value: TextureNode;
+    textureSize: FloatNode;
+    radianceCache: {
+        uv: TextureCubeUVNode;
+    };
+    irradianceCache: {
+        uv: TextureCubeUVNode;
+    };
+    nodeType: string;
 
-	value: TextureNode;
-	textureSize: FloatNode;
-	radianceCache: {
-		uv: TextureCubeUVNode
-	};
-	irradianceCache: {
-		uv: TextureCubeUVNode
-	};
-	nodeType: string;
-
-	generateTextureCubeUV( builder: NodeBuilder, output: string ): string;
-
+    generateTextureCubeUV(builder: NodeBuilder, output: string): string;
 }

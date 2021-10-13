@@ -6,18 +6,16 @@ import { TextureNode } from './TextureNode';
 import { PositionNode } from '../accessors/PositionNode';
 
 export class ReflectorNode extends TempNode {
+    constructor(mirror?: ReflectorRTT);
 
-	constructor( mirror?: ReflectorRTT );
+    mirror: ReflectorRTT;
+    textureMatrix: Matrix4Node;
+    localPosition: PositionNode;
+    uv: OperatorNode;
+    uvResult: OperatorNode;
+    texture: TextureNode;
 
-	mirror: ReflectorRTT;
-	textureMatrix: Matrix4Node;
-	localPosition: PositionNode;
-	uv: OperatorNode;
-	uvResult: OperatorNode;
-	texture: TextureNode;
+    nodeType: string;
 
-	nodeType: string;
-
-	copy( source: ReflectorNode ): this;
-
+    copy(source: ReflectorNode): this;
 }

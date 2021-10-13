@@ -4,16 +4,14 @@ import { UVNode } from '../accessors/UVNode';
 import { UVTransformNode } from '../utils/UVTransformNode';
 
 export class NoiseNode extends TempNode {
+    constructor(uv?: UVNode | UVTransformNode);
 
-	constructor( uv?: UVNode | UVTransformNode );
+    uv: UVNode | UVTransformNode;
+    nodeType: string;
 
-	uv: UVNode | UVTransformNode;
-	nodeType: string;
+    copy(source: NoiseNode): this;
 
-	copy( source: NoiseNode ): this;
-
-	static Nodes: {
-		snoise: FunctionNode;
-	};
-
+    static Nodes: {
+        snoise: FunctionNode;
+    };
 }

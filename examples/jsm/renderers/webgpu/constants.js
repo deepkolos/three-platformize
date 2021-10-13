@@ -252,9 +252,11 @@ const GPUInputStepMode = {
 	Instance: 'instance'
 };
 
+const GPUChunkSize = 16; // size of a chunk in bytes (STD140 layout)
+
 // @TODO: Move to src/constants.js
 
 const BlendColorFactor = 211;
 const OneMinusBlendColorFactor = 212;
 
-export { BlendColorFactor, GPUAddressMode, GPUBindingType, GPUBlendFactor, GPUBlendOperation, GPUColorWriteFlags, GPUCompareFunction, GPUCullMode, GPUFilterMode, GPUFrontFace, GPUIndexFormat, GPUInputStepMode, GPULoadOp, GPUPrimitiveTopology, GPUStencilOperation, GPUStoreOp, GPUTextureDimension, GPUTextureFormat, GPUTextureViewDimension, GPUVertexFormat, OneMinusBlendColorFactor };
+export { BlendColorFactor, GPUAddressMode, GPUBindingType, GPUBlendFactor, GPUBlendOperation, GPUChunkSize, GPUColorWriteFlags, GPUCompareFunction, GPUCullMode, GPUFilterMode, GPUFrontFace, GPUIndexFormat, GPUInputStepMode, GPULoadOp, GPUPrimitiveTopology, GPUStencilOperation, GPUStoreOp, GPUTextureDimension, GPUTextureFormat, GPUTextureViewDimension, GPUVertexFormat, OneMinusBlendColorFactor };

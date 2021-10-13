@@ -2,16 +2,14 @@ import { ShaderPass } from '../../postprocessing/ShaderPass';
 import { ScreenNode } from '../inputs/ScreenNode';
 
 export class NodePass extends ShaderPass {
+    constructor();
 
-	constructor();
+    name: string;
+    uuid: string;
+    userData: object;
+    input: ScreenNode;
+    needsUpdate: boolean;
 
-	name: string;
-	uuid: string;
-	userData: object;
-	input: ScreenNode;
-	needsUpdate: boolean;
-
-	copy( source: NodePass ): this;
-	toJSON( meta?: object | string ): object;
-
+    copy(source: NodePass): this;
+    toJSON(meta?: object | string): object;
 }

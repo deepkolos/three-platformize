@@ -51,7 +51,9 @@ class LightNode extends Node {
 
 	}
 
-	generate( builder, output ) {
+	generate( builder ) {
+
+		const type = this.getNodeType( builder );
 
 		this.lightPositionView.object3d = this.light;
 
@@ -71,7 +73,7 @@ class LightNode extends Node {
 
 		}
 
-		return this.color.build( builder, output );
+		return this.color.build( builder, type );
 
 	}
 

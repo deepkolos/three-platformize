@@ -55,10 +55,8 @@ export function injectPlatformCode() {
         );
         // 淘宝小程序ios下对于不支持的扩展返回undefined
         code = code.replace(
-          `if ( extension === null ) {`,
-          `
-          extension = extension || null;
-          if ( extension === null ) {`,
+          `const extension = getExtension( name );`,
+          `const extension = getExtension( name ) || null;`,
         );
       }
 

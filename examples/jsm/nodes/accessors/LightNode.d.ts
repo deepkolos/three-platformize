@@ -1,14 +1,12 @@
 import { TempNode } from '../core/TempNode';
 
 export class LightNode extends TempNode {
+    constructor(scope?: string);
 
-	constructor( scope?: string );
+    scope: string;
+    nodeType: string;
 
-	scope: string;
-	nodeType: string;
+    copy(source: LightNode): this;
 
-	copy( source: LightNode ): this;
-
-	static TOTAL: string;
-
+    static TOTAL: string;
 }

@@ -1,23 +1,17 @@
-import {
-	Camera,
-	EventDispatcher,
-	Object3D
-} from '../../../src/Three';
+import { Camera, EventDispatcher, Object3D } from '../../../src/Three';
 
 export class DragControls extends EventDispatcher {
+    constructor(objects: Object3D[], camera: Camera, domElement?: HTMLElement);
 
-	constructor( objects: Object3D[], camera: Camera, domElement?: HTMLElement );
+    object: Camera;
 
-	object: Camera;
+    // API
 
-	// API
+    enabled: boolean;
+    transformGroup: boolean;
 
-	enabled: boolean;
-	transformGroup: boolean;
-
-	activate(): void;
-	deactivate(): void;
-	dispose(): void;
-	getObjects(): Object3D[];
-
+    activate(): void;
+    deactivate(): void;
+    dispose(): void;
+    getObjects(): Object3D[];
 }

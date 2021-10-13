@@ -4,18 +4,16 @@ import { TextureNode } from '../inputs/TextureNode';
 import { Vector2Node } from '../inputs/Vector2Node';
 
 export class NormalMapNode extends TempNode {
+    constructor(value: TextureNode, scale?: Vector2Node);
 
-	constructor( value: TextureNode, scale?: Vector2Node );
+    value: TextureNode;
+    scale: Vector2Node;
+    toNormalMap: boolean;
+    nodeType: string;
 
-	value: TextureNode;
-	scale: Vector2Node;
-	toNormalMap: boolean;
-	nodeType: string;
+    copy(source: NormalMapNode): this;
 
-	copy( source: NormalMapNode ): this;
-
-	static Nodes: {
-		perturbNormal2Arb: FunctionNode;
-	}
-
+    static Nodes: {
+        perturbNormal2Arb: FunctionNode;
+    };
 }

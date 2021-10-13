@@ -2,20 +2,18 @@ import { TempNode } from './TempNode';
 import { NodeBuilder } from './NodeBuilder';
 
 export interface StructNodeInput {
-	type: string;
-	name: string;
+    type: string;
+    name: string;
 }
 
 export class StructNode extends TempNode {
+    constructor(src?: string);
 
-	constructor( src?: string );
+    inputs: StructNodeInput[];
+    src: string;
+    nodeType: string;
 
-	inputs: StructNodeInput[];
-	src: string;
-	nodeType: string;
-
-	getType( builder: NodeBuilder ): string;
-	getInputByName( name: string ): StructNodeInput;
-	parse( src: string ): void;
-
+    getType(builder: NodeBuilder): string;
+    getInputByName(name: string): StructNodeInput;
+    parse(src: string): void;
 }

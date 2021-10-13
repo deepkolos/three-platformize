@@ -9,25 +9,23 @@ import { FunctionNode } from '../core/FunctionNode';
 import { TextureNode } from '../inputs/TextureNode';
 
 export class BlurNode extends TempNode {
+    constructor(value: TextureNode, uv?: UVNode, radius?: number, size?: Vector2);
 
-	constructor( value: TextureNode, uv?: UVNode, radius?: number, size?: Vector2 );
+    value: TextureNode;
+    uv: UVNode;
+    radius: Vector2Node;
+    size: Vector2;
+    blurX: boolean;
+    blurY: boolean;
+    horizontal: FloatNode;
+    vertical: FloatNode;
+    nodeType: string;
 
-	value: TextureNode;
-	uv: UVNode;
-	radius: Vector2Node;
-	size: Vector2;
-	blurX: boolean;
-	blurY: boolean;
-	horizontal: FloatNode;
-	vertical: FloatNode;
-	nodeType: string;
+    updateFrame(frame: NodeFrame): void;
+    copy(source: BlurNode): this;
 
-	updateFrame( frame: NodeFrame ): void;
-	copy( source: BlurNode ): this;
-
-	static Nodes: {
-		blurX: FunctionNode;
-		blurY: FunctionNode;
-	}
-
+    static Nodes: {
+        blurX: FunctionNode;
+        blurY: FunctionNode;
+    };
 }

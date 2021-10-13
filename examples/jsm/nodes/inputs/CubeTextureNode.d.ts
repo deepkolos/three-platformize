@@ -5,15 +5,13 @@ import { Node } from '../core/Node';
 import { NodeBuilder } from '../core/NodeBuilder';
 
 export class CubeTextureNode extends InputNode {
+    constructor(value: CubeTexture, uv?: Node, bias?: Node);
 
-	constructor( value: CubeTexture, uv?: Node, bias?: Node );
+    value: CubeTexture;
+    uv: Node | undefined;
+    bias: Node | undefined;
+    nodeType: string;
 
-	value: CubeTexture;
-	uv: Node | undefined;
-	bias: Node | undefined;
-	nodeType: string;
-
-	getTexture( builder: NodeBuilder, output: string ): string;
-	copy( source: CubeTextureNode ): this;
-
+    getTexture(builder: NodeBuilder, output: string): string;
+    copy(source: CubeTextureNode): this;
 }

@@ -2,12 +2,10 @@ import { Node } from '../core/Node';
 import { NodeMaterial } from './NodeMaterial';
 
 export class BasicNodeMaterial extends NodeMaterial {
+    constructor();
 
-	constructor();
-
-	color: Node;
-	alpha: Node;
-	mask: Node;
-	position: Node;
-
+    color: Node;
+    alpha: Node;
+    mask: Node;
+    position: Node;
 }

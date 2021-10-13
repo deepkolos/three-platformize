@@ -1,47 +1,46 @@
-import { Camera, EventDispatcher, Vector3 } from '../../../src/Three';
+import { Camera, EventDispatcher, MOUSE, Vector3 } from '../../../src/Three';
 
 export class TrackballControls extends EventDispatcher {
+    constructor(object: Camera, domElement?: HTMLElement);
 
-	constructor( object: Camera, domElement?: HTMLElement );
+    object: Camera;
+    domElement: HTMLElement;
 
-	object: Camera;
-	domElement: HTMLElement;
+    // API
+    enabled: boolean;
+    screen: { left: number; top: number; width: number; height: number };
+    rotateSpeed: number;
+    zoomSpeed: number;
+    panSpeed: number;
+    noRotate: boolean;
+    noZoom: boolean;
+    noPan: boolean;
+    noRoll: boolean;
+    staticMoving: boolean;
+    dynamicDampingFactor: number;
+    minDistance: number;
+    maxDistance: number;
+    keys: string[];
+    mouseButtons: { LEFT: MOUSE; MIDDLE: MOUSE; RIGHT: MOUSE };
 
-	// API
-	enabled: boolean;
-	screen: {left: number; top: number; width: number; height: number};
-	rotateSpeed: number;
-	zoomSpeed: number;
-	panSpeed: number;
-	noRotate: boolean;
-	noZoom: boolean;
-	noPan: boolean;
-	noRoll: boolean;
-	staticMoving: boolean;
-	dynamicDampingFactor: number;
-	minDistance: number;
-	maxDistance: number;
-	keys: number[];
+    target: Vector3;
+    position0: Vector3;
+    target0: Vector3;
+    up0: Vector3;
 
-	target: Vector3;
-	position0: Vector3;
-	target0: Vector3;
-	up0: Vector3;
+    update(): void;
 
-	update(): void;
+    reset(): void;
 
-	reset(): void;
+    dispose(): void;
 
-	dispose(): void;
+    checkDistances(): void;
 
-	checkDistances(): void;
+    zoomCamera(): void;
 
-	zoomCamera(): void;
+    panCamera(): void;
 
-	panCamera(): void;
+    rotateCamera(): void;
 
-	rotateCamera(): void;
-
-	handleResize(): void;
-
+    handleResize(): void;
 }

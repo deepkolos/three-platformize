@@ -114,11 +114,11 @@ class KTX2Loader extends Loader {
 
 						const worker = new Worker( this.workerSourceURL );
 						const transcoderBinary = this.transcoderBinary.slice( 0 );
-			
+
 						worker.postMessage( { type: 'init', config: this.workerConfig, transcoderBinary }, [ transcoderBinary ] );
-			
+
 						return worker;
-			
+
 					} );
 
 				} );
@@ -130,6 +130,12 @@ class KTX2Loader extends Loader {
 	}
 
 	load( url, onLoad, onProgress, onError ) {
+
+		if ( this.workerConfig === null ) {
+
+			throw new Error( 'THREE.KTX2Loader: Missing initialization with `.detectSupport( renderer )`.' );
+
+		}
 
 		const loader = new FileLoader( this.manager );
 
@@ -167,7 +173,8 @@ class KTX2Loader extends Loader {
 
 	}
 
-	createTextureFrom( transcodeResult ) {
+	_createTextureFrom( transcodeResult ) {
+
 		const { mipmaps, width, height, format, type, error, dfdTransferFn, dfdFlags } = transcodeResult;
 
 		if ( type === 'error' ) return Promise.reject( error );
@@ -177,7 +184,7 @@ class KTX2Loader extends Loader {
 		texture.magFilter = LinearFilter;
 		texture.generateMipmaps = false;
 		texture.needsUpdate = true;
-		texture.encoding = dfdTransferFn === KTX2TransferSRGB ? sRGBEncoding: LinearEncoding;
+		texture.encoding = dfdTransferFn === KTX2TransferSRGB ? sRGBEncoding : LinearEncoding;
 		texture.premultiplyAlpha = !! ( dfdFlags & KTX2_ALPHA_PREMULTIPLIED );
 
 		return texture;
@@ -196,7 +203,7 @@ class KTX2Loader extends Loader {
 
 			return this.workerPool.postMessage( { type: 'transcode', buffers, taskConfig: taskConfig }, buffers );
 
-		} ).then( ( e ) => this.createTextureFrom( e.data ) );
+		} ).then( ( e ) => this._createTextureFrom( e.data ) );
 
 		// Cache the task result.
 		_taskCache.set( buffers[ 0 ], { promise: texturePending } );
@@ -345,7 +352,7 @@ KTX2Loader.BasisWorker = function () {
 
 		}
 
-		if ( !ktx2File.isValid() ) {
+		if ( ! ktx2File.isValid() ) {
 
 			cleanup();
 			throw new Error( 'THREE.KTX2Loader:	Invalid or unsupported .ktx2 file' );
@@ -392,8 +399,8 @@ KTX2Loader.BasisWorker = function () {
 				0,
 				transcoderFormat,
 				0,
-				-1,
-				-1,
+				- 1,
+				- 1,
 			);
 
 			if ( ! status ) {

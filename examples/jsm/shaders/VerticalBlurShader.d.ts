@@ -1,12 +1,10 @@
-import {
-	Uniform
-} from '../../../src/Three';
+import { Uniform } from '../../../src/Three';
 
 export const VerticalBlurShader: {
-	uniforms: {
-		tDiffuse: Uniform;
-		v: Uniform;
-	};
-	vertexShader: string;
-	fragmentShader: string;
+    uniforms: {
+        tDiffuse: Uniform;
+        v: Uniform;
+    };
+    vertexShader: string;
+    fragmentShader: string;
 };

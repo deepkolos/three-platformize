@@ -1,74 +1,69 @@
-import {
-	BufferGeometry,
-	Material,
-	ImmediateRenderObject
-} from '../../../src/Three';
+import { BufferGeometry, Material, ImmediateRenderObject } from '../../../src/Three';
 
 export class MarchingCubes extends ImmediateRenderObject {
+    constructor(resolution: number, material: Material, enableUvs?: boolean, enableColors?: boolean);
 
-	constructor( resolution: number, material: Material, enableUvs?: boolean, enableColors?: boolean );
+    enableUvs: boolean;
+    enableColors: boolean;
 
-	enableUvs: boolean;
-	enableColors: boolean;
+    resolution: number;
 
-	resolution: number;
+    // parameters
 
-	// parameters
+    isolation: number;
 
-	isolation: number;
+    // size of field, 32 is pushing it in Javascript :)
 
-	// size of field, 32 is pushing it in Javascript :)
+    size: number;
+    size2: number;
+    size3: number;
+    halfsize: number;
 
-	size: number;
-	size2: number;
-	size3: number;
-	halfsize: number;
+    // deltas
 
-	// deltas
+    delta: number;
+    yd: number;
+    zd: number;
 
-	delta: number;
-	yd: number;
-	zd: number;
+    field: Float32Array;
+    normal_cache: Float32Array;
+    palette: Float32Array;
 
-	field: Float32Array;
-	normal_cache: Float32Array;
-	palette: Float32Array;
+    maxCount: number;
+    count: number;
 
-	maxCount: number;
-	count: number;
+    hasPositions: boolean;
+    hasNormals: boolean;
+    hasColors: boolean;
+    hasUvs: boolean;
 
-	hasPositions: boolean;
-	hasNormals: boolean;
-	hasColors: boolean;
-	hasUvs: boolean;
+    positionArray: Float32Array;
+    normalArray: Float32Array;
 
-	positionArray: Float32Array;
-	normalArray: Float32Array;
+    uvArray: Float32Array;
+    colorArray: Float32Array;
 
-	uvArray: Float32Array;
-	colorArray: Float32Array;
+    begin(): void;
+    end(): void;
 
-	begin(): void;
-	end(): void;
+    init(resolution: string): void;
 
-	addBall( ballx: number, bally: number, ballz: number, strength: number, subtract: number, colors: any ): void;
+    addBall(ballx: number, bally: number, ballz: number, strength: number, subtract: number, colors: any): void;
 
-	addPlaneX( strength: number, subtract: number ): void;
-	addPlaneY( strength: number, subtract: number ): void;
-	addPlaneZ( strength: number, subtract: number ): void;
+    addPlaneX(strength: number, subtract: number): void;
+    addPlaneY(strength: number, subtract: number): void;
+    addPlaneZ(strength: number, subtract: number): void;
 
-	setCell ( x: number, y: number, z: number, value: number ): void;
-	getCell ( x: number, y: number, z: number ): number;
+    setCell(x: number, y: number, z: number, value: number): void;
+    getCell(x: number, y: number, z: number): number;
 
-	blur( intensity: number ): void;
+    blur(intensity: number): void;
 
-	reset(): void;
-	render( renderCallback: any ): void;
-	generateGeometry(): BufferGeometry;
-	generateBufferGeometry(): BufferGeometry;
-
+    reset(): void;
+    render(renderCallback: any): void;
+    generateGeometry(): BufferGeometry;
+    generateBufferGeometry(): BufferGeometry;
 }
 
 export const edgeTable: Int32Array[];
 export const triTable: Int32Array[];
-

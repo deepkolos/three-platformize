@@ -3,17 +3,15 @@ import { MaxMIPLevelNode } from '../utils/MaxMIPLevelNode';
 import { FunctionNode } from '../core/FunctionNode';
 
 export class SpecularMIPLevelNode extends TempNode {
+    constructor(texture: Node);
 
-	constructor( texture: Node );
+    texture: Node;
+    maxMIPLevel: MaxMIPLevelNode;
+    nodeType: string;
 
-	texture: Node;
-	maxMIPLevel: MaxMIPLevelNode;
-	nodeType: string;
+    copy(source: SpecularMIPLevelNode): this;
 
-	copy( source: SpecularMIPLevelNode ): this;
-
-	static Nodes: {
-		getSpecularMIPLevel: FunctionNode;
-	};
-
+    static Nodes: {
+        getSpecularMIPLevel: FunctionNode;
+    };
 }

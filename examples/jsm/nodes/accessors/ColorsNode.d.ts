@@ -1,12 +1,10 @@
 import { TempNode } from '../core/TempNode';
 
 export class ColorsNode extends TempNode {
+    constructor(index?: number);
 
-	constructor( index?: number );
+    index: number;
+    nodeType: string;
 
-	index: number;
-	nodeType: string;
-
-	copy( source: ColorsNode ): this;
-
+    copy(source: ColorsNode): this;
 }

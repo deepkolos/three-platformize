@@ -1,15 +1,9 @@
-import {
-	Camera,
-	Scene,
-	WebGLRenderer
-} from '../../../src/Three';
+import { Camera, Scene, WebGLRenderer } from '../../../src/Three';
 
 export class StereoEffect {
+    constructor(renderer: WebGLRenderer);
 
-	constructor( renderer: WebGLRenderer );
-
-	setEyeSeparation( eyeSep: number ): void;
-	render( scene: Scene, camera: Camera ): void;
-	setSize( width: number, height: number ): void;
-
+    setEyeSeparation(eyeSep: number): void;
+    render(scene: Scene, camera: Camera): void;
+    setSize(width: number, height: number): void;
 }
