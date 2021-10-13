@@ -1,10 +1,12 @@
-# [1.129.0](https://github.com/deepkolos/three-platformize/compare/v1.0.23...v1.129.0) (2021-06-22)
+## [1.133.1](https://github.com/deepkolos/three-platformize/compare/v1.0.23...v1.133.1) (2021-10-13)
 
 
 ### Bug Fixes
 
 * buffer.slice ([7b7ea0a](https://github.com/deepkolos/three-platformize/commit/7b7ea0a44ec62f10663c12f9673a1d5b850ca2a4))
+* dispose shader recompile error ([7051938](https://github.com/deepkolos/three-platformize/commit/70519382fd92f40a0e3dc3c55bd1ffbdd6e8439b))
 * sync PR filename & dispose ([80e8736](https://github.com/deepkolos/three-platformize/commit/80e8736fa20b7aeff25ed98fb44ebae40bb18c90))
+* taobao pointerEvent ([b395fee](https://github.com/deepkolos/three-platformize/commit/b395feec36b77f18440ea000ae6c7572dee08d5d))
 
 
 ### Features
@@ -17,7 +19,11 @@
 * GLTFGPUCompressedTexture support load mipmap ([d67cd84](https://github.com/deepkolos/three-platformize/commit/d67cd84380bf93fbfa1169185f0ab418a4a407da))
 * improve GLTFGPUCompressedTexture test case ([1aac31b](https://github.com/deepkolos/three-platformize/commit/1aac31bd10057b9ab716651dcbeae174594d0bc0))
 * shade zstd wasm data between zstddec and zstddec worker ([e4c89cc](https://github.com/deepkolos/three-platformize/commit/e4c89cc70d3753bca29e277a4ae1a080baa6f711))
+* taobao add getFromCloud helper ([8d393a3](https://github.com/deepkolos/three-platformize/commit/8d393a39090fdffb32d21460a9690c9a5a4021e5))
+* update three to 133 & copy @types/three/examples/*.d.ts ([2f45f26](https://github.com/deepkolos/three-platformize/commit/2f45f2678685d52c2c2a0ae4a37437f52c8549d3))
+* update three to r132 ([2a2c461](https://github.com/deepkolos/three-platformize/commit/2a2c4615f735196452778c5dc7a1b43a2b631b5e))
 * update to r129 ([0cabace](https://github.com/deepkolos/three-platformize/commit/0cabace53f899e12b22e4014af3c7f2ac631faeb))
+* update to r131 & add pointerEvent polyfill ([e0cb77b](https://github.com/deepkolos/three-platformize/commit/e0cb77bbc23a8f846605cd40254e8cd04673bcdd))
 
 
 
