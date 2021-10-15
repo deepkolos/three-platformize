@@ -129,6 +129,7 @@
 14. STLLoader
 15. PDBLoader
 16. TGALoader (改用 DataTextureLoader [PR](https://github.com/mrdoob/three.js/pull/21377) 已合并，r127 可用)
+17. VTKLoader
 
 #### Controls
 

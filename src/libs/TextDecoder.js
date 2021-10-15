@@ -2,9 +2,12 @@ export class $TextDecoder {
   /**
    * 不支持 UTF-8 code points 大于 1 字节
    * @see https://stackoverflow.com/questions/17191945/conversion-between-utf-8-arraybuffer-and-string
-   * @param {Uint8Array} uint8Array
+   * @param {Uint8Array|ArrayBuffer} uint8Array
    */
   decode(uint8Array) {
+    if (uint8Array instanceof ArrayBuffer)
+      uint8Array = new Uint8Array(uint8Array);
+
     // from LoaderUtils.js
     let s = '';
 
