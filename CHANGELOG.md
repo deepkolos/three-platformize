@@ -1,3 +1,12 @@
+## [1.133.2](https://github.com/deepkolos/three-platformize/compare/v1.133.1...v1.133.2) (2021-10-15)
+
+
+### Features
+
+* support VTKLoader ([87fa081](https://github.com/deepkolos/three-platformize/commit/87fa081c5cf8757e6534aa4375edba0e1d415679))
+
+
+
 ## [1.133.1](https://github.com/deepkolos/three-platformize/compare/v1.0.23...v1.133.1) (2021-10-13)
 
 
