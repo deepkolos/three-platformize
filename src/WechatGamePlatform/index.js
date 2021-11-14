@@ -164,8 +164,8 @@ export class WechatGamePlatform {
 
     this.canvas.dispatchEvent(event);
 
-    if (changedTouches.length) {
-      const touch = changedTouches[0];
+    if (e.changedTouches.length) {
+      const touch = e.changedTouches[0];
       const pointerEvent = {
         pageX: touch.pageX,
         pageY: touch.pageY,
