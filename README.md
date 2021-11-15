@@ -111,6 +111,10 @@
 
 ### 已测试模块
 
+#### Features
+
+0. VSMShadow (r131以及之前的版本可以, 见[Loop index cannot be compared with non-constant expression](https://techbrood.com/zh/news/webgl/webgl-glsl%E7%A8%8B%E5%BA%8F%E5%87%BA%E9%94%99_-loop-index-cannot-be-compared-with-non-constant-expression.html))
+
 #### Loader
 
 1. GLTFLoader (支持带纹理的 GLB) && (EXT_meshopt_compression 安卓可用 WASM，ios 可用 ASM 版，见 tools) && (KHR_mesh_quantization，小程序可用) [【网格压缩测评】MeshQuan、MeshOpt、Draco ](https://juejin.cn/post/6931954784018628621) (微信 8.0 后 WebAssembly API 已无法使用需要使用 WXWebAssembly, 且只支持包内 wasm, 已新增 meshopt_decoder.wasm.module, [使用见](https://github.com/deepkolos/three-platformize-demo/blob/main/src/MeshOpt.ts#L8))
