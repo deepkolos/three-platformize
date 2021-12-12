@@ -2,6 +2,8 @@
 
 一个让 THREE 平台化的项目
 
+> 后续维护将会在[platformize](https://github.com/deepkolos/platformize)继续
+
 1. 目前已适配微信，淘宝，字节小程序
 2. 支持 tree shaking（需用 webpack，rollup 等构建工具）
 3. VSCode types 正常，能正常访问各个类的定义
@@ -177,6 +179,7 @@ THREE.PLATFORM.dispose();
 // 正常使用three即可
 // DEMO 代码示例见 https://github.com/deepkolos/three-platformize-demo
 // 基础的使用DEMO见 https://github.com/deepkolos/three-platformize-demo-wechat-simple
+// 生产环境时rollup.config.js里请开启teser压缩, 即plugins末尾增加 terser({ output: { comments: false } })
 ```
 
 ### 经验
